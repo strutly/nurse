@@ -1,0 +1,15 @@
+<view class="cu-bar tabbar bg-white shadow foot">  
+  <view class="action" bindtap="switch" data-url="/pages/index/home">
+    <view class='cuIcon-cu-image'>
+      <image  src="http://gridpic.tsing-tec.com/consult/home.png"></image>
+    </view>
+    <view>首页</view>
+  </view>
+
+  <view class="action" bindtap="switch"  data-url="/pages/index/my">
+    <view class='cuIcon-cu-image'>
+      <image  src="http://gridpic.tsing-tec.com/consult/my.png"></image>
+    </view>
+    <view>我的</view>
+  </view>
+</view>

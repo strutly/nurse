@@ -1,0 +1,182 @@
+<form bindsubmit="submit">
+
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 基本评估
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">糖尿病类型</view>
+    <picker mode="selector" bindchange="pickerChange" name="assess.type" data-name="type" value="{{typeVal||0}}" range="{{typeArr}}">
+      <view class="picker">
+        {{typeArr[typeVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">病程</view>
+    <input placeholder="请输入病程" name="assess.time" type="digit" class="text-right"></input>
+    <view class="text-gray text-xs margin-left-xs padding-top-xs">年</view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">并发症</view>
+    <input placeholder="请输入并发症" name="assess.complication" class="text-right"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">目前治疗方案</view>
+    <input placeholder="请输入目前治疗方案" name="assess.treatments" class="text-right"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">经济状况</view>
+    <input placeholder="请输入经济状况" name="assess.economicState" class="text-right"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">经济状况</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="economy" name="assess.economicState" value="{{economyVal||0}}" range="{{economyArr}}">
+      <view class="picker">
+        {{economyArr[economyVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">互联网操作能力</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="internet" name="assess.internet" value="{{internetVal||0}}" range="{{internetArr}}">
+      <view class="picker">
+        {{internetArr[internetVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 资源评估利用
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">教育水平</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="education" name="assess.education" value="{{educationVal||0}}" range="{{educationArr}}">
+      <view class="picker">
+        {{educationArr[educationVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">职业</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="occupation" name="assess.occupation" value="{{occupationVal||0}}" range="{{occupationArr}}">
+      <view class="picker">
+        {{occupationArr[occupationVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">主要照护者</view>
+    <input placeholder="请输入主要照护者" name="assess.carePerson" class="text-right"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">是否独居</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="liveAlone" name="assess.liveAlone" value="{{liveAloneVal||0}}" range="{{liveAloneArr}}">
+      <view class="picker">
+        {{liveAloneArr[liveAloneVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 生活方式评估
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">饮食习惯</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="diet" name="assess.diet" value="{{dietVal||0}}" range="{{dietArr}}">
+      <view class="picker">
+        {{dietArr[dietVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">运动习惯</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="motion" name="assess.motion" value="{{motionVal||0}}" range="{{motionArr}}">
+      <view class="picker">
+        {{motionArr[motionVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">睡眠</view>
+    <input placeholder="请输入睡眠时长" name="assess.sleep" type="digit" class="text-right"></input>
+    <view class="text-gray text-xs margin-left-xs padding-top-xs">小时</view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">吸烟</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="smoke" name="assess.smoke" value="{{smokeVal||0}}" range="{{smokeArr}}">
+      <view class="picker">
+        {{smokeArr[smokeVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">饮酒</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="wine" name="assess.wine" value="{{wineVal||0}}" range="{{wineArr}}">
+      <view class="picker">
+        {{wineArr[wineVal||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">院内每日摄入热量</view>
+    <input placeholder="请输入睡眠时长" name="quantity" type="number" class="text-right"></input>
+    <view class="text-gray text-xs margin-left-xs padding-top-xs">Kcal</view>
+  </view>
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 其他
+    </view>
+  </view>
+  <checkbox-group bindchange="otherChange" value="{{others}}" name="assess.others" class="safe-btns">
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病自我管理知识缺乏"></checkbox>
+      <view class="margin-left">糖尿病自我管理知识缺乏</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病自我管理态度消极"></checkbox>
+      <view class="margin-left">糖尿病自我管理态度消极</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病自我管理行为差"></checkbox>
+      <view class="margin-left">糖尿病自我管理行为差</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="经济困难"></checkbox>
+      <view class="margin-left">经济困难</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="焦虑/抑郁"></checkbox>
+      <view class="margin-left">焦虑/抑郁</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="家庭支持系统差"></checkbox>
+      <view class="margin-left">家庭支持系统差</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="用药依从性差"></checkbox>
+      <view class="margin-left">用药依从性差</view>
+    </view>
+  </checkbox-group>
+
+  <view class="padding margin-top-xl  text-center footer bg-white">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" form-type="submit" disabled="{{disabled}}">完成评估</button>
+  </view>
+</form>
+
+<view class="cu-modal {{show?'show':''}}">
+  <view class="cu-dialog bg-white">
+    <view class="text-center text-xxl margin-tb-xl">患者档案已建立</view>
+    <view class="padding-lr-xl margin-lr-xl text-lg">{{tips}}</view>
+    <view class="text-center margin-top">
+      <image src="{{codeUrl||'/images/fail.png'}}" mode="aspectFill" bindtap="updateCode" style="width: 500rpx;height: 500rpx;"></image>
+    </view>
+    <view class="padding margin-top-xl  text-center safe-bottom">
+      <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl" bindtap="home">完成</button>
+    </view>
+  </view>
+</view>

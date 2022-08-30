@@ -1,0 +1,6 @@
+function include(obj,val){  
+  return obj.indexOf(val)>-1;
+}
+module.exports = {
+  include:include
+}

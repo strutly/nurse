@@ -1,0 +1,93 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="padding flex bg-main align-center">
+  <image style="width: 100rpx;height: 100rpx;" src="/images/head.png" class="round margin-right-sm bg-white padding-xs"></image>
+  <view class="flex-sub flex align-center">
+    <view class="flex-sub text-white">
+      <view class="">健康照护师</view>
+      <view class="text-sm">
+        一级照护师
+      </view>
+    </view>
+    <view class="padding-sm text-center">
+      <image src="/images/data.png" style="width: 60rpx;height: 60rpx;"></image>
+      <view class="text-sm">CGM数据</view>
+    </view>
+    <view class="padding-tb-sm text-center" bindtap="toUrl" data-url="/pages/patient/list">
+      <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
+      <view class="text-sm">患者管理</view>
+    </view>
+  </view>
+</view>
+
+<view class="cu-list menu">
+  <view class="cu-item" wx:for="{{datas}}" wx:key="index">
+    <view class="content" bindtap="toUrl" data-url="/pages/patient/detail?id={{item.patient.id}}">
+      <text class="cu-avatar round margin-right bg-gray text-white">Z</text>
+      <text class="">{{item.patient.name}}</text>
+      <text class="cu-tag bg-yellow text-white margin-left-sm">{{item.patient.assess.type||'未知'}}</text>
+    </view>
+    <view class="action {{k>0?'margin-left':''}}" bindtap="{{tag.type}}" data-id="{{item.patient.id}}" data-index="{{index}}" wx:for="{{item.tags}}" wx:for-index="k" wx:for-item="tag" wx:key="k">
+      <view class="padding-tb-xs" style="position: relative;">{{tag.title}}<view class='cu-tag badge' wx:if="{{tag.num>0}}">{{tag.num}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="padding footer text-center safe-bottom">
+  <button class="cu-btn block bg-main margin lg round" bindtap="scan">病历扫描</button>
+  <view class="text-gray text-sm">技术支持:清华大学精准医学研究院智慧健康中心</view>
+</view>
+
+
+
+<view class="cu-modal show" wx:if="{{show}}">
+  <form bindsubmit="submit">
+    <input name="patientId" value="{{patient.id}}" hidden></input>
+    <view class="cu-dialog bg-white padding text-left">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">患者随访</view>
+        <view class="action" bindtap="hiddenModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="cu-bar margin-top">
+        <view class="action flex-wrap">
+          <text class="margin-right margin-top-xs">患者标签</text>
+          <view class="cu-tag bg-main margin-top-xs">{{patient.assess.type||'未知'}}</view>
+          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||'0年'}}</view>
+          <view class="cu-tag bg-red margin-top-xs" wx:if="{{patient.assess.smoke==0}}">{{patient.assess.smoke==0?'吸烟':'不吸烟'}}</view>
+          <view class="cu-tag bg-mauve margin-top-xs" wx:if="{{patient.assess.wine==0}}">{{patient.assess.wine==0?'喝酒':'不喝酒'}}</view>
+        </view>
+        <view class="action padding-right text-underline" bindtap="toUrl" data-url="/pages/patient/info?id={{patient.id}}">更多信息</view>
+      </view>
+      <view class="padding">
+        <view class="">随访需要询问的内容如下：</view>
+        <view class="margin-top-sm">
+          症状、体重、血压、用药情况、空腹和餐后血糖、自我管理情况等内容
+        </view>
+        <textarea name="content.msg" class="solid padding margin-top" style="min-height: 200rpx;width: 100%;" maxlength="-1" placeholder="如需记录随访信息,请在此输入"></textarea>
+      </view>
+      <view class="cu-bar bg-white justify-center">
+        <button class="cu-btn bg-main lg" form-type="submit">确定</button>
+      </view>
+    </view>
+  </form>
+</view>
+
+<view class="cu-modal show" wx:if="{{authModal}}">
+  <view class="cu-dialog sm">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">授权提示</view>
+
+    </view>
+    <view class="padding-xl">
+      您未授权,请先进行授权
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+
+      </view>
+    </view>
+  </view>
+</view>

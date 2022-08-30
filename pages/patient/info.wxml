@@ -1,0 +1,81 @@
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>基本信息
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">姓名</view>
+    <view class="action">{{info.name}}</view>
+  </view>
+  <view class="cu-item">
+    <view class="content">年龄</view>
+    <view class="action">{{info.age}}</view>
+  </view>
+  <view class="cu-item">
+    <view class="content">身高</view>
+    <view class="action">{{info.height}}<text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text></view>
+  </view>
+  <view class="cu-item">
+    <view class="content">体重</view>
+    <view class="action">{{info.weight}}<text class="text-gray text-xs padding-top-xs margin-left-xs">KG</text></view>
+  </view>
+  <view class="cu-item">
+    <view class="content">性别</view>
+    <view class="action">{{info.gender}}</view>
+  </view>
+  <view class="cu-item">
+    <view class="content">腰围</view>
+    <view class="action">{{info.waistline}}</view>
+  </view>
+  <view class="cu-item">
+    <view class="content">臀围</view>
+    <view class="action">{{info.hipline}}</view>
+  </view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>既往病史
+  </view>
+</view>
+<view class="padding bg-white">
+  {{info.otherInfo.sickHistory||'无'}}
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>化验体检
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="grid col-4 grid-square flex-sub padding-tb">
+    <view class="bg-img" wx:for="{{info.otherInfo.images}}" wx:key="index">
+      <image src="{{item}}" mode="aspectFill" bindtap="viewImage" data-url="{{item}}"></image>
+    </view>
+  </view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院诊断
+  </view>
+</view>
+<view class="padding bg-white">
+  <view class='cu-tag' wx:for="{{info.otherInfo.diagnoses}}">{{item.name}}</view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>治疗
+  </view>
+</view>
+<view class="padding flex bg-white solid-bottom">
+  <text class="flex-treble">药品名称</text>
+  <text class="flex-twice text-center">规格</text>
+  <text class="flex-twice text-center">方式</text>
+  <text class="flex-twice text-center">时间</text>
+</view>
+<view class="padding flex bg-white solid-bottom text-sm" wx:for="{{info.otherInfo.treats}}" wx:key="index">
+  <text class="flex-treble text-left">{{item.name}}</text>
+  <text class="flex-twice text-center">{{item.specs}}</text>
+  <text class="flex-twice text-center">{{item.way}}</text>
+  <text class="flex-twice text-center text-red">{{item.time}}</text>
+</view>
+<view class="safe-bottom"></view>
