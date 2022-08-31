@@ -1,8 +1,7 @@
 <view class="cu-list menu">
   <view class="cu-item arrow" wx:for="{{reports}}" wx:key="index" bindtap="toUrl" data-url="/pages/report/{{item.type==1?'report':'form'}}?id={{item.id}}">
     <view class="content">
-      <text class="cuIcon-circlefill text-grey"></text>
-      <text class="text-grey">提交时间</text>
+      <text class="">提交时间</text>
     </view>
     <view class="action">
       <text class="text-grey text-sm">{{item.createTime}}</text>

@@ -23,7 +23,7 @@
       </view>
     </view>
   </view>
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/report/list?type=1&status=1&patientId={{patient.id}}">
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/report/list?type=2&status=1&patientId={{patient.id}}">
     <view class="content">
       <text class="">量表检测</text>
     </view>

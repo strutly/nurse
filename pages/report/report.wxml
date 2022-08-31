@@ -1,2 +1,107 @@
-<!--pages/report/report.wxml-->
-<text>pages/report/report.wxml</text>
+<view class="cu-bar">
+  <view class="action">
+    用药
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">二甲双胍（普通片）1000mg/日</text>
+    </view>
+    <view class="action">
+      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.medic?'main':'gray'}} text-bold"></text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-bar">
+  <view class="action">饮食是否按时按量</view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      <text class="">每日总热量</text>
+      <text class="margin-lr text-gray">2500Kcal</text>
+      <text class="text-gray">3份</text>
+    </view>
+    <view class="action">
+      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.measure?'main':'gray'}} text-bold"></text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="">谷薯类</text>
+      <text class="text-grey text-sm margin-left">3份</text>
+      <text class="margin-left">水果类</text>
+      <text class="text-grey text-sm margin-left">1份</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="">豆乳类</text>
+      <text class="text-grey text-sm margin-left">1份</text>
+      <text class="margin-left">蔬菜类</text>
+      <text class="text-grey text-sm margin-left">3份</text>
+      <text class="margin-left">油脂类</text>
+      <text class="text-grey text-sm margin-left">1份</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar">
+  <view class="action">
+    运动是否完成
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey">快走/骑车 20分钟</text>
+    </view>
+    <view class="action">
+      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.health?'main':'gray'}}  text-bold"></text>
+    </view>
+  </view>
+</view>
+
+<view class="cu-bar">
+  <view class="action">
+    血糖
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">餐前</view>
+    <view class="action">
+      <text class="margin-right-sm">{{reportForm.content.sugarBefore}}</text>
+      <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">餐后</view>
+    <view class="action">
+      <text class="margin-right-sm">{{reportForm.content.sugarAfter}}</text>
+      <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+    </view>
+  </view>
+</view>
+<view class="cu-bar">
+  <view class="action">
+    血压
+  </view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">收缩压</view>
+    <view class="action">
+      <text class="margin-right-sm">{{reportForm.content.systolicPressure}}</text>
+      <text class="text-grey text-sm padding-tb-sm">mmHg</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">舒张压</view>
+    <view class="action">
+      <text class="margin-right-sm">{{reportForm.content.diastolicPressure}}</text>
+      <text class="text-grey text-sm padding-tb-sm">mmHg</text>
+    </view>
+  </view>
+</view>

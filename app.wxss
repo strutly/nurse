@@ -10,13 +10,7 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 }
-.text-main{
-  color:#38C1F7;
-}
-.bg-main{
-  background-color: #38C1F7;
-  color:var(--white);
-}
+
 
 .text-underline{
   text-decoration:underline;

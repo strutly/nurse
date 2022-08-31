@@ -1,5 +1,4 @@
 <form bindsubmit="submit">
-
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
       <text class="cuIcon-titles text-orange"></text> 基本评估
@@ -27,10 +26,7 @@
     <input placeholder="请输入目前治疗方案" name="assess.treatments" class="text-right"></input>
   </view>
 
-  <view class="cu-form-group">
-    <view class="title">经济状况</view>
-    <input placeholder="请输入经济状况" name="assess.economicState" class="text-right"></input>
-  </view>
+  
   <view class="cu-form-group">
     <view class="title">经济状况</view>
     <picker mode="selector" bindchange="pickerChange" data-name="economy" name="assess.economicState" value="{{economyVal||0}}" range="{{economyArr}}">
@@ -124,7 +120,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">院内每日摄入热量</view>
-    <input placeholder="请输入睡眠时长" name="quantity" type="number" class="text-right"></input>
+    <input placeholder="请输入院内每日摄入热量" name="quantity" type="number" class="text-right"></input>
     <view class="text-gray text-xs margin-left-xs padding-top-xs">Kcal</view>
   </view>
   <view class="cu-bar bg-gary solid-bottom">

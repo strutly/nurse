@@ -1,1 +1,6 @@
-/* pages/report/form.wxss */
+.cu-item .action{
+  min-width: 40rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  color:var(--main)
+}
