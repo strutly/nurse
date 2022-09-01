@@ -13,6 +13,27 @@
     </view>
   </view>
 </view>
+<view class="cu-bar">
+  <view class="action">
+    饮食情况
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="grid col-3 grid-square flex-sub padding-tb">
+    <view class="bg-img" wx:if="{{reportForm.content.breakfast}}">
+      <image src="{{reportForm.content.breakfast}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.breakfast}}" mode="aspectFill"></image>
+      <view>早餐</view>
+    </view>
+    <view class="bg-img" wx:if="{{reportForm.content.lunch}}">
+      <image src="{{reportForm.content.lunch}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.lunch}}" mode="aspectFill"></image>
+      <view>中餐</view>
+    </view>
+    <view class="bg-img" wx:if="{{reportForm.content.dinner}}">
+      <image src="{{reportForm.content.dinner}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.dinner}}" mode="aspectFill"></image>
+      <view>晚餐</view>
+    </view>
+  </view>
+</view>
 
 <view class="cu-bar">
   <view class="action">饮食是否按时按量</view>

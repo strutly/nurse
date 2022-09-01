@@ -1,1 +1,10 @@
-/* pages/report/report.wxss */
+.grid.grid-square>view {
+  overflow: visible;
+}
+
+.bg-img view {
+  position: absolute;
+  bottom: -40rpx;
+  text-align: center;
+  width: 100%;
+}
