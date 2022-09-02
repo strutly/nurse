@@ -53,8 +53,8 @@
       <view class="cu-bar margin-top">        
         <view class="action flex-wrap">
           <text class="margin-right margin-top-xs">患者标签</text>
-          <view class="cu-tag bg-main margin-top-xs">{{patient.assess.type||'未知'}}</view>
-          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||'0年'}}</view>
+          <view class="cu-tag bg-main margin-top-xs">{{typeArr[patient.assess.type||2]}}</view>
+          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||0}}年</view>
           <view class="cu-tag bg-red margin-top-xs" wx:if="{{patient.assess.smoke==0}}">{{patient.assess.smoke==0?'吸烟':'不吸烟'}}</view>
           <view class="cu-tag bg-mauve margin-top-xs" wx:if="{{patient.assess.wine==0}}">{{patient.assess.wine==0?'喝酒':'不喝酒'}}</view>
         </view>

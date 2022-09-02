@@ -24,7 +24,7 @@
     <view class="content" bindtap="toUrl" data-url="/pages/patient/detail?id={{item.patient.id}}">
       <text class="cu-avatar round margin-right bg-gray text-white">Z</text>
       <text class="">{{item.patient.name}}</text>
-      <text class="cu-tag bg-yellow text-white margin-left-sm">{{item.patient.assess.type||'未知'}}</text>
+      <text class="cu-tag bg-yellow text-white margin-left-sm">{{typeArr[item.patient.assess.type]}}</text>
     </view>
     <view class="action {{k>0?'margin-left':''}}" bindtap="{{tag.type}}" data-id="{{item.patient.id}}" data-index="{{index}}" wx:for="{{item.tags}}" wx:for-index="k" wx:for-item="tag" wx:key="k">
       <view class="padding-tb-xs" style="position: relative;">{{tag.title}}<view class='cu-tag badge' wx:if="{{tag.num>0}}">{{tag.num}}</view>
@@ -52,8 +52,8 @@
       <view class="cu-bar margin-top">
         <view class="action flex-wrap">
           <text class="margin-right margin-top-xs">患者标签</text>
-          <view class="cu-tag bg-main margin-top-xs">{{patient.assess.type||'未知'}}</view>
-          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||'0年'}}</view>
+          <view class="cu-tag bg-main margin-top-xs">{{typeArr[patient.assess.type]}}</view>
+          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||0}}年</view>
           <view class="cu-tag bg-red margin-top-xs" wx:if="{{patient.assess.smoke==0}}">{{patient.assess.smoke==0?'吸烟':'不吸烟'}}</view>
           <view class="cu-tag bg-mauve margin-top-xs" wx:if="{{patient.assess.wine==0}}">{{patient.assess.wine==0?'喝酒':'不喝酒'}}</view>
         </view>

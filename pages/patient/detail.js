@@ -3,7 +3,7 @@ import Api from '../../config/api';
 import CustomPage from '../../CustomPage';
 CustomPage({
   data: {
-
+    typeArr:['1型','2型','未知'],
   },
   async onLoad(options) {
     console.log(options)

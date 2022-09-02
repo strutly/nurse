@@ -25,7 +25,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">身高</view>
-    <input placeholder="请输入身高" name="height" class="text-right" value=""></input>
+    <input placeholder="请输入身高" name="height" class="text-right" value="{{scanData['身高']}}"></input>
     <text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text>
   </view>
   <view class="cu-form-group">
@@ -34,18 +34,18 @@
   </view>
   <view class="cu-form-group">
     <view class="title">体重</view>
-    <input placeholder="请输入体重" name="weight" class="text-right" value=""></input>
+    <input placeholder="请输入体重" type="digit" name="weight" class="text-right" value="{{scanData['体重']}}"></input>
     <text class="text-gray text-xs padding-top-xs margin-left-xs">KG</text>
   </view>
 
   <view class="cu-form-group">
     <view class="title">腰围</view>
-    <input placeholder="请输入腰围" name="waistline" class="text-right" value=""></input>
+    <input placeholder="请输入腰围" type="number" name="waistline" class="text-right" value=""></input>
     <text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text>
   </view>
   <view class="cu-form-group">
     <view class="title">臀围</view>
-    <input placeholder="请输入臀围" name="hipline" class="text-right" value=""></input>
+    <input placeholder="请输入臀围" type="number" name="hipline" class="text-right" value=""></input>
     <text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text>
   </view>
 
@@ -55,7 +55,7 @@
     </view>
   </view>
   <view class="cu-form-group">
-    <textarea maxlength="-1" name="otherInfo.sickHistory" value="" style="min-height: 200rpx;" auto-height="true" placeholder="请输入既往病史"></textarea>
+    <textarea maxlength="-1" name="otherInfo.sickHistory" value="{{scanData['入院诊断']}}" style="min-height: 200rpx;" auto-height="true" placeholder="请输入既往病史"></textarea>
   </view>
   <view class="cu-bar bg-gray">
     <view class="action">
