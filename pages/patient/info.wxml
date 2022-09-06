@@ -41,7 +41,7 @@
 <view class="padding bg-white">
   {{info.otherInfo.sickHistory||'无'}}
 </view>
-<view class="cu-bar bg-gray">
+<view class="cu-bar bg-gray" wx:if="{{info.otherInfo.images.length>0}}">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>化验体检
   </view>
@@ -53,7 +53,7 @@
     </view>
   </view>
 </view>
-<view class="cu-bar bg-gray">
+<view class="cu-bar bg-gray" wx:if="{{info.otherInfo.diagnoses.length>0}}">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>出院诊断
   </view>
@@ -78,4 +78,16 @@
   <text class="flex-twice text-center">{{item.way}}</text>
   <text class="flex-twice text-center text-red">{{item.time}}</text>
 </view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>绑定二维码
+  </view>
+  <view class="action" bindtap="refresh">
+    <text class="cuIcon-refresh text-gray margin-right-xs"></text>刷新
+  </view>
+</view>
+<view class="text-center bg-white padding">
+  <image src="{{qUrl||'/images/fail.png'}}" style="width: 300rpx;height: 300rpx;"></image>
+</view>
+
 <view class="safe-bottom"></view>

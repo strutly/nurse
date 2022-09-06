@@ -2,7 +2,7 @@
   overflow: visible;
 }
 
-.bg-img view {
+.bg-img .tag-msg{
   position: absolute;
   bottom: -40rpx;
   text-align: center;

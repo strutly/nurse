@@ -13,7 +13,7 @@ CustomPage({
     let res = await Api.detailReport(options);
     console.log(res);
     that.setData({
-      reportForm:res.data
+      reportForm:res.data.report
     })
   },
 

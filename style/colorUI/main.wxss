@@ -513,6 +513,17 @@ radio.white[checked] .wx-radio-input {
 	background-color: var(--white) !important;
 	color: var(--black) !important;
 }
+switch.main[checked] .wx-switch-input,
+checkbox.main[checked] .wx-checkbox-input,
+radio.main[checked] .wx-radio-input {
+	border-color: var(--main) !important;
+}
+switch.main[checked] .wx-switch-input,
+checkbox.main[checked] .wx-checkbox-input,
+radio.main[checked] .wx-radio-input {
+	background-color: var(--main) !important;
+	color: var(--white) !important;
+}
 
 /* ==================
           边框

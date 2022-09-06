@@ -17,10 +17,44 @@
     <input placeholder="请输入病程" name="assess.time" type="digit" class="text-right"></input>
     <view class="text-gray text-xs margin-left-xs padding-top-xs">年</view>
   </view>
-  <view class="cu-form-group">
-    <view class="title">并发症</view>
-    <input placeholder="请输入并发症" name="assess.complication" class="text-right"></input>
+  
+
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 并发症
+    </view>
   </view>
+  <checkbox-group bindchange="otherChange" data-name="complications" value="{{complications}}" name="assess.complications" class="solid-bottom">
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病酮症"></checkbox>
+      <view class="margin-left">糖尿病酮症</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病酮症酸中毒"></checkbox>
+      <view class="margin-left">糖尿病酮症酸中毒</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="高血糖高渗综合征"></checkbox>
+      <view class="margin-left">高血糖高渗综合征</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="心脑血管疾病"></checkbox>
+      <view class="margin-left">心脑血管疾病</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病肾病"></checkbox>
+      <view class="margin-left">糖尿病肾病</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病眼病"></checkbox>
+      <view class="margin-left">糖尿病眼病</view>
+    </view>
+    <view class="cu-form-group justify-start">
+      <checkbox class='round blue' value="糖尿病神经病变"></checkbox>
+      <view class="margin-left">糖尿病神经病变</view>
+    </view>
+  </checkbox-group>
+
   <view class="cu-form-group">
     <view class="title">目前治疗方案</view>
     <input placeholder="请输入目前治疗方案" name="assess.treatments" class="text-right"></input>
@@ -128,7 +162,7 @@
       <text class="cuIcon-titles text-orange"></text> 其他
     </view>
   </view>
-  <checkbox-group bindchange="otherChange" value="{{others}}" name="assess.others" class="safe-btns">
+  <checkbox-group bindchange="otherChange" data-name="others" value="{{others}}" name="assess.others" class="safe-btns">
     <view class="cu-form-group justify-start">
       <checkbox class='round blue' value="糖尿病自我管理知识缺乏"></checkbox>
       <view class="margin-left">糖尿病自我管理知识缺乏</view>

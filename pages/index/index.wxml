@@ -5,13 +5,13 @@
     <view class="flex-sub text-white">
       <view class="">健康照护师</view>
       <view class="text-sm">
-        一级照护师
+        糖尿病管理
       </view>
     </view>
-    <view class="padding-sm text-center">
+    <!-- <view class="padding-sm text-center">
       <image src="/images/data.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">CGM数据</view>
-    </view>
+    </view> -->
     <view class="padding-tb-sm text-center" bindtap="toUrl" data-url="/pages/patient/list">
       <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">患者管理</view>

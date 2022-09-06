@@ -5,7 +5,7 @@ import CustomPage from '../../CustomPage';
 const fileManager = wx.getFileSystemManager();
 CustomPage({
   data: {
-    typeArr:['1型','2型','未知'],
+    typeArr: ['1型', '2型', '未知'],
     tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
     tabIndex: 0,
     show: false
@@ -64,44 +64,53 @@ CustomPage({
       });
       console.log(res);
       let datas = "";
-      for (let i = 0; i < res.tempFiles.length; i++) {
-        let file = res.tempFiles[i];
-        let quality = 100;
-        console.log(file.size)
-        console.log(file.size > 6 * 1024 * 1024)
-        if (file.size > 4 * 1024 * 1024) {//大于10兆压缩50%
-          console.log(22)
-          quality = ((4 * 1024 * 1024) / file.size) * 90;
-          let newFile = await wx.compressImage({//压缩图片
-            src: file.tempFilePath, // 图片路径
-            quality: quality
-          });
-          console.log(newFile)
-          file = newFile;
-          console.log(file)
+      try {
+        for (let i = 0; i < res.tempFiles.length; i++) {
+          let file = res.tempFiles[i];
+          let quality = 100;
+          console.log(file.size)
+          console.log(file.size > 6 * 1024 * 1024)
+          if (file.size > 4 * 1024 * 1024) {//大于10兆压缩50%
+            console.log(22)
+            quality = ((4 * 1024 * 1024) / file.size) * 90;
+            let newFile = await wx.compressImage({//压缩图片
+              src: file.tempFilePath, // 图片路径
+              quality: quality
+            });
+            console.log(newFile)
+            file = newFile;
+            console.log(file)
+          }
+          let base64 = 'data:image/jpg;base64,' + fileManager.readFileSync(file.tempFilePath, 'base64')
+
+          let data = await Api.scanImageInfo(base64);
+          datas += data;
         }
-        let base64 = 'data:image/jpg;base64,' + fileManager.readFileSync(file.tempFilePath, 'base64')
+        let result = datas.replaceAll("；", ";");
+        let name = result.substring(result.indexOf('姓名') + 3, result.indexOf('科别'));
+        let gender = result.substring(result.indexOf('性别') + 3, result.indexOf('年龄'));
+        let age = result.substring(result.indexOf('年龄') + 3, result.indexOf('入院时间'));
+        let admissionDiagnosis = result.substring(result.indexOf('入院诊断') + 5, result.indexOf(('出院诊断')));
+        let dischargeDiagnosis = result.substring(result.indexOf('出院诊断') + 5, result.indexOf('入院情况'));
+        let height = result.substring(result.indexOf('身高') + 3, result.indexOf('体重') - 1).replace("cm", "");
+        let widget = result.substring(result.indexOf('体重') + 3, result.indexOf('BMI') - 1).replace("kg", "");
+        let bmi = result.substring(result.indexOf('BMI') + 3, result.indexOf('m2') + 2);
 
-        let data = await Api.scanImageInfo(base64);
-        datas += data;
+        console.log(datas);
+        app.globalData.scanData = { 'BMI': bmi, '姓名': name, '性别': gender, '年龄': age, '入院诊断': admissionDiagnosis, '出院诊断': dischargeDiagnosis, '身高': height, '体重': widget };
+        wx.showToast({
+          title: '图片识别成功',
+          icon: 'none'
+        })
+        wx.navigateTo({
+          url: '/pages/patient/scanResult',
+        })
+      } catch (error) {        
+        wx.showToast({
+          title: '图片识别成功',
+          icon: 'none'
+        })
       }
-      let result = datas.replaceAll("；",";");
-
-      let name = result.substring(result.indexOf('姓名') + 3, result.indexOf('科别'));
-      let gender = result.substring(result.indexOf('性别') + 3, result.indexOf('年龄'));
-      let age = result.substring(result.indexOf('年龄') + 3, result.indexOf('入院时间'));
-      let admissionDiagnosis = result.substring(result.indexOf('入院诊断') + 5, result.indexOf(('出院诊断')));
-      let dischargeDiagnosis = result.substring(result.indexOf('出院诊断') + 5, result.indexOf('入院情况'));
-      let height = result.substring(result.indexOf('身高') + 3, result.indexOf('体重') - 1).replace("cm","");
-      let widget = result.substring(result.indexOf('体重') + 3, result.indexOf('BMI') - 1).replace("kg","");
-      let bmi = result.substring(result.indexOf('BMI') + 3, result.indexOf('m2') + 2);
-      
-      console.log(datas);
-      app.globalData.scanData = { 'BMI': bmi, '姓名': name, '性别': gender, '年龄': age, '入院诊断': admissionDiagnosis, '出院诊断': dischargeDiagnosis, '身高': height, '体重': widget };
-      wx.navigateTo({
-        url: '/pages/patient/scanResult',
-      })
-
     } catch (error) {
       console.log(error)
     }

@@ -1,128 +1,112 @@
-<view class="cu-bar">
-  <view class="action">
-    用药
-  </view>
-</view>
-<view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content">
-      <text class="text-grey">二甲双胍（普通片）1000mg/日</text>
-    </view>
-    <view class="action">
-      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.medic?'main':'gray'}} text-bold"></text>
-    </view>
-  </view>
-</view>
-<view class="cu-bar">
-  <view class="action">
-    饮食情况
-  </view>
-</view>
-<view class="cu-form-group">
-  <view class="grid col-3 grid-square flex-sub padding-tb">
-    <view class="bg-img" wx:if="{{reportForm.content.breakfast}}">
-      <image src="{{reportForm.content.breakfast}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.breakfast}}" mode="aspectFill"></image>
-      <view>早餐</view>
-    </view>
-    <view class="bg-img" wx:if="{{reportForm.content.lunch}}">
-      <image src="{{reportForm.content.lunch}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.lunch}}" mode="aspectFill"></image>
-      <view>中餐</view>
-    </view>
-    <view class="bg-img" wx:if="{{reportForm.content.dinner}}">
-      <image src="{{reportForm.content.dinner}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.dinner}}" mode="aspectFill"></image>
-      <view>晚餐</view>
-    </view>
-  </view>
-</view>
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit">
+  <input hidden name="id" value="{{reportForm.id}}"></input>
 
-<view class="cu-bar">
-  <view class="action">饮食是否按时按量</view>
-</view>
-<view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content">
-      <text class="">每日总热量</text>
-      <text class="margin-lr text-gray">2500Kcal</text>
-      <text class="text-gray">3份</text>
-    </view>
+  <view class="cu-bar">
     <view class="action">
-      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.measure?'main':'gray'}} text-bold"></text>
+      用药
     </view>
   </view>
-  <view class="cu-item">
-    <view class="content">
-      <text class="">谷薯类</text>
-      <text class="text-grey text-sm margin-left">3份</text>
-      <text class="margin-left">水果类</text>
-      <text class="text-grey text-sm margin-left">1份</text>
-    </view>
+  <view class="cu-form-group">
+    <view class="title">二甲双胍（普通片）1000mg/日</view>
+    <input hidden name="content.medic" value="{{reportForm.content.medic||0}}"></input>
+    <checkbox-group bindchange="checkboxChange" data-type="medic" >
+      <checkbox class="round main {{reportForm.content.medic==1?'checked':''}}" checked="{{reportForm.content.medic==1?true:false}}" value="1"></checkbox>
+    </checkbox-group>
   </view>
-  <view class="cu-item">
-    <view class="content">
-      <text class="">豆乳类</text>
-      <text class="text-grey text-sm margin-left">1份</text>
-      <text class="margin-left">蔬菜类</text>
-      <text class="text-grey text-sm margin-left">3份</text>
-      <text class="margin-left">油脂类</text>
-      <text class="text-grey text-sm margin-left">1份</text>
-    </view>
-  </view>
-</view>
-<view class="cu-bar">
-  <view class="action">
-    运动是否完成
-  </view>
-</view>
-<view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content">
-      <text class="text-grey">快走/骑车 20分钟</text>
-    </view>
-    <view class="action">
-      <text class="text-xxl cuIcon-roundcheck text-{{reportForm.content.health?'main':'gray'}}  text-bold"></text>
-    </view>
-  </view>
-</view>
 
-<view class="cu-bar">
-  <view class="action">
-    血糖
-  </view>
-</view>
-<view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content">餐前</view>
+  <view class="cu-bar">
     <view class="action">
-      <text class="margin-right-sm">{{reportForm.content.sugarBefore}}</text>
-      <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+      饮食情况
     </view>
   </view>
-  <view class="cu-item">
-    <view class="content">餐后</view>
-    <view class="action">
-      <text class="margin-right-sm">{{reportForm.content.sugarAfter}}</text>
-      <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  <view class="cu-form-group">
+    <view class="grid col-3 grid-square flex-sub padding-tb">
+      <input hidden name="content.breakfast" value="{{reportForm.content.breakfast}}"></input>
+      <input hidden name="content.lunch" value="{{reportForm.content.breakfast}}"></input>
+      <input hidden name="content.dinner" value="{{reportForm.content.breakfast}}"></input>
+      <view class="bg-img" wx:if="{{reportForm.content.breakfast}}">
+        <image src="{{reportForm.content.breakfast}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.breakfast}}" mode="aspectFill"></image>
+        <view class="cu-tag bg-red" bindtap="removeImg" data-type="breakfast">
+          <text class='cuIcon-close'></text>
+        </view>
+        <view class="tag-msg">早餐</view>
+      </view>
+      <view class="solids" bindtap="addImg" data-type="breakfast" wx:else>
+        <text class='cuIcon-cameraadd'>早餐</text>
+      </view>
+      <view class="bg-img" wx:if="{{reportForm.content.lunch}}">
+        <image src="{{reportForm.content.lunch}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.lunch}}" mode="aspectFill"></image>
+        <view class="cu-tag bg-red" bindtap="removeImg" data-type="lunch">
+          <text class='cuIcon-close'></text>
+        </view>
+        <view class="tag-msg">中餐</view>
+      </view>
+      <view class="solids" bindtap="addImg" data-type="lunch" wx:else>
+        <text class='cuIcon-cameraadd'>中餐</text>
+      </view>
+      <view class="bg-img" wx:if="{{reportForm.content.dinner}}">
+        <image src="{{reportForm.content.dinner}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{reportForm.content.dinner}}" mode="aspectFill"></image>
+        <view class="cu-tag bg-red" bindtap="removeImg" data-type="dinner">
+          <text class='cuIcon-close'></text>
+        </view>
+        <view class="tag-msg">晚餐</view>
+      </view>
+      <view class="solids" bindtap="addImg" data-type="dinner" wx:else>
+        <text class='cuIcon-cameraadd'>晚餐</text>
+      </view>
     </view>
   </view>
-</view>
-<view class="cu-bar">
-  <view class="action">
-    血压
-  </view>
-</view>
-<view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content">收缩压</view>
+
+  <view class="cu-bar">
     <view class="action">
-      <text class="margin-right-sm">{{reportForm.content.systolicPressure}}</text>
-      <text class="text-grey text-sm padding-tb-sm">mmHg</text>
+      运动是否完成
     </view>
   </view>
-  <view class="cu-item">
-    <view class="content">舒张压</view>
+  <view class="cu-form-group">
+    <view class="title">快走/骑车 20分钟</view>
+    <input hidden name="content.health" value="{{reportForm.content.health||0}}"></input>
+    <checkbox-group bindchange="checkboxChange" data-type="health">
+      <checkbox class="round main {{reportForm.content.health==1?'checked':''}}" checked="{{reportForm.content.health==1?true:false}}" value="1"></checkbox>
+    </checkbox-group>
+  </view>
+
+
+  <view class="cu-bar">
     <view class="action">
-      <text class="margin-right-sm">{{reportForm.content.diastolicPressure}}</text>
-      <text class="text-grey text-sm padding-tb-sm">mmHg</text>
+      血糖
     </view>
   </view>
-</view>
+
+  <view class="cu-form-group">
+    <view class="title">餐前</view>
+    <input class="text-right" placeholder="请输入餐前血糖" name="content.sugarBefore" value="{{reportForm.content.sugarBefore}}"></input>
+    <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">餐后</view>
+    <input class="text-right" placeholder="请输入餐后血糖" name="content.sugarAfter" value="{{reportForm.content.sugarAfter}}"></input>
+    <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  </view>
+
+  <view class="cu-bar">
+    <view class="action">
+      血压
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">收缩压</view>
+    <input class="text-right" placeholder="请输入收缩压" name="content.systolicPressure" value="{{reportForm.content.systolicPressure}}"></input>
+    <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">舒张压</view>
+    <input class="text-right" placeholder="请输入舒张压" name="content.diastolicPressure" value="{{reportForm.content.diastolicPressure}}"></input>
+    <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  </view>
+  <view class="footer-btns"></view>
+  <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" bindtap="call">联系患者</button>
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" form-type="submit">保存修改</button>
+  </view>
+</form>

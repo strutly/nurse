@@ -6,7 +6,7 @@ import Api from '../../config/api';
 CustomPage({
   data: {
     tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
-    typeArr:['1型','2型'],
+    typeArr:['2型','1型'],
     emotionArr: ['良好', '精神紧张', '焦虑', '抑郁'],
     medicationArr: ['按时按量', '未按时用药'],
     dietArr: ['清淡', '油腻'],
@@ -38,8 +38,9 @@ CustomPage({
     })
   },
   otherChange(e) {
+    let name = e.currentTarget.dataset.name;
     that.setData({
-      others: e.detail.value
+      [name]: e.detail.value
     })
   },
   async submit(e) {

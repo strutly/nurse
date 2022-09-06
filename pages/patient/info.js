@@ -15,6 +15,19 @@ CustomPage({
     that.setData({
       info:res.data.patient,
       nums:res.data.nums
+    });
+    that.loadQcode(options.id);
+  },
+  async loadQcode(id){
+    let res = await Api.codePatient({
+      id:id
+    });
+    console.log(res);
+    that.setData({
+      qUrl:res.data
     })
   },
+  refresh(){
+    that.loadQcode(that.data.options.id)
+  }
 })
