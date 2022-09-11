@@ -115,10 +115,14 @@ CustomPage({
       console.log(error)
     }
   },
-  hiddenModal(e) {
-
+  hideModal(e) {
     that.setData({
-      show: false
+      authModal: false
+    })
+  },
+  hiddenModal(){
+    that.setData({
+      show:false
     })
   },
   async getPhoneNumber(e) {
