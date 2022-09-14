@@ -5,11 +5,13 @@ CustomPage({
   data: {
     typeArr:['1型','2型','未知'],
   },
-  async onLoad(options) {
+  onLoad(options) {
     console.log(options)
-    that = this;
+    that = this;    
+  },
+  async onShow(){
     let res = await Api.detailPatient({
-      id:options.id
+      id:that.data.options.id
     });
     console.log(res);
     that.setData({

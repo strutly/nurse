@@ -1,34 +1,10 @@
 <wxs src="/utils/Tools.wxs" module="Tools"></wxs>
 <view class="padding-lg text-center">
-  <text class="text-main text-xsl">{{Tools.sum(reportForm.content.sum1,reportForm.content.sum2,reportForm.content.sum3,reportForm.content.sum4,reportForm.content.sum5,reportForm.content.sum6,reportForm.content.sum6)}}</text>
+  <text class="text-main text-xsl">{{Tools.sum(reportForm.content)}}</text>
 </view>
 <view class="cu-list menu">
-  <view class="cu-item">
-    <view class="content padding-tb-sm">过去7天中，有{{reportForm.content.sum1}}天，按照健康的饮食计划来进食</view>
-    <view class="action text-right">{{reportForm.content.sum1}}</view>
+  <view class="cu-item" wx:for="{{qs}}" wx:key="index">
+    <view class="content padding-tb-sm">{{Tools.replace(item,'多少',reportForm.content['sum'+(index+1)])}}</view>
+    <view class="action text-right">{{reportForm.content['sum'+(index+1)]||'未提交'}}</view>
   </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">过去7天中，有{{reportForm.content.sum2}}天，一天所吃的蔬菜水果加起来超过5份</view>
-    <view class="action text-right">{{reportForm.content.sum2}}</view>
-  </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">过去7天中，有{{reportForm.content.sum3}}天，吃油脂多的食物</view>
-    <view class="action text-right">{{reportForm.content.sum3}}</view>
-  </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">过去7天中，有{{reportForm.content.sum4}}天，做30分钟以上的活动</view>
-    <view class="action text-right">{{reportForm.content.sum4}}</view>
-  </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">在过去7天中，出了工作及做家事以外，有{{reportForm.content.sum5}}天，有另外拨时间去运动</view>
-    <view class="action text-right">{{reportForm.content.sum5}}</view>
-  </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">过去7天中，有{{reportForm.content.sum6}}天，按照健康的饮食计划来进食</view>
-    <view class="action text-right">{{reportForm.content.sum6}}</view>
-  </view>
-  <view class="cu-item">
-    <view class="content padding-tb-sm">在过去7天中，有{{reportForm.content.sum7}}天，依照医师指示的血糖测量标准次数（例如1天量血糖两次）在家自己（或家人帮忙）量血糖</view>
-    <view class="action text-right">{{reportForm.content.sum7}}</view>
-  </view>  
 </view>

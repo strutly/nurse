@@ -1,6 +1,6 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <view class="padding flex bg-main align-center">
-  <image style="width: 100rpx;height: 100rpx;" src="/images/head.png" class="round margin-right-sm bg-white padding-xs"></image>
+  <image style="width: 100rpx;height: 100rpx;" src="{{userInfo?domain+userInfo.pic:'/images/head.png'}}" class="round margin-right-sm bg-white padding-xs"></image>
   <view class="flex-sub flex align-center">
     <view class="flex-sub text-white">
       <view class="">健康照护师</view>
@@ -12,7 +12,7 @@
       <image src="/images/data.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">CGM数据</view>
     </view> -->
-    <view class="padding-tb-sm text-center" bindtap="toUrl" data-url="/pages/patient/list">
+    <view class="padding-tb-sm text-center" bindtap="toUrl" data-url="{{authSuccess?'/pages/patient/list':''}}" data-msg="{{loginMsg}}">
       <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">患者管理</view>
     </view>
@@ -33,7 +33,7 @@
   </view>
 </view>
 <view class="padding footer text-center safe-bottom">
-  <button class="cu-btn block bg-main margin lg round" bindtap="scan">病历扫描</button>
+  <button class="cu-btn block bg-main margin lg round" bindtap="scan" wx:if="{{authSuccess}}">病历扫描</button>
   <view class="text-gray text-sm">技术支持:清华大学精准医学研究院智慧健康中心</view>
 </view>
 
@@ -49,7 +49,7 @@
           <text class="cuIcon-close text-red"></text>
         </view>
       </view>
-            <view class="cu-bar margin-top">
+      <view class="cu-bar margin-top">
         <view class="action flex-wrap">
           <text class="margin-right margin-top-xs">患者标签</text>
           <view class="cu-tag bg-main margin-top-xs">{{typeArr[patient.assess.type]}}</view>

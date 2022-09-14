@@ -6,14 +6,12 @@ const CustomPage = function (page) {
         this.setData({
           options:options
         });
-        this.setData({
-          authModal: !wx.getStorageSync('auth')
-        })
         page.onLoad && page.onLoad.call(this, options)
       },
       toUrl(e) {
         console.log(e)
         let url = e.currentTarget.dataset.url;
+        let msg = e.currentTarget.dataset.msg||'正在开发中~';
         if (url) {
           wx.navigateTo({
             url: url,
@@ -21,7 +19,7 @@ const CustomPage = function (page) {
         } else {
           wx.showToast({
             icon: "none",
-            title: '正在开发中~',
+            title: msg,
           })
         }
       },

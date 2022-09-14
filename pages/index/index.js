@@ -5,22 +5,55 @@ import CustomPage from '../../CustomPage';
 const fileManager = wx.getFileSystemManager();
 CustomPage({
   data: {
+    domain: Api.domain,
     typeArr: ['1型', '2型', '未知'],
     tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
     tabIndex: 0,
-    show: false
+    show: false,
   },
-
   onLoad() {
     that = this;
-    that.getHomeData();
   },
-
   async getHomeData() {
     let res = await Api.homeData();
     console.log(res);
     that.setData({
       datas: res.data
+    })
+  },
+  onReady() {
+    getApp().watch(function (value) {
+      console.log(value);
+      /*
+        登录成功,并且授权成功 ,获取首页数据
+      */
+      if (value.login && value.auth) {
+        that.showTips('登录成功','success');
+        that.setData({
+          authModal: false
+        })
+        that.getHomeData();
+      }
+      /**
+       * 登录成功,授权失败,提示授权
+       */
+      else if (value.login && !value.auth) {
+        that.setData({
+          authModal: true
+        })
+      }
+      /**
+       * 登录不成功等提示错误信息
+       */
+      else {
+        that.showTips(app.globalData.msg);
+      }
+      that.setData({
+        
+        authSuccess: value.auth,
+        loginMsg: app.globalData.msg,
+        userInfo: wx.getStorageSync('userInfo')
+      })
     })
   },
   follow(e) {
@@ -96,7 +129,7 @@ CustomPage({
         wx.navigateTo({
           url: '/pages/patient/scanResult',
         })
-      } catch (error) {        
+      } catch (error) {
         wx.showToast({
           title: '图片识别成功',
           icon: 'none'
@@ -111,9 +144,9 @@ CustomPage({
       authModal: false
     })
   },
-  hiddenModal(){
+  hiddenModal() {
     that.setData({
-      show:false
+      show: false
     })
   },
   async getPhoneNumber(e) {
@@ -127,17 +160,21 @@ CustomPage({
       })
       console.log(res);
       if (res.code == 0) {
-        that.setData({
-          auth: true,
-          authModal: false
-        });
-        wx.setStorageSync('auth', true);
+        if(res.data.login){          
+          wx.setStorageSync('token', res.data.token);
+          wx.setStorageSync('userInfo', res.data.info);
+        }else{
+          wx.removeStorageSync('token');
+          wx.removeStorageSync('userInfo');
+        }
+        app.globalData.msg = res.data.msg;
+        app.globalData.status = {login:res.data.login,auth:res.data.auth};
       } else {
         wx.removeStorageSync('code');
-        that.showTips(res.msg, 'error')
+        that.showTips(res.msg)
       }
     } else {
-      that.showTips('您已拒绝授权获取手机号~', 'error')
+      that.showTips('您已拒绝授权获取手机号~')
     }
   }
 

@@ -1,16 +1,48 @@
 function include(obj,val){  
   return obj.indexOf(val)>-1;
 }
-function sum() {
-	var sum = 0;
-	for (var i = 0; i < arguments.length ; i ++) {
-		sum += parseInt(arguments[i]);
-	}
+
+function objectKeys(obj) {
+  var str = JSON.stringify(obj);
+  var reg = getRegExp('"(\w+)":|[{}]', "g");
+  var keys = [];
+  var nested = 0;
+  var result = null;
+
+  while((result = reg.exec(str)) !== null) {
+    var match = result[0]
+
+    switch(match) {
+      case "{":
+        nested++;
+        break;
+      case "}":
+        nested--;
+        break;
+      default:
+        if (nested === 1) keys.push(result[1]);
+        break;
+    }
+  }
+  
+  return keys;
+}
+
+function sum(content) {
+  var keys = objectKeys(content);
+  var sum = 0;
+  for(var i=0;i<keys.length;i++){
+    sum+=parseInt(content[keys[i]]);
+  }  
 	return sum;
 }
 
+function replace(str,o,n='未知'){
+  return str.replace(o,n);
+}
 
 module.exports = {
   include:include,
-  sum:sum
+  sum:sum,
+  replace:replace
 }
