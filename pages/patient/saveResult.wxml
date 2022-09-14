@@ -1,3 +1,4 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <form bindsubmit="submit">
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">

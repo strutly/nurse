@@ -39,17 +39,17 @@
 
 
 
-<view class="cu-modal show" wx:if="{{show}}">
+<view class="cu-modal show" wx:if="{{modalfollow}}">
   <form bindsubmit="submit">
     <input name="patientId" value="{{patient.id}}" hidden></input>
     <view class="cu-dialog bg-white padding text-left">
       <view class="cu-bar bg-white justify-end">
         <view class="content">患者随访</view>
-        <view class="action" bindtap="hiddenModal">
+        <view class="action" bindtap="modalStatus" data-name="follow">
           <text class="cuIcon-close text-red"></text>
         </view>
       </view>
-      <view class="cu-bar margin-top">
+            <view class="cu-bar margin-top">
         <view class="action flex-wrap">
           <text class="margin-right margin-top-xs">患者标签</text>
           <view class="cu-tag bg-main margin-top-xs">{{typeArr[patient.assess.type]}}</view>

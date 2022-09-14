@@ -117,23 +117,16 @@ CustomPage({
           let data = await Api.scanImageInfo(base64);
           datas += data;
         }
-        let result = datas.replaceAll("；", ";");
-        let name = result.substring(result.indexOf('姓名') + 3, result.indexOf('科别'));
-        let gender = result.substring(result.indexOf('性别') + 3, result.indexOf('年龄'));
-        let age = result.substring(result.indexOf('年龄') + 3, result.indexOf('入院时间'));
-        let admissionDiagnosis = result.substring(result.indexOf('入院诊断') + 5, result.indexOf(('出院诊断')));
-        let dischargeDiagnosis = result.substring(result.indexOf('出院诊断') + 5, result.indexOf('入院情况'));
-        let height = result.substring(result.indexOf('身高') + 3, result.indexOf('体重') - 1).replace("cm", "");
-        let widget = result.substring(result.indexOf('体重') + 3, result.indexOf('BMI') - 1).replace("kg", "");
-        let bmi = result.substring(result.indexOf('BMI') + 3, result.indexOf('m2') + 2);
+        console.log(datas);
+        let sacaResult = Api.scanResult(datas);
+        app.globalData.scanData = sacaResult;
+
         wx.showToast({
           title: '图片识别成功',
           icon: 'none'
         })
-        console.log(datas);
-        app.globalData.scanData = { 'BMI': bmi, '姓名': name, '性别': gender, '年龄': age, '入院诊断': admissionDiagnosis, '出院诊断': dischargeDiagnosis, '身高': height, '体重': widget };
         that.setData({
-          scanData: app.globalData.scanData
+          scanData: sacaResult
         })
       } catch (error) {
         wx.showToast({
