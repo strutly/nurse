@@ -29,6 +29,19 @@ const CustomPage = function (page) {
           ['modal'+name]:!this.data['modal'+name]
         })
       },
+      call(e){
+        let phone = e.currentTarget.dataset.phone;
+        if(phone){
+          wx.makePhoneCall({
+            phoneNumber: phone
+          })
+        }else{
+          wx.showToast({
+            title: '号码不存在',
+            icon:'none'
+          })
+        }        
+      },
       phoneChange(e) {
         console.log(e);
         this.setData({

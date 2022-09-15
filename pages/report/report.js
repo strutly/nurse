@@ -4,15 +4,17 @@ import CustomPage from '../../CustomPage';
 import WxValidate from '../../utils/WxValidate';
 CustomPage({
   data: {
-
+    healthWays:['散步（低速50-60m/min）','散步（中速70-80m/min）','散步（快速90m/min）','广播体操','跳舞','自行车（平地中速）','自行车（登坡中速）','上下楼梯','乒乓球','羽毛球','游泳']
   },
   async onLoad(options) {
     that = this;
     console.log(options)
     let res = await Api.detailReport(options);
     console.log(res);
+    let treats = JSON.parse(res.data.report.content.treats||'[]');
     that.setData({
       reportForm:res.data.report,
+      treats:treats,
       patient:res.data.patient
     })
     that.initValidate();
@@ -67,8 +69,6 @@ CustomPage({
     that.setData({
       ['reportForm.content.'+type]:res.data
     })
-
-
   },
   removeImg(e){
     let type = e.currentTarget.dataset.type;
@@ -76,9 +76,37 @@ CustomPage({
       ['reportForm.content.'+type]:''
     })
   },
-  call(){
-    wx.makePhoneCall({
-      phoneNumber: that.data.patient.phone
+  add(e) {
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    console.log(type);
+    let vals = that.data[type + "s"];
+    console.log(vals);
+    vals.push({});
+    that.setData({
+      [type + "s"]: vals
+    })
+  },
+  remove(e) {
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    console.log(type);
+    let vals = that.data[type + "s"];
+    vals.splice(e.currentTarget.dataset.index, 1);
+    console.log(vals)
+    that.setData({
+      [type + "s"]: vals
+    })
+  },
+  inputChange(e) {
+    let type = e.currentTarget.dataset.type;
+    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.title;
+    let vals = that.data[type + "s"];
+    let val = vals[index];
+    val[name] = e.detail.value;
+    that.setData({
+      [type + "s"]: vals
     })
   },
   async submit(e){
@@ -100,7 +128,8 @@ CustomPage({
         delete data[key];
       }
     })
-    console.log(data)
+    console.log(data);
+    data.content.treats = JSON.stringify(that.data.treats);
     let res = await Api.updateReport(data);
     console.log(res);
     if(res.code==0){

@@ -66,8 +66,9 @@
         </view>
         <textarea name="content.msg" class="solid padding margin-top" style="min-height: 200rpx;width: 100%;" maxlength="-1" placeholder="如需记录随访信息,请在此输入"></textarea>
       </view>
-      <view class="cu-bar bg-white justify-center">
-        <button class="cu-btn bg-main lg" form-type="submit">确定</button>
+      <view class="padding flex justify-between align-center bg-white">
+        <button style="width: 40%;" class="cu-btn bg-main lg" bindtap="call" data-phone="{{patient.phone}}">拨打电话</button>
+        <button style="width: 40%;" class="cu-btn bg-main lg" form-type="submit">确定</button>
       </view>
     </view>
   </form>
