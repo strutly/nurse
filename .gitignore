@@ -4,7 +4,7 @@ Thumbs.db
 $RECYCLE.BIN/
 ./api.js
 config/api.js
-./orc.js
+./ocr.js
 config/api.js
 .svn
 # macOS

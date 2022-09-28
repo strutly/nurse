@@ -2,7 +2,7 @@ var that;
 const app = getApp()
 import Api from '../../config/api';
 import CustomPage from '../../CustomPage';
-import orc from '../../config/orc';
+import ocr from '../../config/ocr';
 CustomPage({
   data: {
     domain: Api.domain,
@@ -70,7 +70,7 @@ CustomPage({
   async scan() {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let result = await orc.getOrcResult(scanImages);
+    let result = await ocr.getocrResult(scanImages);
     app.globalData.scanData = result;
     wx.navigateTo({
       url: '/pages/patient/scanResult',

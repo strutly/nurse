@@ -2,7 +2,7 @@ var that;
 const app = getApp();
 import WxValidate from "../../utils/WxValidate";
 import CustomPage from "../../CustomPage";
-import orc from '../../config/orc';
+import ocr from '../../config/ocr';
 CustomPage({
   data: {
     scanImages:[]
@@ -61,7 +61,7 @@ CustomPage({
   async scan() {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let result = await orc.getOrcResult(scanImages);
+    let result = await ocr.getocrResult(scanImages);
     console.log(result);
     app.globalData.scanData = result;
     that.setData({
