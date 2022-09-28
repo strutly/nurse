@@ -1,6 +1,7 @@
+@import '/style/colorUI/main.wxss';
 @import '/style/colorUI/animation.wxss';
 @import '/style/colorUI/icon.wxss';
-@import '/style/colorUI/main.wxss';
+
 .container {
   height: 100%;
   display: flex;

@@ -31,10 +31,20 @@
       <text class="text-main text-xxl">{{nums['2-1']||0}}</text>
     </view>
   </view>
+
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/notice/list?type=2&status=1&patientId={{patient.id}}">
+    <view class="content">
+      <text class="">医嘱消息</text>
+    </view>
+    <view class="action">
+      <text class="text-main text-xxl">{{(nums['3-1']||0)+(nums['3-0']||0)}}</text>
+    </view>
+  </view>
+
 </view>
 
 <view class="padding-xl flex flex-direction footer">
-  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="showModal">开始随访</button>
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/follow/list?id={{patient.id}}">患者电话随访记录</button>
   <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/patient/info?id={{patient.id}}">查看患者信息</button>
 </view>
 

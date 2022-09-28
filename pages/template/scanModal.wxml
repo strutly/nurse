@@ -1,0 +1,26 @@
+<view class="cu-modal {{modalscan?'show':''}}">
+  <view class="cu-dialog sm">
+    <view class="cu-bar bg-white padding-lr">
+      <view class="text-left"><text class="cuIcon-titles text-orange "></text> 添加病历图片(<text class="text-red">请按顺序添加</text>)</view>
+      <view class="action">
+        <text class="cuIcon-add text-main" bindtap="add">添加</text>
+      </view>
+    </view>
+
+    <scroll-view scroll-y="true" style="max-height: 500rpx;min-height: 100rpx;" class="bg-white">
+      <view class="flex justify-between align-center solid-bottom padding-sm" wx:for="{{scanImages}}" wx:key="index">
+        <image src="{{item.tempFilePath}}" style="width: 60rpx;height: 60rpx;"></image>
+        <view class="flex">
+          <text class="cuIcon-pulldown margin-right text-xxl" wx:if="{{index<scanImages.length-1}}" data-index="{{index}}" bindtap="down"></text>
+          <text class="cuIcon-roundclose text-xxl text-red" bindtap="remove" data-index="remove"></text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-grey" bindtap="modalStatus" data-name="scan">取消</button>
+        <button class="cu-btn bg-main margin-left" bindtap="scan">识别</button>
+      </view>
+    </view>
+  </view>
+</view>

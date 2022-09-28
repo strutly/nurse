@@ -1,0 +1,4 @@
+<view class="padding solids-bottom">
+  {{notice.content.advice}}
+  <view class="text-right"><text>{{notice.patientName}}</text><text class="margin-left-sm">{{notice.createTime}}</text></view>
+</view>

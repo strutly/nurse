@@ -25,59 +25,156 @@
     <view class="action">{{info.gender}}</view>
   </view>
   <view class="cu-item">
-    <view class="content">腰围</view>
-    <view class="action">{{info.waistline}}</view>
+    <view class="content">ID</view>
+    <view class="action">{{info.hospitalId}}</view>
   </view>
   <view class="cu-item">
-    <view class="content">臀围</view>
-    <view class="action">{{info.hipline}}</view>
+    <view class="content">入院时间</view>
+    <view class="action">{{info.admissionDate}}</view>
+  </view>
+  <view class="cu-item">
+    <view class="content">出院时间</view>
+    <view class="action">{{info.dischargeDate}}</view>
   </view>
 </view>
 <view class="cu-bar bg-gray">
   <view class="action">
-    <text class="cuIcon-title text-blue"></text>既往病史
+    <text class="cuIcon-title text-blue"></text>入院诊断
   </view>
 </view>
-<view class="padding bg-white">
-  {{info.otherInfo.sickHistory||'无'}}
+<view class="cu-form-group flex-wrap">
+  <view class="cu-tag margin-tb-xs text-main bg-white" wx:for="{{info.scanData['admissionDiagnosis']}}" wx:key="index">{{item}}</view>
 </view>
-<view class="cu-bar bg-gray" wx:if="{{info.otherInfo.images.length>0}}">
-  <view class="action">
-    <text class="cuIcon-title text-blue"></text>化验体检
-  </view>
-</view>
-<view class="cu-form-group">
-  <view class="grid col-4 grid-square flex-sub padding-tb">
-    <view class="bg-img" wx:for="{{info.otherInfo.images}}" wx:key="index">
-      <image src="{{item}}" mode="aspectFill" bindtap="viewImage" data-url="{{item}}"></image>
-    </view>
-  </view>
-</view>
-<view class="cu-bar bg-gray" wx:if="{{info.otherInfo.diagnoses.length>0}}">
+<view class="cu-bar bg-gray">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>出院诊断
   </view>
 </view>
-<view class="padding bg-white">
-  <view class='cu-tag' wx:for="{{info.otherInfo.diagnoses}}">{{item.name}}</view>
+<view class="cu-form-group flex-wrap">
+  <view class="cu-tag margin-tb-xs text-main bg-white" wx:for="{{info.scanData['dischargeDiagnosis']}}" wx:key="index">{{item}}</view>
 </view>
 <view class="cu-bar bg-gray">
   <view class="action">
-    <text class="cuIcon-title text-blue"></text>治疗
+    <text class="cuIcon-title text-blue"></text>入院情况
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="padding-tb">{{info.scanData['admissionInfo']}}</view>
+</view>
+
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>既往史
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="padding-tb">{{info.scanData['anamnesis']}}</view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>治疗经过
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="padding-tb">{{info.scanData['treatment']}}</view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院情况
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="padding-tb">{{info.scanData['dischargeInfo']}}</view>
+</view>
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院医嘱(生活方式)
+  </view>
+</view>
+<view class="cu-form-group">
+  <view class="padding-tb">{{info.scanData['life']['content']}}</view>
+</view>
+
+<view class="cu-form-group" wx:for="{{info.scanData['life']['diet']}}">
+  <view class="title">{{item}}</view>
+  <checkbox class='round checked main' checked="true" disabled="true"></checkbox>
+</view>
+
+<view class="cu-list menu solid-top">
+
+
+  <view class="cu-item">
+    <view class="content">
+      每日热量
+    </view>
+    <view class="action">
+      {{info.scanData['life']['cal']}}
+    </view>
+  </view>
+</view>
+
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院医嘱(药物治疗)
   </view>
 </view>
 <view class="padding flex bg-white solid-bottom">
   <text class="flex-treble">药品名称</text>
+  <text class="flex-twice text-center">产商</text>
   <text class="flex-twice text-center">规格</text>
   <text class="flex-twice text-center">方式</text>
   <text class="flex-twice text-center">时间</text>
 </view>
-<view class="padding flex bg-white solid-bottom text-sm" wx:for="{{info.otherInfo.treats}}" wx:key="index">
-  <text class="flex-treble text-left">{{item.name}}</text>
-  <text class="flex-twice text-center">{{item.specs}}</text>
-  <text class="flex-twice text-center">{{item.way}}</text>
-  <text class="flex-twice text-center text-red">{{item.time}}</text>
+
+<view class="padding flex bg-white text-sm" wx:for="{{info.scanData['drugs']}}" wx:key="index">
+  <text class="flex-treble">{{item.name}}</text>
+  <text class="flex-twice text-center">{{item.company}}</text>
+  <text class="flex-twice text-center">{{item.dosage}}</text>
+  <text class="flex-twice text-center">{{item.mode}}</text>
+  <text class="flex-twice text-center">{{item.daily}}</text>
 </view>
+
+
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院医嘱(复诊要求)
+  </view>
+</view>
+<view class="cu-form-group solid-bottom">
+  <view class="padding-tb">{{info.scanData['reviewRequire']['content']}}</view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      复诊时间
+    </view>
+    <view class="action">
+      {{info.scanData['reviewDiagnosisDate']||'请选择出院时间'}}
+    </view>
+  </view>
+</view>
+
+<view class="cu-bar bg-gray">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>出院医嘱(复查项目)
+  </view>
+</view>
+
+<view class="cu-form-group solid-bottom">
+  <view class="padding-tb">{{info.scanData['reviewProject']['content']}}</view>
+</view>
+<view class="cu-list menu">
+  <view class="cu-item">
+    <view class="content">
+      复查时间
+    </view>
+    <view class="action">
+      {{info.scanData['reviewDate']}}
+    </view>
+  </view>
+</view>
+
+
 <view class="cu-bar bg-gray">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>绑定二维码

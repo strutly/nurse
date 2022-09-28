@@ -3,7 +3,7 @@
   "projectname": "清云数字健康",
   "setting": {
     "compileHotReLoad": true,
-    "bigPackageSizeSupport": false,
+    "bigPackageSizeSupport": true,
     "urlCheck": false
   },
   "libVersion": "2.25.2"

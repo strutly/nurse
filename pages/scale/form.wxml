@@ -1,0 +1,25 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit" class="cu-card footer-btns">
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="cuIcon-titles text-orange "></text> {{scaleForm.title}}
+    </view>
+  </view>
+  <block wx:for="{{scaleForm.questions}}" wx:key="q" wx:for-item="question" wx:for-index="q">
+    <view class="cu-bar bg-white solid-bottom {{q==0?'':'margin-top'}}">
+      <view class="action">
+        {{q+1}}:{{question.title}}
+      </view>
+    </view>
+    <radio-group class="block" name="{{q}}">
+      <view class="cu-form-group" wx:for="{{question.options}}" wx:key="index" wx:for-item="option">
+        <view class="title">{{option.lable}}</view>
+        <radio class="blue radio" value="{{option.value}}"></radio>
+      </view>
+    </radio-group>
+  </block>
+
+  <view class="padding footer text-center safe-bottom">
+    <button class="cu-btn block bg-main margin lg round" form-type="submit">提交</button>
+  </view>
+</form>

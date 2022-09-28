@@ -1,44 +1,17 @@
 var that;
-const app = getApp()
+const app = getApp();
 import WxValidate from "../../utils/WxValidate";
 import CustomPage from "../../CustomPage";
-import Api from "../../config/api";
-const fileManager = wx.getFileSystemManager();
+import orc from '../../config/orc';
 CustomPage({
   data: {
-    images: [],
-    diagnoses: [],
-    treats: [{
-      name: "利格列汀片(上海勃林格) ",
-      specs: "5mg(1片) ",
-      way: "口服",
-      time: '1/早'
-    }, {
-      name: "盐酸二甲双胍片(施贵宝)  ",
-      specs: "5g(1片) ",
-      way: "口服3/日",
-      time: '三餐前'
-    }, {
-      name: "双环醇片(北京协和)  ",
-      specs: "5mg(1片) ",
-      way: "口服3/日",
-      time: ''
-    }]
+    scanImages:[]
   },
   onLoad(options) {
-    that = this;
-    console.log(app.globalData.scanData)
-    let dis = app.globalData.scanData['出院诊断'].split(";") || [];
-    console.log(dis.map(item => {
-      console.log(item);
-      return { name: item }
-    }))
+    that = this; 
     that.setData({
-      scanData: app.globalData.scanData,
-      diagnoses: dis.map(item => {
-        console.log(item);
-        return { name: item }
-      })
+      patientData:app.globalData.scanData,
+      scanData:app.globalData.scanData
     })
     that.initValidate();
   },
@@ -47,174 +20,90 @@ CustomPage({
       name: {
         required: true
       },
-      phone: {
-        required: true,
-        tel: true
+      gender: {
+        required: true
       },
       age: {
         required: true
       },
-      gender: {
+      hospitalId: {
         required: true
       },
-      weight: {
+      admissionDate: {
         required: true
       },
-      height: {
+      dischargeDate: {
         required: true
       }
     }, messages = {
       name: {
         required: "请输入姓名"
       },
-      phone: {
-        required: "请输入手机号码",
-        tel: "请输入正确的手机号"
+      gender: {
+        required: "请输入性别"
       },
       age: {
         required: "请输入年龄"
       },
-      gender: {
-        required: "请输入性别"
+      
+      hospitalId: {
+        required: "请输入住院ID"
       },
-      weight: {
-        required: "请输入体重"
+      admissionDate: {
+        required: "请选择入院时间"
       },
-      height: {
-        required: "请输入身高"
+      dischargeDate: {
+        required: "请选择出院时间"
       }
     };
     that.WxValidate = new WxValidate(rules, messages);
-  },
+  },  
   async scan() {
-    try {
-      let res = await wx.chooseMedia({
-        count: 9,
-        sourceType: ['album'],
-        mediaType: ["image"]
-      });
-      console.log(res);
-      let datas = "";
-      try {
-        for (let i = 0; i < res.tempFiles.length; i++) {
-          let file = res.tempFiles[i];
-          let quality = 100;
-          console.log(file.size)
-          console.log(file.size > 6 * 1024 * 1024)
-          if (file.size > 4 * 1024 * 1024) {//大于10兆压缩50%
-            console.log(22)
-            quality = ((4 * 1024 * 1024) / file.size) * 90;
-            let newFile = await wx.compressImage({//压缩图片
-              src: file.tempFilePath, // 图片路径
-              quality: quality
-            });
-            console.log(newFile)
-            file = newFile;
-            console.log(file)
-          }
-          let base64 = 'data:image/jpg;base64,' + fileManager.readFileSync(file.tempFilePath, 'base64')
-
-          let data = await Api.scanImageInfo(base64);
-          datas += data;
-        }
-        console.log(datas);
-        let sacaResult = Api.scanResult(datas);
-        app.globalData.scanData = sacaResult;
-
-        wx.showToast({
-          title: '图片识别成功',
-          icon: 'none'
-        })
+    let scanImages = that.data.scanImages;
+    if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
+    let result = await orc.getOrcResult(scanImages);
+    console.log(result);
+    app.globalData.scanData = result;
+    that.setData({
+      patientData:result,
+      scanData:result,
+      modalscan:false
+    })    
+  },
+  add() {
+    wx.chooseMedia({
+      mediaType: ['image'],
+      success(res) {
+        console.log(res);
+        let tempFiles = res.tempFiles;
+        let scanImages = that.data.scanImages;
+        scanImages = scanImages.concat(tempFiles);
+        console.log(scanImages)
         that.setData({
-          scanData: sacaResult
-        })
-      } catch (error) {
-        wx.showToast({
-          title: '图片识别成功',
-          icon: 'none'
+          scanImages: scanImages
         })
       }
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
-  async chooseImage() {
-    let images = that.data.images;
-    try {
-      let res = await wx.chooseMedia({
-        count: 4 - images.length,
-        mediaType: ['image'],
-        sizeType: ['compressed']
-      });
-      console.log(res)
-      for (let file of res.tempFiles) {
-        that.uploadImage(file.tempFilePath);
-      }
-    } catch (error) {
-      console.log(error);
-      return that.showTips('您已经取消上传', 'info');
-    }
-  },
-  async uploadImage(filePath) {
-    let images = that.data.images;
-    let res = await Api.uploadFile(filePath, true)
-    if (res.code == 0) {
-      images.push(res.data);
-      that.setData({
-        images: images
-      })
-    } else {
-      that.showTips(res.msg);
-    }
-  },
-  delImg(e) {
-    console.log(e);
-    let images = that.data.images;
-    images.splice(e.currentTarget.dataset.index, 1);
-    console.log(images)
-    that.setData({
-      images: images
     })
   },
-  saveResult() {
-    wx.navigateTo({
-      url: '/pages/patient/saveResult',
-    })
-  },
-  add(e) {
-    console.log(e);
-    let type = e.currentTarget.dataset.type;
-    console.log(type);
-    let vals = that.data[type + "s"];
-    console.log(vals);
-    vals.push({});
+  down(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index;
+    let scanImages = that.data.scanImages;
+    [scanImages[index + 1], scanImages[index]] = [scanImages[index], scanImages[index + 1]];
     that.setData({
-      [type + "s"]: vals
+      scanImages: scanImages
     })
   },
   remove(e) {
-    console.log(e);
-    let type = e.currentTarget.dataset.type;
-    console.log(type);
-    let vals = that.data[type + "s"];
-    vals.splice(e.currentTarget.dataset.index, 1);
-    console.log(vals)
-    that.setData({
-      [type + "s"]: vals
-    })
-  },
-  inputChange(e) {
-    let type = e.currentTarget.dataset.type;
+    console.log(e)
     let index = e.currentTarget.dataset.index;
-    let name = e.currentTarget.dataset.title;
-    let vals = that.data[type + "s"];
-    let val = vals[index];
-    val[name] = e.detail.value;
+    let scanImages = that.data.scanImages;
+    scanImages.splice(index, 1);
     that.setData({
-      [type + "s"]: vals
+      scanImages: scanImages
     })
   },
+
   submit(e) {
     let data = e.detail.value;
     if (!that.WxValidate.checkForm(data)) {
@@ -224,12 +113,24 @@ CustomPage({
       return false;
     }
     app.globalData.patientData = data;
-    app.globalData.scanData = data;
     wx.navigateTo({
       url: '/pages/patient/saveResult',
     })
-
-
+  },
+  pickerChange(e){
+    console.log(e);
+    let name = e.currentTarget.dataset.name;
+    that.setData({
+      ['patientData.'+name]:e.detail.value
+    })
+  },
+  inputChange(e){
+    console.log(e);
+    let name = e.currentTarget.dataset.name;
+    that.setData({
+      ['patientData.'+name]:e.detail.value
+    })
   }
+  
 
 })
