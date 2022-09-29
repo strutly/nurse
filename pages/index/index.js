@@ -70,7 +70,7 @@ CustomPage({
   async scan() {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let result = await ocr.getocrResult(scanImages);
+    let result = await ocr.getOcrResult(scanImages);
     app.globalData.scanData = result;
     wx.navigateTo({
       url: '/pages/patient/scanResult',

@@ -61,7 +61,7 @@ CustomPage({
   async scan() {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let result = await ocr.getocrResult(scanImages);
+    let result = await ocr.getOcrResult(scanImages);
     console.log(result);
     app.globalData.scanData = result;
     that.setData({
