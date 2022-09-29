@@ -68,7 +68,7 @@
   <view class="cu-form-group">
     <view class="padding-tb">{{patientData['admissionInfo']}}</view>
   </view>
-  
+
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>既往史
@@ -108,7 +108,7 @@
     <input hidden name="plan.lowSalt" value="{{item}}" wx:if="{{item=='低盐'}}"></input>
     <input hidden name="plan.lowFat" value="{{item}}" wx:if="{{item=='低脂'}}"></input>
   </view>
-  
+
   <view class="cu-list menu solid-top">
     <input hidden name="quantity" value="{{patientData['life']['cal']}}"></input>
     <view class="cu-item">
@@ -151,7 +151,7 @@
   <view class="cu-form-group solid-bottom">
     <view class="padding-tb">{{patientData['reviewRequire']['content']}}</view>
   </view>
-  <view class="cu-list menu">
+  <!-- <view class="cu-list menu">
     <view class="cu-item">
       <view class="content">
         复诊时间
@@ -160,7 +160,7 @@
         {{patientData['reviewRequire']['time']}}
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class="cu-bar bg-gray">
     <view class="action">
@@ -171,33 +171,33 @@
     <view class="cu-form-group solid-bottom">
       <view class="padding-tb">{{patientData['reviewProject']['content']}}</view>
     </view>
-    <view class="cu-list menu">
+    <!-- <view class="cu-list menu">
       <view class="cu-item">
         <view class="content">
           复查时间
         </view>
-        <view class="action">          
+        <view class="action">
           <veiw class="cu-tag" wx:for="{{patientData['reviewProject']['time']}}" wx:key="index">{{item}}</veiw>
         </view>
       </view>
-    </view>
+    </view> -->
 
     <view class="cu-form-group">
-    <view class="title">复查时间</view>
-    <picker mode="date" bindchange="pickerChange" data-name="reviewDate" name="reviewDate" value="{{patientData['reviewDate']}}">
-      <view class="picker">
-        {{patientData['reviewDate']||'请选择出院时间'}}
-      </view>
-    </picker>
-  </view>
-  <view class="cu-form-group">
-    <view class="title">复诊时间</view>
-    <picker mode="date" bindchange="pickerChange" data-name="reviewDiagnosisDate" name="reviewDiagnosisDate" value="{{patientData['reviewDiagnosisDate']}}">
-      <view class="picker">
-        {{patientData['reviewDiagnosisDate']||'请选择出院时间'}}
-      </view>
-    </picker>
-  </view>
+      <view class="title">复查时间</view>
+      <picker mode="date" bindchange="pickerChange" data-name="reviewDate" name="reviewDate" value="{{patientData['reviewDate']}}">
+        <view class="picker">
+          {{patientData['reviewDate']||'请选择出院时间'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">复诊时间</view>
+      <picker mode="date" bindchange="pickerChange" data-name="reviewDiagnosisDate" name="reviewDiagnosisDate" value="{{patientData['reviewDiagnosisDate']}}">
+        <view class="picker">
+          {{patientData['reviewDiagnosisDate']||'请选择出院时间'}}
+        </view>
+      </picker>
+    </view>
   </view>
 
   <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
