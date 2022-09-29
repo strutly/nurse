@@ -2,9 +2,8 @@ var that;
 import CustomPage from "../../CustomPage";
 import Api from "../../config/api";
 CustomPage({
-
   data: {
-
+    notices:[]
   },
   onLoad(options) {
     that = this;
@@ -15,13 +14,13 @@ CustomPage({
     console.log(param)
     param.pageNo = pageNo;
     let res = await Api.reportNoticePage(param);
-    let reports = that.data.reports;
+    console.log(res);
+    let notices = that.data.notices;
     that.setData({
-      reports:reports.concat(res.data.content),
+      notices:notices.concat(res.data.content),
       endline:res.data.last,
       pageNo: pageNo
-    })
-    console.log(res);
+    })    
   },
   onReachBottom() {
     let endline = that.data.endline;
