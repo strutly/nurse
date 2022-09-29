@@ -5,6 +5,7 @@ import CustomPage from "../../CustomPage";
 import Api from "../../config/api";
 CustomPage({
   data: {
+    score:[]
   },
   onLoad(options) {
     console.log(jsonData)
@@ -17,7 +18,6 @@ CustomPage({
   initValidate(questions) {
     let rules = {},messages = {};
     questions.forEach((question,i)=>{
-      console.log(question)
       rules[i]={
         required: true
       };
@@ -26,6 +26,13 @@ CustomPage({
       };
     })
     that.WxValidate = new WxValidate(rules, messages);
+  },
+  choose(e){
+    console.log(e);
+    let dataset = e.currentTarget.dataset;
+    that.setData({
+      ['score['+dataset.q+']']:dataset.value
+    })
   },
   getResult(sum){
     let scaleForm = that.data.scaleForm;

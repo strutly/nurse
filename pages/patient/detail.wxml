@@ -32,7 +32,7 @@
     </view>
   </view>
 
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/notice/list?type=2&status=1&patientId={{patient.id}}">
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/notice/list?patientId={{patient.id}}">
     <view class="content">
       <text class="">医嘱消息</text>
     </view>

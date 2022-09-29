@@ -1,1 +1,4 @@
-/* pages/scale/form.wxss */
+.text-lg{
+  font-size: 44rpx;
+  font-weight: bold;
+}

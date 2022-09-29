@@ -10,7 +10,7 @@ CustomPage({
     console.log(options)
     let res = await Api.detailReport(options);
     that.setData({
-      report:res.data
+      notice:res.data
     })
   }
 })

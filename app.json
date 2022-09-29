@@ -1,6 +1,5 @@
 {
-  "pages": [
-    
+  "pages": [    
     "pages/index/index",
     "pages/scale/form",
     "pages/patient/saveResult",
@@ -11,11 +10,9 @@
     "pages/report/list",
     "pages/report/report",
     "pages/report/form",
-    "pages/notice/form",
     "pages/notice/detail",
     "pages/follow/list",
-    "pages/notice/list",
-    "pages/report/notice"
+    "pages/notice/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

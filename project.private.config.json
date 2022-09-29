@@ -6,5 +6,18 @@
     "bigPackageSizeSupport": true,
     "urlCheck": true
   },
-  "libVersion": "2.26.1"
+  "libVersion": "2.25.2",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/scale/form",
+          "query": "type=sas",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

@@ -17,7 +17,7 @@
   </block> 
 </view>
 <view class="padding-xl flex flex-direction footer">
-  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="modalStatus" data-name="follow">开始随访</button>
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="modalStatus" data-name="follow">记录随访</button>
 </view>
 
 <view class="cu-modal show" wx:if="{{modalfollow}}">

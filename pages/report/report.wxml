@@ -16,17 +16,18 @@
   </view>
   <view class="padding flex bg-white solid-bottom">
     <text class="flex-treble">药品名称</text>
+    <text class="flex-twice text-center">产商</text>
     <text class="flex-twice text-center">规格</text>
     <text class="flex-twice text-center">方式</text>
     <text class="flex-twice text-center">时间</text>
-    <text class="cuIcon-add text-main text-bold" bindtap="add" data-type="treat"></text>
   </view>
-  <view class="padding flex bg-white solid-bottom text-sm align-center" wx:for="{{treats}}">
-    <input class="flex-treble text-left" placeholder="药品名称" value="{{item.name}}" bindinput="inputChange" data-type="treat" data-index="{{index}}" data-title="name"></input>
-    <input class="flex-twice text-center" placeholder="药品规格" value="{{item.specs}}" bindinput="inputChange" data-type="treat" data-index="{{index}}" data-title="specs"></input>
-    <input class="flex-twice text-center" placeholder="服用方式" value="{{item.way}}" bindinput="inputChange" data-type="treat" data-index="{{index}}" data-title="way"></input>
-    <input class="flex-twice text-center text-red" placeholder="服用时间" value="{{item.time}}" bindinput="inputChange" data-type="treat" data-index="{{index}}" data-title="time"></input>
-    <text class="cuIcon-move text-red margin-left-sm" bindtap="remove" data-type="treat" data-index="{{index}}"></text>
+
+  <view class="padding flex bg-white text-sm" wx:for="{{treats}}" wx:key="index">
+    <text class="flex-treble">{{item.name}}</text>
+    <text class="flex-twice text-center">{{item.company}}</text>
+    <text class="flex-twice text-center">{{item.dosage}}</text>
+    <text class="flex-twice text-center">{{item.mode}}</text>
+    <text class="flex-twice text-center">{{item.daily}}</text>
   </view>
 
 

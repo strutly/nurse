@@ -11,12 +11,17 @@
         {{q+1}}:{{question.title}}
       </view>
     </view>
-    <radio-group class="block" name="{{q}}">
-      <view class="cu-form-group" wx:for="{{question.options}}" wx:key="index" wx:for-item="option">
-        <view class="title">{{option.lable}}</view>
-        <radio class="blue radio" value="{{option.value}}"></radio>
+
+    <view class="cu-list menu">
+      <input name="{{q}}" value="{{score[q]}}" hidden></input>
+      <view class="cu-item" wx:for="{{question.options}}" wx:key="index" wx:for-item="option" bindtap="choose" data-q="{{q}}" data-value="{{option.value}}">
+        <view class="content">{{option.lable}}</view>
+        <view class="action" wx:if="{{score[q]==option.value}}">
+          <view class="text-main text-lg cuIcon-check"></view>
+        </view>
       </view>
-    </radio-group>
+    </view>
+
   </block>
 
   <view class="padding footer text-center safe-bottom">
