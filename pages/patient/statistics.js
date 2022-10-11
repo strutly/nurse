@@ -15,7 +15,7 @@ CustomPage({
   async onLoad(options) {
     that = this;
     let res = await Api.patientStatistics({
-      id: 7
+      id: options.id
     })
     that.setData({
       statisticsData: res.data

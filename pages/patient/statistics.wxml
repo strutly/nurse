@@ -1,20 +1,24 @@
 <view class="flex text-center">
-  <view class="flex-sub padding text-lg">
+  <view class="flex-sub padding">
     <view class="text-main text-bold text-xxl">{{statisticsData.sumDay}}</view>
     <view class="">检测天数</view>
   </view>
-  <view class="flex-sub padding text-lg">
+  <view class="flex-sub padding">
     <view class="text-main text-bold text-xxl">{{statisticsData.sumFollow}}</view>
     <view class="">随访次数</view>
   </view>
-  <view class="flex-sub padding text-lg">
+  <view class="flex-sub padding">
     <view class="text-main text-bold text-xxl">{{statisticsData.sumScale}}</view>
     <view class="">量表报告</view>
   </view>
-  <view class="flex-sub padding text-lg">
+  <view class="flex-sub padding">
     <view class="text-main text-bold text-xxl">{{statisticsData.sumReport}}</view>
     <view class="">日报告</view>
   </view>
+  <view class="padding-right padding-top">
+    <view class="cuIcon-calendar text-main text-bold" bindtap="toUrl" data-url="/pages/patient/calendar?id={{options.id}}"></view>
+  </view>
+  
 </view>
 <view class="solid-top text-center padding-top">异常数据(次)</view>
 <view class="padding-sm flex text-center">
