@@ -44,6 +44,8 @@
 </view>
 
 <view class="padding-xl flex flex-direction footer">
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/patient/statistics?id={{patient.id}}">统计报表</button>
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/patient/calendar?id={{patient.id}}">患者日历</button>
   <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/follow/list?id={{patient.id}}">患者电话随访记录</button>
   <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/patient/info?id={{patient.id}}">查看患者信息</button>
 </view>

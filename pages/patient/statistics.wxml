@@ -1,0 +1,105 @@
+<view class="flex text-center">
+  <view class="flex-sub padding text-lg">
+    <view class="text-main text-bold text-xxl">{{statisticsData.sumDay}}</view>
+    <view class="">检测天数</view>
+  </view>
+  <view class="flex-sub padding text-lg">
+    <view class="text-main text-bold text-xxl">{{statisticsData.sumFollow}}</view>
+    <view class="">随访次数</view>
+  </view>
+  <view class="flex-sub padding text-lg">
+    <view class="text-main text-bold text-xxl">{{statisticsData.sumScale}}</view>
+    <view class="">量表报告</view>
+  </view>
+  <view class="flex-sub padding text-lg">
+    <view class="text-main text-bold text-xxl">{{statisticsData.sumReport}}</view>
+    <view class="">日报告</view>
+  </view>
+</view>
+<view class="solid-top text-center padding-top">异常数据(次)</view>
+<view class="padding-sm flex text-center">
+  <view class="flex-sub margin-sm bg-pink light padding-tb">
+    <view class="text-red text-bold text-xxl">{{statisticsData.badSugarBefore}}</view>
+    <view class="text-black margin-top-sm text-sm">餐前血糖</view>
+  </view>
+  <view class="flex-sub margin-sm bg-pink light padding-tb">
+    <view class="text-red text-bold text-xxl">{{statisticsData.badSugarAfter}}</view>
+    <view class="text-black margin-top-sm text-sm">餐后血糖</view>
+  </view>
+  <view class="flex-sub margin-sm bg-pink light padding-tb">
+    <view class="text-red text-bold text-xxl">{{statisticsData.badSystolicPressure}}</view>
+    <view class="text-black margin-top-sm text-sm">舒张压</view>
+  </view>
+  <view class="flex-sub margin-sm bg-pink light padding-tb">
+    <view class="text-red text-bold text-xxl">{{statisticsData.badDiastolicPressure}}</view>
+    <view class="text-black margin-top-sm text-sm">收缩压</view>
+  </view>
+</view>
+<veiw class="flex solids-top padding">
+  <view class="cu-tag {{tabIndex==0?'bg-main':''}}" bindtap="tabChange" data-index="0">血糖</view>
+  <view class="cu-tag {{tabIndex==1?'bg-main':''}} " bindtap="tabChange" data-index="1">血压</view>
+</veiw>
+<canvas canvas-id="myChart" disable-scroll="true" class="canvas margin-top-xl padding-bottom"></canvas>
+
+<view class="tags">
+  <view class="fr padding-right solid-right margin-right text-main text-bold">
+    <view class="tag" bindtap="footTab" data-index="0">
+      <view>随访记录</view>
+    </view>
+    <view class="tag" bindtap="footTab" data-index="1">
+      <view>日报告</view>
+    </view>
+
+    <view class="tag" bindtap="footTab" data-index="2">
+      <view>量表</view>
+    </view>
+  </view>
+</view>
+<view class=" safe-bottom" wx:if="{{footIndex==0}}">
+  <view class="cu-list menu">
+  
+  <block wx:for="{{lists[0]}}" wx:key="index">
+    <view class="cu-item" bindtap="open" data-index="{{index}}">
+      <view class="content">
+        <text class="">随访时间</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{item.createTime}}</text>
+      </view>
+      <view class="action">
+        <text class="{{open==index?'cuIcon-fold':'cuIcon-unfold'}} text-bold  text-grey margin-left-sm"></text>
+      </view>
+    </view>
+    <view class="bg-white padding text-content solid-bottom" wx:if="{{open==index}}">
+      {{item.content.msg||'无'}}
+    </view>
+  </block>
+</view>
+</view>
+
+<view class=" safe-bottom" wx:if="{{footIndex==1}}">
+  <view class="cu-list menu">
+    <view class="cu-item arrow" wx:for="{{lists[1]}}" wx:key="index" bindtap="toUrl" data-url="/pages/report/report?id={{item.id}}">
+      <view class="content">
+        <text class="">提交时间</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{item.createTime}}</text>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class=" safe-bottom" wx:if="{{footIndex==2}}">
+  <view class="cu-list menu">
+    <view class="cu-item arrow" wx:for="{{lists[2]}}" wx:key="index" bindtap="toUrl" data-url="/pages/report/form?id={{item.id}}">
+      <view class="content">
+        <text class="">提交时间</text>
+      </view>
+      <view class="action">
+        <text class="text-grey text-sm">{{item.createTime}}</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,56 @@
+
+@import "/style/colorUI/icon.wxss";
+.text-yellow{
+  color: #fbbd08;
+}
+.text-main{
+  color: #38C1F7;
+}
+.flex{
+  display: flex;
+}
+.align-center{
+  align-items: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.week,
+.date {
+  width: 100vw;
+  float:left;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #fff;
+}
+
+.day {
+  float:left;
+  border-top:solid 1rpx #eee;
+  width: calc(100vw/7);
+  position: relative;
+  padding: 10rpx;
+}
+
+.day-detail {
+  padding-top:10rpx;
+  padding-bottom: 10rpx;
+  padding-right: 15rpx;
+  padding-left: 15rpx;
+  width: calc(100vw/5);
+  position: absolute;
+  top: 98%;  
+  background-color: #f1f1f1;
+  z-index: 10;
+  border-radius: 15rpx;
+}
+
+.day-detail::before {
+  content: "";
+  border: 10px solid transparent;
+  border-bottom-color: var(--ghostWhite);
+  position: absolute;
+  right: 40%;
+  top: 3rpx;
+  margin-top: -20px;
+}

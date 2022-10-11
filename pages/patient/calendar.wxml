@@ -1,0 +1,8 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="text-center">
+  <view class="date-wrap padding text-xl ">
+    <text class="text-main cuIcon-roundleftfill-copy margin-right" bindtap="prevMonth"></text>{{daysData.year}}年{{daysData.month}}月
+    <text class="text-main cuIcon-roundrightfill margin-left" bindtap="nextMonth"></text>
+  </view>
+</view>
+<calendar daysData="{{daysData.days}}" open="{{open}}"></calendar>

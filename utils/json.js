@@ -118,7 +118,7 @@ var eatArr = [[{
 }]];
 var scaleFormData = {
   sds: {
-    title:"抑郁自测评估",
+    title:"情绪量表自测评估",
     questions: [
       {
         title: "我觉得闷闷不乐，情绪低沉",

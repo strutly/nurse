@@ -186,7 +186,7 @@
       <picker hidden name="other.sds" value="{{sds}}"></picker>
       <view class="content padding-tb-sm">
         <view>
-          抑郁测评
+          情绪量表
         </view>
         <view class="text-orange text-sm">
           <text class="cuIcon-infofill margin-right-xs"></text> {{sds.suggest}}

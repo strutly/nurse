@@ -107,6 +107,12 @@ const CustomPage = function (page) {
           errorType: errorType,
           errorShow: true
         })
+      },
+      showToast(msg="出错了~"){
+        wx.showToast({
+          title: msg,
+          icon:'none'
+        })
       }
     })
   )

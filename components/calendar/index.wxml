@@ -1,0 +1,20 @@
+<wxs src="/utils/Tools.wxs" module="Tools"></wxs>
+<view class="calendar">
+  <view class="week">
+    <view wx:for="{{weekArr}}" wx:for-index="index" wx:for-item="item" wx:key="key" style="height:{{param-17}}px;line-height:{{param-17}}px" class="day">{{item}}</view>
+  </view>
+  <view class="date">
+    <block wx:for="{{daysData}}" wx:for-index="index" wx:for-item="item" wx:key="key">
+      <view style="height:{{param-10}}px;" class="day" bindtap="{{item.canOpen?'open':'close'}}" data-index="{{item.day}}">
+        {{item.day?item.day:''}}
+        <view class="text-main cuIcon-roundcheckfill" wx:if="{{item.canOpen && item.checkAll}}"></view>
+        <view class="text-yellow cuIcon-roundclosefill" wx:if="{{item.canOpen && !item.checkAll}}"></view>
+
+        <view class="day-detail bg-gray" style="right:calc({{index%7==6?'10rpx':0}})" wx:if="{{item.day==open}}">
+          
+          <view class="flex align-center justify-between" wx:for="{{item.checks}}" wx:for-item="check" wx:for-index="i" wx:key="i">{{check.title}}<text class="cuIcon-{{check.check?'roundcheckfill':'roundclosefill'}} text-{{check.check?'main':'yellow'}}" ></text></view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

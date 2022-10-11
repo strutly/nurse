@@ -1,4 +1,4 @@
-function include(obj,val){  
+function include(obj,val){
   return obj.indexOf(val)>-1;
 }
 

@@ -19,7 +19,8 @@
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-grey" bindtap="modalStatus" data-name="scan">取消</button>
-        <button class="cu-btn bg-main margin-left" bindtap="scan">识别</button>
+        <button class="cu-btn bg-main margin-left" bindtap="scan">门诊识别</button>
+        <button class="cu-btn bg-main margin-left" bindtap="scan">住院识别</button>
       </view>
     </view>
   </view>

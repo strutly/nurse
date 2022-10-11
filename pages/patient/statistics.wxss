@@ -1,0 +1,24 @@
+page{
+  background-color: var(--white);
+}
+.canvas {
+  width: 750rpx;
+  height: 600rpx;
+}
+.tags{
+  border-bottom: 1rpx solid var(--ghostWhite);
+  overflow: hidden;
+}
+.tag { 
+  display: inline-block;
+  border-width: 1rpx 0 0 1rpx;
+  border-style: solid;
+  padding:10rpx 0;
+  border-color: var(--ghostWhite);
+  transform: skewX(-45deg); 
+}
+.tag > view {
+  padding:10rpx 30rpx; 
+  transform: skewX(45deg);
+  font-size: 20rpx;
+}

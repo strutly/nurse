@@ -11,7 +11,7 @@ CustomPage({
     emotionArr: ['良好', '精神紧张', '焦虑', '抑郁'],
     medicationArr: ['按时按量', '未按时用药'],
     dietArr: ['清淡', '油腻'],
-    motionArr: ['有', '无'],
+    motionArr: ['是', '否'],
     educationArr: ['一般', '良好'],
     occupationArr: ['无业', '脑力劳动者', '体力劳动者'],
     economyArr: ['一般', '良好'],

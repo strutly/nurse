@@ -2,6 +2,7 @@ var that;
 const app = getApp()
 import Api from '../../config/api';
 import CustomPage from '../../CustomPage';
+import pinyin from '../../utils/pinyin';
 import ocr from '../../config/ocr';
 CustomPage({
   data: {
@@ -16,11 +17,21 @@ CustomPage({
     that = this;
   },
   async getHomeData() {
-    let res = await Api.homeData();
-    console.log(res);
-    that.setData({
-      datas: res.data
-    })
+    try {
+      let res = await Api.homeData();
+      console.log(res);
+      let datas = res.data.map(item=>{
+        console.log(item)
+        item.first = pinyin.getFirstCamelChars(item.patient.name||"未知");
+        return item;
+      })
+      that.setData({
+        datas: datas
+      })
+    } catch (error) {
+
+    }
+
   },
   onReady() {
     getApp().watch(function (value) {
