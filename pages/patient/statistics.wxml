@@ -15,8 +15,8 @@
     <view class="text-main text-bold text-xxl">{{statisticsData.sumReport}}</view>
     <view class="">日报告</view>
   </view>
-  <view class="padding-right padding-top">
-    <view class="cuIcon-calendar text-main text-bold" bindtap="toUrl" data-url="/pages/patient/calendar?id={{options.id}}"></view>
+  <view class="padding-right padding-top" bindtap="toUrl" data-url="/pages/patient/calendar?id={{options.id}}">
+    <view class="cuIcon-calendar text-main text-bold"></view>
   </view>
   
 </view>
