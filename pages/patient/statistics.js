@@ -7,9 +7,11 @@ CustomPage({
   data: {
     tabIndex:0,
     footIndex:0,
+    footTab:['随访记录','日报告','量表'],
     lists:[[],[],[]],
     endline:[false,false,false],
-    pageNo:['','','']
+    pageNo:['','',''],
+    chartLine:true
   },
 
   async onLoad(options) {
@@ -17,10 +19,12 @@ CustomPage({
     let res = await Api.patientStatistics({
       id: options.id
     })
+
     that.setData({
       statisticsData: res.data
     })
     console.log(res);
+    
     that.showLine(res.data.sugarLine);
     that.getList(0,1);
   },
@@ -29,6 +33,12 @@ CustomPage({
     console.log(lineData)
     console.log(1)
     var windowWidth = 320;
+    if(lineData.days.length<=0){
+      that.setData({
+        chartLine:false
+      })
+      return;
+    }
     try {
       var res = wx.getSystemInfoSync();
       windowWidth = res.windowWidth;

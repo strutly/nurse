@@ -54,16 +54,16 @@
 
   // 正式上传的前置方法，做预处理，应用七牛云配置
   function upload(filePath, success, fail, options, progress, cancelTask) {
-
+    console.log(filePath);
     if (null == filePath) {
       console.error('qiniu uploader need filePath to upload');
       return;
     }
-
+    console.log(options)
     if (options) {
       updateConfigWithOptions(options);
     }
-
+    console.log(config);
     if (config.qiniuUploadToken) {
 
       doUpload(filePath, success, fail, options, progress, cancelTask);
@@ -168,6 +168,7 @@
   let t = 0;
   // 获取七牛云uptoken, url为后端服务器获取七牛云uptoken接口
   function getQiniuToken(callback) {
+    console.log("getqiniu token")
     wx.request({
       url: config.qiniuUploadTokenURL,
       header: {

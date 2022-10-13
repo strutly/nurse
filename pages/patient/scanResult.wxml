@@ -1,6 +1,7 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
 <form bindsubmit="submit">
+  <picker hidden name="pics" value="{{pics}}"></picker>
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>基本信息
@@ -18,10 +19,17 @@
     <view class="title">性别</view>
     <input placeholder="请输入性别" name="gender" data-name="gender" bindinput="inputChange" class="text-right" value="{{patientData['gender']}}"></input>
   </view>
+
+
   <view class="cu-form-group">
-    <view class="title">年龄</view>
-    <input placeholder="请输入年龄" name="age" data-name="age" bindinput="inputChange" type="number" class="text-right" value="{{patientData['age']}}"></input>
-  </view>
+    <input hidden name="age" value="{{patientData['age']}}"></input>
+    <view class="title">出生年份</view>
+    <picker mode="date" header-text="请选择出生年份" fields="year" bindchange="pickerChange" data-name="birthOfYear" name="birthOfYear" value="{{patientData['birthOfYear']}}">
+      <view class="picker">
+        {{patientData['birthOfYear']||'请选择出生年份'}}
+      </view>
+    </picker>
+  </view> 
 
   <view class="cu-form-group">
     <view class="title">ID</view>

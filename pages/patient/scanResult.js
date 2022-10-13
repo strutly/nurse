@@ -5,13 +5,16 @@ import CustomPage from "../../CustomPage";
 import ocr from '../../config/ocr';
 CustomPage({
   data: {
+    pics:[],
     scanImages:[]
   },
   onLoad(options) {
     that = this; 
+    console.log(app.globalData)
     that.setData({
       patientData:app.globalData.scanData,
-      scanData:app.globalData.scanData
+      scanData:app.globalData.scanData,
+      pics:app.globalData.pics
     })
     that.initValidate();
   },
@@ -23,7 +26,7 @@ CustomPage({
       gender: {
         required: true
       },
-      age: {
+      birthOfYear: {
         required: true
       },
       hospitalId: {
@@ -42,8 +45,8 @@ CustomPage({
       gender: {
         required: "请输入性别"
       },
-      age: {
-        required: "请输入年龄"
+      birthOfYear: {
+        required: "请选择出生年份"
       },
       
       hospitalId: {
@@ -61,12 +64,14 @@ CustomPage({
   async scan() {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let result = await ocr.getOcrResult(scanImages);
-    console.log(result);
-    app.globalData.scanData = result;
+    let res = await ocr.getOcrResult(scanImages);
+    console.log(res);
+    app.globalData.scanData = res.scanData;
+    app.globalData.pics = res.pics;
     that.setData({
-      patientData:result,
-      scanData:result,
+      patientData:res.scanData,
+      scanData:res.scanData,
+      pics:res.pics,
       modalscan:false
     })    
   },

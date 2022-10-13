@@ -188,7 +188,7 @@
         <view>
           情绪量表
         </view>
-        <view class="text-orange text-sm">
+        <view class="text-orange text-sm"  wx:if="{{sds.suggest}}">
           <text class="cuIcon-infofill margin-right-xs"></text> {{sds.suggest}}
         </view>
       </view>
