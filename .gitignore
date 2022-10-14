@@ -2,10 +2,7 @@
 [Dd]esktop.ini
 Thumbs.db
 $RECYCLE.BIN/
-./api.js
-config/api.js
-./ocr.js
-config/api.js
+config/
 .svn
 # macOS
 .DS_Store
