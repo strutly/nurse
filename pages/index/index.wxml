@@ -10,7 +10,7 @@
       </view>
     </view>
     <!-- 
-    <view bindtap="toUrl" data-url="/pages/notice/list" class="padding-sm text-center">
+    <view bindtap="toUrl" data-url="/pages/diabetes/notice/list" class="padding-sm text-center">
       <image src="/images/notice.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">通知管理</view>
     </view>
@@ -19,7 +19,7 @@
       <view class="text-sm">CGM数据</view>
     </view>
     -->
-    <view class="padding-tb-sm text-center" bindtap="toUrl" wx:if="{{authSuccess}}" data-url="{{authSuccess?'/pages/patient/list':''}}" data-msg="{{loginMsg}}">
+    <view class="padding-tb-sm text-center" bindtap="toUrl" wx:if="{{authSuccess}}" data-url="{{authSuccess?'/pages/diabetes/patient/list':''}}" data-msg="{{loginMsg}}">
       <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">患者管理</view>
     </view>
@@ -28,7 +28,7 @@
 
 <view class="cu-list menu">
   <view class="cu-item" wx:for="{{datas}}" wx:key="index">
-    <view class="content" bindtap="toUrl" data-url="/pages/patient/detail?id={{item.patient.id}}">
+    <view class="content" bindtap="toUrl" data-url="/pages/diabetes/patient/detail?id={{item.patient.id}}">
       <text class="cu-avatar round margin-right bg-gray text-white">{{item.first}}</text>
       <text class="">{{item.patient.name}}</text>
       <text class="cu-tag bg-yellow text-white margin-left-sm">{{typeArr[item.patient.assess.type]}}</text>
@@ -80,7 +80,7 @@
           <view class="cu-tag bg-red margin-top-xs" wx:if="{{patient.assess.smoke==0}}">{{patient.assess.smoke==0?'吸烟':'不吸烟'}}</view>
           <view class="cu-tag bg-mauve margin-top-xs" wx:if="{{patient.assess.wine==0}}">{{patient.assess.wine==0?'喝酒':'不喝酒'}}</view>
         </view>
-        <view class="action padding-right text-underline" bindtap="toUrl" data-url="/pages/patient/info?id={{patient.id}}">更多信息</view>
+        <view class="action padding-right text-underline" bindtap="toUrl" data-url="/pages/diabetes/patient/info?id={{patient.id}}">更多信息</view>
       </view>
       <view class="padding">
         <view class="">随访需要询问的内容如下：</view>

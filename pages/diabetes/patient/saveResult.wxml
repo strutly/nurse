@@ -1,0 +1,233 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 基本评估
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">手机号</view>
+    <input placeholder="请输入手机号" name="phone" type="number" class="text-right" value=""></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">身高</view>
+    <input placeholder="请输入身高" name="height" type="number" class="text-right" value=""></input>
+    <text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">体重</view>
+    <input placeholder="请输入体重" type="digit" name="weight" class="text-right" value=""></input>
+    <text class="text-gray text-xs padding-top-xs margin-left-xs">KG</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">经管医生</view>
+    <input hidden name="doctorId" value="{{doctor}}"></input>
+    <picker mode="selector" bindchange="pickerChange" data-name="doctor" value="{{0}}" range="{{doctorArr}}" range-key="name">
+      <view class="picker">
+        {{doctorArr[doctor].name||"请选择经管医生"}}
+      </view>
+    </picker>
+  </view>
+
+
+  <view class="cu-form-group">
+    <view class="title">糖尿病类型</view>
+    <picker mode="selector" bindchange="pickerChange" name="assess.type" data-name="type" value="{{type||0}}" range="{{typeArr}}">
+      <view class="picker">
+        {{typeArr[type||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">病程</view>
+    <input placeholder="请输入病程" name="assess.time" type="digit" class="text-right"></input>
+    <view class="text-gray text-xs margin-left-xs padding-top-xs">年</view>
+  </view>
+
+
+
+
+  <view class="cu-form-group">
+    <view class="title">目前治疗方案</view>
+    <input placeholder="请输入目前治疗方案" name="assess.treatments" class="text-right"></input>
+  </view>
+
+  <!--
+
+  
+  <view class="cu-form-group">
+    <view class="title">经济状况</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="economy" name="assess.economicState" value="{{economy||0}}" range="{{economyArr}}">
+      <view class="picker">
+        {{economyArr[economy||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">互联网操作能力</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="internet" name="assess.internet" value="{{internet||0}}" range="{{internetArr}}">
+      <view class="picker">
+        {{internetArr[internet||0]}}
+      </view>
+    </picker>
+  </view>
+  -->
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 资源评估利用
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">教育水平</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="education" name="assess.education" value="{{education||0}}" range="{{educationArr}}">
+      <view class="picker">
+        {{educationArr[education||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">职业</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="occupation" name="assess.occupation" value="{{occupation||0}}" range="{{occupationArr}}">
+      <view class="picker">
+        {{occupationArr[occupation||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">主要照护者</view>
+    <input placeholder="请输入主要照护者" name="assess.carePerson" class="text-right"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">是否独居</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="liveAlone" name="assess.liveAlone" value="{{liveAlone||0}}" range="{{liveAloneArr}}">
+      <view class="picker">
+        {{liveAloneArr[liveAlone||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 生活方式评估
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">饮食习惯</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="diet" name="assess.diet" value="{{diet||0}}" range="{{dietArr}}">
+      <view class="picker">
+        {{dietArr[diet||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">运动习惯</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="motion" name="assess.motion" value="{{motion||0}}" range="{{motionArr}}">
+      <view class="picker">
+        {{motionArr[motion||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">睡眠</view>
+    <input placeholder="请输入睡眠时长" name="assess.sleep" type="digit" class="text-right"></input>
+    <view class="text-gray text-xs margin-left-xs padding-top-xs">小时</view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">吸烟</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="smoke" name="assess.smoke" value="{{smoke||0}}" range="{{smokeArr}}">
+      <view class="picker">
+        {{smokeArr[smoke||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">饮酒</view>
+    <picker mode="selector" bindchange="pickerChange" data-name="wine" name="assess.wine" value="{{wine||0}}" range="{{wineArr}}">
+      <view class="picker">
+        {{wineArr[wine||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 并发症
+    </view>
+  </view>
+  <checkbox-group bindchange="otherChange" data-name="complications" value="{{complications}}" name="assess.complications" class="solid-bottom">
+    <view class="cu-form-group justify-start" wx:for="{{complicationArr}}" wx:key="index">
+      <checkbox class='round blue' value="{{item}}"></checkbox>
+      <view class="margin-left">{{item}}</view>
+    </view>
+  </checkbox-group>
+
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 量表测评
+    </view>
+  </view>
+
+  <view class="cu-list menu footer-btns">
+
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/diabetes/scale/form?type=sas">
+      <picker hidden name="other.sas" value="{{sas}}"></picker>
+      <view class="content padding-tb-sm">
+        <view>
+          焦虑测评
+        </view>
+        <view class="text-orange text-sm" wx:if="{{sas.suggest}}">
+          <text class="cuIcon-infofill margin-right-xs"></text> {{sas.suggest}}
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right {{sas?'':'text-gray'}}">{{sas.score||'点击进入测评'}}</view>
+      </view>
+    </view>
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/diabetes/scale/form?type=sds">
+      <picker hidden name="other.sds" value="{{sds}}"></picker>
+      <view class="content padding-tb-sm">
+        <view>
+          情绪量表
+        </view>
+        <view class="text-orange text-sm"  wx:if="{{sds.suggest}}">
+          <text class="cuIcon-infofill margin-right-xs"></text> {{sds.suggest}}
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right {{sds?'':'text-gray'}}">{{sds.score||'点击进入测评'}}</view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <!--  
+  <view class="cu-bar bg-gary solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 其他
+    </view>
+  </view>
+  <checkbox-group bindchange="otherChange" data-name="others" value="{{others}}" name="assess.others" class="safe-btns">
+    <view class="cu-form-group justify-start" wx:for="{{otherArr}}" wx:key="index">
+      <checkbox class='round blue' value="{{item}}"></checkbox>
+      <view class="margin-left">{{item}}</view>
+    </view>
+  </checkbox-group>
+  -->
+  <view class="padding margin-top-xl  text-center footer bg-white">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" form-type="submit" disabled="{{disabled}}">完成评估</button>
+  </view>
+</form>
+
+<view class="cu-modal {{show?'show':''}}">
+  <view class="cu-dialog bg-white">
+    <view class="text-center text-xxl margin-tb-xl">患者档案已建立</view>
+    <view class="padding-lr-xl margin-lr-xl text-lg">{{tips}}</view>
+    <view class="text-center margin-top">
+      <image src="{{codeUrl||'/images/fail.png'}}" mode="aspectFill" bindtap="updateCode" style="width: 500rpx;height: 500rpx;"></image>
+    </view>
+    <view class="padding margin-top-xl  text-center safe-bottom">
+      <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl" bindtap="home">完成</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,15 @@
+<view class="padding-xl bg-main flex align-center">
+  <image style="width: 100rpx;height: 100rpx;" src="{{userInfo?domain+userInfo.pic:'/images/head.png'}}" class="round margin-right-sm bg-white padding-xs"></image>
+  <view class="flex-sub flex align-center">
+    <view class="flex-sub text-white">
+      <view class="">健康照护师</view>
+      
+      
+      
+      <view class="margin-top padding-lr text-sm cu-tag line-white round {{index==checkIndex?'tag-active':''}}" wx:for="{{userInfo.tags}}" wx:key="index" bindtap="{{item.caregiverTag.diseaseId?'tagChange':''}}" data-type="{{item.caregiverTag.diseaseId}}" data-index="{{index}}">
+        {{item.caregiverTag.name}}
+      </view>
+
+    </view>
+  </view>
+</view>

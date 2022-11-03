@@ -1,0 +1,19 @@
+<view class="cu-list menu">
+  <view class="cu-item arrow" wx:for="{{reports}}" wx:key="index" bindtap="toUrl" data-url="/pages/diabetes/report/{{item.type==1?'report':'form'}}?id={{item.id}}">
+    <view class="content">
+      <text class="">提交时间</text>
+    </view>
+    <view class="action">
+      <text class="text-grey text-sm">{{item.createTime}}</text>
+    </view>
+  </view>
+
+  <view class="padding-xs flex align-center" wx:if="{{reports.length==0}}">
+    <view class="flex-sub text-center">
+      <view class="text-xsl padding">
+        <text class="cuIcon-info text-main"></text>
+      </view>
+      <view class="padding">暂无相关量表报告</view>
+    </view>
+  </view>
+</view>

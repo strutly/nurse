@@ -1,0 +1,4 @@
+.tag-active{
+  background-color: var(--white);
+  color:var(--main);
+}

@@ -1,0 +1,88 @@
+<view class="cu-list menu margin-top">
+  <view class="cu-item" wx:if="{{nums['1-0']}}" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=1&status=0&patientId={{patient.id}}">
+    <view class="content">
+      <view>
+        <view class="padding-tb-xs" style="position: relative;">待核实的报告<view class='cu-tag badge' >{{nums['1-0']}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=1&status=1&patientId={{patient.id}}">
+    <view class="content">
+      <text class="">自我管理报告</text>
+    </view>
+    <view class="action">
+      <text class="text-main text-xxl">{{nums['1-1']||0}}</text>
+    </view>
+  </view>
+  <view class="cu-item" wx:if="{{nums['2-0']}}" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=2&status=0&patientId={{patient.id}}">
+    <view class="content">
+      <view>
+        <view class="padding-tb-xs" style="position: relative;">待核实的量表<view class='cu-tag badge' >{{nums['2-0']}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=2&status=1&patientId={{patient.id}}">
+    <view class="content">
+      <text class="">量表检测</text>
+    </view>
+    <view class="action">
+      <text class="text-main text-xxl">{{nums['2-1']||0}}</text>
+    </view>
+  </view>
+
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/diabetes/notice/list?patientId={{patient.id}}">
+    <view class="content">
+      <text class="">医嘱消息</text>
+    </view>
+    <view class="action">
+      <text class="text-main text-xxl">{{(nums['3-1']||0)+(nums['3-0']||0)}}</text>
+    </view>
+  </view>
+
+</view>
+
+<view class="padding-xl flex flex-direction footer">
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/diabetes/patient/statistics?id={{patient.id}}">健康数据监测</button>
+  
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/diabetes/follow/list?id={{patient.id}}">患者电话随访记录</button>
+  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/diabetes/patient/info?id={{patient.id}}">查看患者信息</button>
+</view>
+
+
+
+<view class="cu-modal show" wx:if="{{show}}">
+  <form bindsubmit="submit">
+    <input name="patientId" value="{{patient.id}}" hidden></input>
+    <view class="cu-dialog bg-white padding text-left">
+      <view class="cu-bar bg-white justify-end">
+					<view class="content">患者随访</view>
+					<view class="action" bindtap="showModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+      <view class="cu-bar margin-top">        
+        <view class="action flex-wrap">
+          <text class="margin-right margin-top-xs">患者标签</text>
+          <view class="cu-tag bg-main margin-top-xs">{{typeArr[patient.assess.type||2]}}</view>
+          <view class="cu-tag bg-yellow text-white margin-top-xs">{{patient.assess.time||0}}年</view>
+          <view class="cu-tag bg-red margin-top-xs" wx:if="{{patient.assess.smoke==0}}">{{patient.assess.smoke==0?'吸烟':'不吸烟'}}</view>
+          <view class="cu-tag bg-mauve margin-top-xs" wx:if="{{patient.assess.wine==0}}">{{patient.assess.wine==0?'喝酒':'不喝酒'}}</view>
+        </view>
+        <view class="action padding-right text-underline" bindtap="toUrl" data-url="/pages/diabetes/patient/info?id={{patient.id}}">更多信息</view>
+      </view>
+      <view class="padding">
+        <view class="">随访需要询问的内容如下：</view>
+        <view class="margin-top-sm">
+          症状、体重、血压、用药情况、空腹和餐后血糖、自我管理情况等内容
+        </view>
+        <textarea name="content.msg" class="solid padding margin-top" style="min-height: 200rpx;width: 100%;" maxlength="-1" placeholder="如需记录随访信息,请在此输入"></textarea>
+      </view>
+      <view class="padding flex justify-between align-center bg-white">
+        <button style="width: 40%;" class="cu-btn bg-main lg" bindtap="call" data-phone="{{patient.phone}}">拨打电话</button>
+        <button style="width: 40%;" class="cu-btn bg-main lg" form-type="submit">确定</button>
+      </view>
+    </view>
+  </form>
+</view>

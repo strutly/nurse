@@ -8,6 +8,13 @@ const CustomPage = function (page) {
         });
         page.onLoad && page.onLoad.call(this, options)
       },
+      onReady(){
+        console.log(2)
+        this.setData({
+          userInfo:wx.getStorageSync('userInfo')
+        })
+        page.onReady && page.onReady.call(this)
+      },
       toUrl(e) {
         console.log(e)
         let url = e.currentTarget.dataset.url;

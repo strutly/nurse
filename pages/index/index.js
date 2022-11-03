@@ -86,7 +86,7 @@ CustomPage({
     app.globalData.scanData = res.scanData;
     app.globalData.pics = res.pics;
     wx.navigateTo({
-      url: '/pages/patient/scanResult',
+      url: '/pages/diabetes/patient/scanResult',
     })
   },
   hideModal(e) {

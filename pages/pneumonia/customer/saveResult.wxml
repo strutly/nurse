@@ -1,0 +1,37 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 莱塞斯特咳嗽生命质量问卷
+    </view>
+  </view>
+
+  <view class="bg-white padding" wx:for="{{coughQuestions}}" wx:key="question" wx:for-item="question" wx:for-index="i">
+    <view class="title">{{i+1}}:{{question.title}}</view>
+    <view class="cu-steps">
+      <view class="cu-item text-sm" wx:for="{{question.checks}}" :key="index">
+        <text class="cuIcon-{{(i+index)%6==2?'radioboxfill':'title'}} text-main"></text><text class="text-xs">{{(i+index)%6==2?item:''}}</text>
+      </view>
+
+    </view>
+  </view>
+
+
+  
+  <view class="padding margin-top-xl  text-center footer bg-white">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" form-type="submit" disabled="{{disabled}}">完成评估</button>
+  </view>
+</form>
+
+<view class="cu-modal {{show?'show':''}}">
+  <view class="cu-dialog bg-white">
+    <view class="text-center text-xxl margin-tb-xl">患者档案已建立</view>
+    <view class="padding-lr-xl margin-lr-xl text-lg">{{tips}}</view>
+    <view class="text-center margin-top">
+      <image src="{{codeUrl||'/images/fail.png'}}" mode="aspectFill" bindtap="updateCode" style="width: 500rpx;height: 500rpx;"></image>
+    </view>
+    <view class="padding margin-top-xl  text-center safe-bottom">
+      <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl" bindtap="home">完成</button>
+    </view>
+  </view>
+</view>

@@ -1,20 +1,24 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/patient/calendar",
-    "pages/scale/form",
-    "pages/patient/saveResult",
-    "pages/patient/scanResult",
-    "pages/patient/detail",
-    "pages/patient/list",
-    "pages/patient/info",
-    "pages/report/list",
-    "pages/report/report",
-    "pages/report/form",
-    "pages/notice/detail",
-    "pages/follow/list",
-    "pages/notice/list",
-    "pages/patient/statistics"
+    
+    "pages/index/index","pages/index/home",
+    "pages/diabetes/patient/calendar",
+    "pages/diabetes/scale/form",
+    "pages/diabetes/patient/saveResult",
+    "pages/diabetes/patient/scanResult",
+    "pages/diabetes/patient/detail",
+    "pages/diabetes/patient/list",
+    "pages/diabetes/patient/info",
+    "pages/diabetes/report/list",
+    "pages/diabetes/report/report",
+    "pages/diabetes/report/form",
+    "pages/diabetes/notice/detail",
+    "pages/diabetes/follow/list",
+    "pages/diabetes/notice/list",
+    "pages/diabetes/patient/statistics",
+    "pages/pneumonia/customer/scanResult",
+    "pages/pneumonia/customer/saveResult"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
