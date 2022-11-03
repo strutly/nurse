@@ -16,20 +16,24 @@ CustomPage({
     that.getMonthData(Util.dateFormat(year + "-" + month + "-1", 'yyyy-MM-dd'))   
   },
   async getMonthData(dateMonth) {
-    let res = await Api.patientCalendar({
-      id: that.data.options.id,
-      dateMonth: dateMonth
-    });
-    console.log(res);
-    if(res.code==0){
-      that.setData({
-        open:-1,
-        dateMonth: dateMonth,
-        daysData: res.data
-      })
-    }else{
-      that.showTips(res.msg);
-    }    
+    try {
+      let res = await Api.patientCalendar({
+        id: that.data.options.id,
+        dateMonth: dateMonth
+      });
+      console.log(res);
+      if(res.code==0){
+        that.setData({
+          open:-1,
+          dateMonth: dateMonth,
+          daysData: res.data
+        })
+      }else{
+        that.showTips(res.msg);
+      }  
+    } catch (error) {
+      console.log(error)
+    }
   },
   prevMonth() {
     let date = new Date(that.data.dateMonth);

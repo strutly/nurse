@@ -8,23 +8,31 @@
 </view>
 
 <view class="cu-list menu sm-border">
-    <view bindtap="{{moveIndex!=index?'toUrl':''}}" data-url="/pages/diabetes/patient/detail?id={{item.id}}" class="cu-item {{moveIndex==index?'move-cur':''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{patients}}" wx:key="index">
-      <view class="content padding-tb-sm">
-        <view>
-          {{item.name}}
-        </view>
-        <view class="text-gray text-sm">
-          {{item.phone}}
-        </view>
+  <view bindtap="{{moveIndex!=index?'toUrl':''}}" data-url="/pages/diabetes/patient/detail?id={{item.id}}" class="cu-item {{moveIndex==index?'move-cur':''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{patients}}" wx:key="index">
+    <view class="content padding-tb-sm">
+      <view>
+        {{item.name}}
       </view>
-      <view class="action text-right">
-        <text class="lg text-{{Tools.include(item.gender,'男')?'blue':'red'}} cuIcon-{{item.gender==1?'male':'female'}}"></text>
-        <view>{{item.age}}</view>
-      </view>
-      <view class="move">
-        <view class="bg-grey" bindtap="toUrl" data-url="">编辑</view>
-        <view class="bg-red" bindtap="delete" data-id="{{item.id}}">删除</view>
+      <view class="text-gray text-sm">
+        {{item.phone}}
       </view>
     </view>
-
+    <view class="action text-right">
+      <text class="lg text-{{Tools.include(item.gender,'男')?'blue':'red'}} cuIcon-{{item.gender==1?'male':'female'}}"></text>
+      <view>{{item.age}}</view>
+    </view>
+    <view class="move">
+      <view class="bg-grey" bindtap="toUrl" data-url="">编辑</view>
+      <view class="bg-red" bindtap="delete" data-id="{{item.id}}">删除</view>
+    </view>
   </view>
+
+</view>
+<view class="padding-xs flex align-center" wx:if="{{patients.length==0}}">
+  <view class="flex-sub text-center">
+    <view class="text-xsl padding">
+      <text class="cuIcon-info text-main"></text>
+    </view>
+    <view class="padding">暂无相关信息</view>
+  </view>
+</view>

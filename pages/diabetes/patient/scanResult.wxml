@@ -167,20 +167,20 @@
     </view>
   </view>
 
-  <view class="cu-form-group" wx:for="{{patientData['life']['diet']}}">
+  <view class="cu-form-group" wx:for="{{patientData['diet']}}">
     <view class="title">{{item}}</view>
     <checkbox class='round checked main' checked="true" disabled="true"></checkbox>
     <input hidden name="plan.lowSalt" value="{{item}}" wx:if="{{item=='低盐'}}"></input>
     <input hidden name="plan.lowFat" value="{{item}}" wx:if="{{item=='低脂'}}"></input>
   </view>
   <view class="cu-list menu solid-top">
-    <input hidden name="quantity" value="{{patientData['life']['cal']}}"></input>
+    <input hidden name="quantity" value="{{patientData['cal']}}"></input>
     <view class="cu-item">
       <view class="content">
         每日热量
       </view>
       <view class="action">
-        {{patientData['life']['cal']}}千卡
+        {{patientData['cal']}}千卡
       </view>
     </view>
   </view>

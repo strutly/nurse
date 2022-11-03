@@ -3,14 +3,18 @@ import Api from '../../config/api';
 import CustomPage from '../../CustomPage';
 CustomPage({
   data: {
-    notice:{}
+    notice: {}
   },
   async onLoad(options) {
     that = this;
-    console.log(options)
-    let res = await Api.detailReport(options);
-    that.setData({
-      notice:res.data
-    })
+    try {
+      console.log(options)
+      let res = await Api.detailReport(options);
+      that.setData({
+        notice: res.data
+      })
+    } catch (error) {
+      
+    }
   }
 })

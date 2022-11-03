@@ -6,3 +6,12 @@
   </view>
 </view>
 <calendar daysData="{{daysData.days}}" open="{{open}}"></calendar>
+
+<view class="padding-xs flex align-center" wx:if="{{!daysData.days}}">
+  <view class="flex-sub text-center">
+    <view class="text-xsl padding">
+      <text class="cuIcon-info text-main"></text>
+    </view>
+    <view class="padding">暂无相关信息</view>
+  </view>
+</view>

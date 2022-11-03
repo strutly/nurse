@@ -2,3 +2,19 @@
   {{notice.report.content.advice}}
   <view class="text-right"><text>{{notice.patient.name}}</text><text class="margin-left-sm">{{notice.report.createTime}}</text></view>
 </view>
+
+<view class="cu-modal show" wx:if="{{!notice.report}}">
+  <view class="cu-dialog sm">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">提醒</view>
+    </view>
+    <view class="padding-xl">
+      不存在的内容~点击确认返回上一页
+    </view>
+    <view class="cu-bar bg-white justify-center">
+      <view class="action">
+        <button class="cu-btn bg-main" bindtap="back">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
