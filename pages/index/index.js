@@ -11,7 +11,11 @@ CustomPage({
     tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
     tabIndex: 0,
     show: false,
-    scanImages: []
+    scanImages: [],
+    scanBtn:{
+      ip:true,
+      op:true
+    }
   },
   onLoad() {
     that = this;
@@ -42,7 +46,7 @@ CustomPage({
       if (value.login && value.auth) {
         that.showTips('登录成功', 'success');
         that.setData({
-          authModal: false
+          modalauth: false
         })
         that.getHomeData();
       }
@@ -51,7 +55,7 @@ CustomPage({
        */
       else if (value.login && !value.auth) {
         that.setData({
-          authModal: true
+          modalauth: true
         })
       }
       /**
@@ -78,15 +82,19 @@ CustomPage({
     })
   },
 
-  async scan() {
+  async scan(e) {
+    let type = e.currentTarget.dataset.type;
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let res = await ocr.getOcrResult(scanImages);
+    let res = await ocr.getOcrResult({
+      imgs:scanImages,
+      type:type
+    });
     console.log(res);
     app.globalData.scanData = res.scanData;
     app.globalData.pics = res.pics;
     wx.navigateTo({
-      url: '/pages/diabetes/patient/scanResult',
+      url: type=='ip'?'/pages/diabetes/patient/scanResult':'/pages/diabetes/patient/outpatient',
     })
   },
   hideModal(e) {

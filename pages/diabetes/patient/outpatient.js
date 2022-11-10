@@ -10,7 +10,7 @@ CustomPage({
     reviews: [],
     allline:{},
     scanBtn:{
-      ip:true
+      op:true
     }
   },
   onLoad(options) {
@@ -37,10 +37,7 @@ CustomPage({
       hospitalId: {
         required: true
       },
-      admissionDate: {
-        required: true
-      },
-      dischargeDate: {
+      treatmentDate: {
         required: true
       }
     }, messages = {
@@ -57,11 +54,8 @@ CustomPage({
       hospitalId: {
         required: "请输入住院ID"
       },
-      admissionDate: {
-        required: "请选择入院时间"
-      },
-      dischargeDate: {
-        required: "请选择出院时间"
+      treatmentDate: {
+        required: "请选择就诊时间"
       }
     };
     that.WxValidate = new WxValidate(rules, messages);

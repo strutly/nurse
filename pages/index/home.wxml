@@ -1,15 +1,37 @@
+<include src="/pages/template/scanModal"></include>
 <view class="padding-xl bg-main flex align-center">
   <image style="width: 100rpx;height: 100rpx;" src="{{userInfo?domain+userInfo.pic:'/images/head.png'}}" class="round margin-right-sm bg-white padding-xs"></image>
   <view class="flex-sub flex align-center">
     <view class="flex-sub text-white">
-      <view class="">健康照护师</view>
-      
+      <view class="">健康照护师</view>     
       
       
       <view class="margin-top padding-lr text-sm cu-tag line-white round {{index==checkIndex?'tag-active':''}}" wx:for="{{userInfo.tags}}" wx:key="index" bindtap="{{item.caregiverTag.diseaseId?'tagChange':''}}" data-type="{{item.caregiverTag.diseaseId}}" data-index="{{index}}">
         {{item.caregiverTag.name}}
       </view>
 
+    </view>
+  </view>
+</view>
+
+<view class="padding footer text-center safe-bottom">
+  <button class="cu-btn block bg-main margin lg round" bindtap="modalStatus" data-name="{{authSuccess?'scan':'auth'}}">病历扫描</button>
+  <view class="text-gray text-sm">技术支持:清华大学精准医学研究院智慧健康中心</view>
+</view>
+
+<view class="cu-modal show" wx:if="{{modalauth}}">
+  <view class="cu-dialog sm">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">授权提示</view>
+    </view>
+    <view class="padding-xl">
+      您未授权,请先进行授权
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-gray text-gray" bindtap="modalStatus" data-name="auth">取消</button>
+        <button class="cu-btn bg-main margin-left" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确定</button>
+      </view>
     </view>
   </view>
 </view>

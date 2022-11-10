@@ -1,6 +1,7 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
 <form bindsubmit="submit">
+  <input hidden name="type" value="1"></input>
   <picker hidden name="pics" value="{{pics}}"></picker>
   <view class="cu-bar bg-gray">
     <view class="action">
@@ -45,7 +46,7 @@
   </view>
   <view class="padding flex bg-white solid-top solid-bottom">
     <view class="title margin-right">住院时间</view>
-    <picker class="flex-sub text-right" mode="date" bindchange="pickerChange" data-name="admissionDate" name="admissionDate" value="{{patientData['admissionDate']}}" range="{{wineArr}}">
+    <picker class="flex-sub text-right" mode="date" bindchange="pickerChange" data-name="admissionDate" name="admissionDate" value="{{patientData['admissionDate']}}">
       <view class="picker">
         {{patientData['admissionDate']||'请选择入院时间'}}
       </view>
@@ -72,9 +73,9 @@
   </view>
   <view class="bg-white padding">
     <text class="line2 {{allline['admissionDiagnosis']?'line-all':''}}">
-      <block wx:for="{{patientData['admissionDiagnosis']}}" wx:key="index">
+      <text wx:for="{{patientData['admissionDiagnosis']}}" wx:key="index">
         {{item}}
-      </block>
+      </text>
     </text>
     <view class="flex align-center" bindtap="showAll" data-type="admissionDiagnosis">
       <view class="flex-sub dashed-bottom"></view>

@@ -1,7 +1,7 @@
 {
   "pages": [
-    
-    "pages/index/index","pages/index/home",
+    "pages/index/index",
+    "pages/index/home",
     "pages/diabetes/patient/calendar",
     "pages/diabetes/scale/form",
     "pages/diabetes/patient/saveResult",
@@ -17,8 +17,8 @@
     "pages/diabetes/notice/list",
     "pages/diabetes/patient/statistics",
     "pages/pneumonia/customer/scanResult",
-    "pages/pneumonia/customer/saveResult"
-    
+    "pages/pneumonia/customer/saveResult",
+    "pages/diabetes/patient/outpatient"
   ],
   "window": {
     "backgroundTextStyle": "light",

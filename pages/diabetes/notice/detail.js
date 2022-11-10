@@ -1,6 +1,6 @@
 var that;
-import Api from '../../config/api';
-import CustomPage from '../../CustomPage';
+import Api from '../../../config/api';
+import CustomPage from '../../../CustomPage';
 CustomPage({
   data: {
     notice: {}
@@ -14,7 +14,9 @@ CustomPage({
         notice: res.data
       })
     } catch (error) {
-      
+      that.setData({
+        notice: {}
+      })
     }
   }
 })
