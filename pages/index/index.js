@@ -122,6 +122,7 @@ CustomPage({
           wx.setStorageSync('token', res.data.token);
           wx.setStorageSync('userInfo', res.data.info);
         } else {
+          wx.removeStorageSync('code');
           wx.removeStorageSync('token');
           wx.removeStorageSync('userInfo');
         }
