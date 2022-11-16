@@ -1,0 +1,22 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit" class="cu-card footer-btns">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-titles text-orange"></text> 加利福利亚大学圣地亚哥分校气短问卷
+    </view>
+  </view>
+  <view class="text-grey padding bg-white solid-bottom">对如下所有的活动，请用0-5的数字标明您的气促程度。其中0表示完全没有气短，5表示极其气短或者因气短而无法从事该活动。如果您未从事该活动，请预计一个最有可能的分数。答题请注意：（1）您的答案应代表上周的典型一天的状况；（2）请回答所有问题。</view>
+  <view class="bg-white padding" wx:for="{{questions}}" wx:key="question" wx:for-item="question" wx:for-index="i">
+    <view class="title">{{i+1}}、{{question}}</view>
+    <input name="{{i}}" value="{{score[i]}}" hidden></input>
+    <view class="cu-steps">
+      <view class="cu-item text-sm" wx:for="{{max}}" wx:key="index" bindtap="choose" data-score="{{item}}" data-q="{{i}}">
+        <text class="cuIcon-{{score[i]==item?'radioboxfill text-main':'title text-grey'}}"></text>
+        <text class="text-xs">{{item}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="padding footer text-center safe-bottom">
+    <button class="cu-btn block bg-main margin lg round" form-type="submit">提交</button>
+  </view>
+</form>

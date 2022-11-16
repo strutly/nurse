@@ -1,8 +1,9 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
 <form bindsubmit="submit">
-  <input hidden name="type" value="1"></input>
+  <input hidden name="type" value="{{options.type}}"></input>
   <picker hidden name="pics" value="{{pics}}"></picker>
+  <input hidden name="diseaseId" value="{{options.diseaseId}}"></input>
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>基本信息

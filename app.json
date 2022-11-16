@@ -1,7 +1,11 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/index/home",
+    "pages/pneumonia/scale/form2",
+    "pages/pneumonia/scale/form",
+    "pages/pneumonia/patient/saveResult",
+    "pages/index/index",
+    "pages/pneumonia/patient/scanResult",
     "pages/diabetes/patient/calendar",
     "pages/diabetes/scale/form",
     "pages/diabetes/patient/saveResult",
@@ -16,9 +20,8 @@
     "pages/diabetes/follow/list",
     "pages/diabetes/notice/list",
     "pages/diabetes/patient/statistics",
-    "pages/pneumonia/customer/scanResult",
-    "pages/pneumonia/customer/saveResult",
     "pages/diabetes/patient/outpatient"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

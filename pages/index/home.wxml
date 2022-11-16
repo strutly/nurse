@@ -1,3 +1,4 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
 <view class="padding-xl bg-main flex align-center">
   <image style="width: 100rpx;height: 100rpx;" src="{{userInfo?domain+userInfo.pic:'/images/head.png'}}" class="round margin-right-sm bg-white padding-xs"></image>
@@ -10,6 +11,10 @@
         {{item.caregiverTag.name}}
       </view>
 
+    </view>
+    <view class="padding-tb-sm text-center" bindtap="{{authSuccess?'toUrl':'modalStatus'}}" data-url="{{authSuccess?'/pages/diabetes/patient/list?diseaseId='+diseaseId:''}}" data-msg="{{loginMsg}}" data-name="auth">
+      <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
+      <view class="text-sm">患者管理</view>
     </view>
   </view>
 </view>

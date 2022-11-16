@@ -14,7 +14,8 @@ CustomPage({
   async getList(pageNo,phone){
     let res = await Api.pagePatient({
       pageNo:pageNo,
-      phone:phone
+      phone:phone,
+      diseaseId:that.data.options.diseaseId
     });
     let patients = that.data.patients||[];
     that.setData({

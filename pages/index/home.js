@@ -5,10 +5,13 @@ import CustomPage from '../../CustomPage';
 import pinyin from '../../utils/pinyin';
 import ocr from '../../config/ocr';
 CustomPage({
-
   data: {
     domain: Api.domain,
-    checkIndex:0,
+    checkIndex: 0,
+    typeArr: ['1型', '2型', '未知'],
+    tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
+    tabIndex: 0,
+    show: false,
     scanImages: [],
     scanBtn:{
       ip:true,
@@ -29,7 +32,12 @@ CustomPage({
         that.setData({
           modalauth: false
         })
-        
+        let userInfo = wx.getStorageSync('userInfo');
+        if (userInfo.tags.length > 0) {
+          that.getHomeData(userInfo.tags[0].caregiverTag.diseaseId)
+        }
+
+
       }
       /**
        * 登录成功,授权失败,提示授权
@@ -53,24 +61,79 @@ CustomPage({
       })
     })
   },
-  tagChange(e){
+  tagChange(e) {
     console.log(e);
     let index = e.currentTarget.dataset.index;
     let checkIndex = that.data.checkIndex;
-    if(index == checkIndex) return;
+    if (index == checkIndex) return;
     that.setData({
-      checkIndex:index
+      checkIndex: index
+    })
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo.tags.length > 0) {
+      that.getHomeData(userInfo.tags[index].caregiverTag.diseaseId)
+    }
+  },
+  async getHomeData(type) {
+    try {
+      let res = await Api.homeData({
+        type: type
+      });
+      console.log(res);
+      let datas = res.data.map(item => {
+        console.log(item)
+        item.first = pinyin.getFirstCamelChars(item.patient.name || "未知");
+        return item;
+      })
+      that.setData({
+        datas: datas,
+        diseaseId:type
+      })
+    } catch (error) {
+
+    }
+
+  },
+  follow(e) {
+    console.log(e);
+    let datas = that.data.datas;
+    let data = datas[e.currentTarget.dataset.index];
+    that.setData({
+      patient: data.patient,
+      modalfollow: true
     })
   },
-  async scan() {
+
+  async scan(e) {
+    console.log(e);
+    let pages = {'ip1':'/pages/diabetes/patient/scanResult?diseaseId=1&type=1','op1':'/pages/diabetes/patient/outpatient?diseaseId=1&type=2','ip2':'/pages/pneumonia/patient/scanResult?diseaseId=2&type=1','op2':'/pages/pneumonia/patient/scanResult?diseaseId=2&type=2'};
+    let dataset = e.currentTarget.dataset;
+    let key = dataset.type+dataset.diseaseId;
+    console.log(pages[key]);
+    console.log(!pages[key]);
+    if(!pages[key]) return that.showTips("该病种病历扫描开发中");
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let res = await ocr.getOcrResult(scanImages);
+    let res = await ocr.getOcrResult({
+      imgs:scanImages,
+      type:dataset.type,
+      diseaseId:dataset.diseaseId
+    });
     console.log(res);
     app.globalData.scanData = res.scanData;
-    app.globalData.pics = res.pics;
+    app.globalData.pics = res.pics;    
     wx.navigateTo({
-      url: '/pages/diabetes/patient/scanResult',
+      url: pages[key]
+    })
+  },
+  hideModal(e) {
+    that.setData({
+      authModal: false
+    })
+  },
+  hiddenModal() {
+    that.setData({
+      show: false
     })
   },
   async getPhoneNumber(e) {
@@ -88,6 +151,7 @@ CustomPage({
           wx.setStorageSync('token', res.data.token);
           wx.setStorageSync('userInfo', res.data.info);
         } else {
+          wx.removeStorageSync('code');
           wx.removeStorageSync('token');
           wx.removeStorageSync('userInfo');
         }

@@ -1,6 +1,7 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
 <form bindsubmit="submit">
+  <input hidden name="type" value="2"></input>
   <picker hidden name="pics" value="{{pics}}"></picker>
   <view class="cu-bar bg-gray">
     <view class="action">

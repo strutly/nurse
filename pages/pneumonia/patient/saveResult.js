@@ -7,28 +7,9 @@ import WxValidate from "../../../utils/WxValidate";
 CustomPage({
   data: {
     tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
-    typeArr: ['2型', '1型'],
-    emotionArr: ['良好', '精神紧张', '焦虑', '抑郁'],
-    medicationArr: ['按时按量', '未按时用药'],
-    dietArr: ['清淡', '油腻'],
-    motionArr: ['是', '否'],
-    educationArr: ['一般', '良好'],
-    occupationArr: ['无业', '脑力劳动者', '体力劳动者'],
-    economyArr: ['一般', '良好'],
-    internetArr: ['一般', '良好'],
-    sugarArr: ['偶尔', '持续', '从不'],
-    dietHabitArr: ['偏清淡', '偏油腻'],
-    motionHabitArr: ['从不', '偶尔', '经常'],
-    sleepArr: ['差', '一般', '良好'],
-    smokeArr: ['有', '无'],
-    wineArr: ['有', '无'],
-    psychologyArr: ['良好', '焦虑'],
-    complianceArr: ['低', '高'],
-    injectionArr: ['有', '无'],
-    liveAloneArr: ['是', '否'],
+    
     disabled: false,
-    complicationArr: ['糖尿病酮症','糖尿病酮症酸中毒','高血糖高渗综合征','糖尿病肾病','糖尿病眼病','糖尿病神经病变','低血糖','冠状动脉粥样硬化','脑梗塞','下肢血管疾病', '糖尿病足'],
-    otherArr:['糖尿病自我管理知识缺乏','糖尿病自我管理态度消极','糖尿病自我管理行为差','经济困难','家庭支持系统差','用药依从性差'],
+    
     doctorArr:[]
   },
 
@@ -49,13 +30,10 @@ CustomPage({
         required: true,
         tel:true
       },
-      height: {
+      lcq:{
         required: true
       },
-      weight: {
-        required: true
-      },
-      doctorId: {
+      sobq: {
         required: true
       }
     }, messages = {
@@ -63,14 +41,11 @@ CustomPage({
         required: "请输入正确的手机号",
         tel:"请输入正确的手机号"
       },
-      height: {
-        required: "请输入身高"
+      lcq:{
+        required: '请完成莱塞斯特咳嗽生命质量问卷'
       },
-      weight: {
-        required: "请输入体重"
-      },
-      doctorId: {
-        required: "请选择经管医生"
+      sobq: {
+        required: '请完成加利福利亚大学圣地亚哥分校气短问卷'
       }
     };
     that.WxValidate = new WxValidate(rules, messages);

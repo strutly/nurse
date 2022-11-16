@@ -98,7 +98,7 @@ const CustomPage = function (page) {
       },
       home() {
         wx.reLaunch({
-          url: '/pages/index/index',
+          url: '/pages/index/home',
         })
       },
       viewImage(e) {

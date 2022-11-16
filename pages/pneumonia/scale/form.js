@@ -1,133 +1,149 @@
-
 var that;
-const app = getApp();
-import Api from '../../../config/api';
-import CustomPage from '../../../CustomPage';
 import WxValidate from "../../../utils/WxValidate";
+import CustomPage from '../../../CustomPage';
 CustomPage({
+
   data: {
-    tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
     coughQuestions:[{
       title: "近两周来，咳嗽会让您胸痛或肚子痛吗?",
+      type:"psychic",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您会因咳嗽有痰而烦恼吗?",
+      type:"psychic",
       checks: ['每次都会', '多数时间会', '不时会', '有时会', '偶尔会', '极少会', '从来不会']
     }, {
       title: "近两周来，咳嗽会让您感到疲倦吗?",
+      type:"psychic",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您觉得能控制咳嗽吗?",
+      type:"mand",
       checks: ['一点也不能', '几乎不能', '很少能', '有时能', '常常能', '多数时间能', '一直都能']
     }, {
       title: "近两周来，咳嗽会让您觉得尴尬吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会让您焦虑不安吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会影响您的工作或其他日常事务吗?",
+      type:"society",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会影响您的整个娱乐生活吗?",
+      type:"society",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，接触油漆油烟会让您咳嗽吗?",
+      type:"psychic",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会影响您的睡眠吗?",
+      type:"psychic",
       checks: ['一直都会', '大多数时间会', '常常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您每天阵发性咳嗽发作多吗?",
+      type:"psychic",
       checks: ['持续有', '次数多', '时时有', '有一些', '偶尔有', '极少有', '一点也没有']
     }, {
       title: "近两周来，您会因咳嗽而情绪低落吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会让您厌烦吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会让您声音嘶哑吗?",
+      type:"psychic",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您会觉得精力充沛吗?",
+      type:"psychic",
       checks: ['一点也不会 ', '几乎不会', '很少会', '有时会', '常常会', '多数时间会', '一直都会']
     }, {
       title: "近两周来，咳嗽会让您担心有可能得了重病吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，咳嗽会让您担心别人觉得您身体不对劲吗?",
+      type:"mand",
       checks: ['一直都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您会因咳嗽中断谈话或接听电话吗?",
+      type:"society",
       checks: ['每次都会', '大多数时间会', '时常会', '有时会', '很少会', '几乎不会', '一点也不会']
     }, {
       title: "近两周来，您会觉得咳嗽惹恼了同伴?家人或朋友?",
+      type:"society",
       checks: ['每次都会', '多数时间会 ', '不时会 ', '有时会', '偶尔会', '极少会', '从来不会']
     }],
-    disabled: false,
-    
-    doctorArr:[]
+    score:[],
+    max:11,
+    sum:-1
   },
 
-  async onLoad(options) {
+  onLoad(options) {
     that = this;
-    that.initValidate();
-    let res = await Api.doctorPage({
-      type:1
-    });
-    that.setData({
-      doctorArr:res.data
-    })
-    console.log(res);
+    that.initValidate(-1);
   },
-  initValidate() {
-    let rules = {
-      phone: {
-        required: true,
-        tel:true
-      },
-      height: {
-        required: true
-      },
-      weight: {
-        required: true
-      },
-      doctorId: {
-        required: true
-      }
-    }, messages = {
-      phone: {
-        required: "请输入正确的手机号",
-        tel:"请输入正确的手机号"
-      },
-      height: {
-        required: "请输入身高"
-      },
-      weight: {
-        required: "请输入体重"
-      },
-      doctorId: {
-        required: "请选择经管医生"
-      }
-    };
+  initValidate(num) {
+    
+    let rules = {},messages = {};
+
+    if(num>0){
+      let questions = that.data.coughQuestions;
+      questions.forEach((question,i)=>{
+        rules[i]={
+          required: true
+        };
+        messages[i]={
+          required: "请选择[ "+question.title+" ]的答案"
+        };
+      })
+    }
+    
     that.WxValidate = new WxValidate(rules, messages);
   },
-  pickerChange(e) {
+
+  chooseScore(e){
     console.log(e);
+    that.setData(e.currentTarget.dataset);
+    that.initValidate(that.data.sum);
+  },
+  choose(e){
+    let dataset = e.currentTarget.dataset;
+    let score = that.data.score;
+    score[dataset['q']] = {score:dataset['score'],type:dataset['type']};
     that.setData({
-      [e.currentTarget.dataset.name]: e.detail.value
+      score:score
     })
   },
-  otherChange(e) {
-    let name = e.currentTarget.dataset.name;
-    that.setData({
-      [name]: e.detail.value
+  getResult(data){
+    console.log(data);
+    let sum = 0;
+    let map = {};
+    data.forEach(score=>{
+      if(!map[score.type]){
+        map[score.type] = [];
+      }
+      map[score.type].push(score);
     })
+
+    Object.values(map).forEach(values=>{
+      let temp = 0;
+      values.forEach(val=>{
+        temp+= val.score;
+      })
+      sum+=Math.floor((temp/values.length)*100)/100;
+    })
+    return sum;
   },
-  async submit(e) {
+  submit(e){
     console.log(e);
-    
     let data = e.detail.value;
     if (!that.WxValidate.checkForm(data)) {
       console.log(that.WxValidate)
@@ -135,45 +151,17 @@ CustomPage({
       that.showTips(error.msg)
       return false;
     }
-
-
-    that.setData({
-      disabled: true
+    let score = that.data.score;
+    console.log(data);
+    console.log(that.getResult(that.data.score));
+    var pages = getCurrentPages();
+    var previousPage = pages[pages.length - 2]; //上一个页面
+    previousPage.setData({
+      [that.data.options.type]: {sum:that.getResult(score),result:score}
     })
-    let patientData = app.globalData.patientData;
-    patientData = Object.assign(patientData, data);
-    Object.keys(patientData).map(key => {
-      console.log(key)
-      if (key.indexOf(".") > -1) {
-        let s = key.split(".");
-        if (!patientData[s[0]]) patientData[s[0]] = {};
-        patientData[s[0]][s[1]] = patientData[key];
-        delete patientData[key];
-      }
+    wx.navigateBack({
+      delta: 1
     })
-    patientData.scanData = app.globalData.scanData;
-
-    console.log(patientData);
-    let res = await Api.addPatient(patientData);
-    console.log(res);
-    if (res.code == 0) {
-      that.setData({
-        codeUrl: res.data.url,
-        patientId: res.data.id,
-        tips: res.data.url ? '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息' : '二维码生成失败,点击重新生成二维码',
-        show: true
-      })
-    } else {
-      that.showTips(res.msg);
-    }
-  },
-  async updateCode() {
-    let res = await Api.codePatient({ id: that.data.patientId });
-    if (res.code == 0) {
-      that.setData({
-        tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
-        codeUrl: res.data
-      })
-    }
   }
+  
 })

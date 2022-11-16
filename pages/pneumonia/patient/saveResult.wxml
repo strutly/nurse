@@ -1,0 +1,67 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit">
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>基本信息
+    </view>
+    <view class="action text-gray">
+      无法识别项请手动输入
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">手机号</view>
+    <input placeholder="请输入手机号" name="phone" class="text-right" data-name="phone" bindinput="inputChange" value="{{patientData['phone']}}"></input>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/pneumonia/scale/form?type=lcq">
+      <picker hidden name="lcq" value="{{lcq.sum}}"></picker>
+      <picker hidden name="other.lcq" value="{{lcq}}"></picker>
+      <view class="content padding-tb-sm">
+        <view>
+          莱塞斯特咳嗽生命质量问卷
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right {{lcq.result?'':'text-gray'}}">{{lcq.sum||'待完成测评'}}</view>
+      </view>
+    </view>
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/pneumonia/scale/form2?type=sobq">
+
+      <picker hidden name="sobq" value="{{sobq.sum}}"></picker>
+      <picker hidden name="other.sobq" value="{{sobq}}"></picker>
+      <view class="content padding-tb-sm">
+        <view>
+          加利福利亚大学圣地亚哥分校气短问卷
+        </view>
+
+      </view>
+      <view class="action">
+        <view class="text-right {{sobq?'':'text-gray'}}">{{sobq.sum||'待完成测评'}}</view>
+      </view>
+    </view>
+  </view>
+  
+
+  
+
+
+
+
+  <view class="padding margin-top-xl  text-center footer bg-white">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" form-type="submit" disabled="{{disabled}}">完成评估</button>
+  </view>
+</form>
+
+<view class="cu-modal {{show?'show':''}}">
+  <view class="cu-dialog bg-white">
+    <view class="text-center text-xxl margin-tb-xl">患者档案已建立</view>
+    <view class="padding-lr-xl margin-lr-xl text-lg">{{tips}}</view>
+    <view class="text-center margin-top">
+      <image src="{{codeUrl||'/images/fail.png'}}" mode="aspectFill" bindtap="updateCode" style="width: 500rpx;height: 500rpx;"></image>
+    </view>
+    <view class="padding margin-top-xl  text-center safe-bottom">
+      <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl" bindtap="home">完成</button>
+    </view>
+  </view>
+</view>

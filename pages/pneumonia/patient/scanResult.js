@@ -6,7 +6,10 @@ import ocr from '../../../config/ocr';
 CustomPage({
   data: {
     pics:[],
-    scanImages:[]
+    scanImages:[],
+    scanBtn:{
+      ip:true
+    }
   },
   onLoad(options) {
     that = this; 
@@ -42,19 +45,22 @@ CustomPage({
     };
     that.WxValidate = new WxValidate(rules, messages);
   },  
-  async scan() {
+  async scan(e) {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
-    let res = await ocr.getOcrResult(scanImages);
+    let res = await ocr.getOcrResult({
+      imgs:scanImages,
+      type:e.currentTarget.dataset.type
+    });
     console.log(res);
     app.globalData.scanData = res.scanData;
     app.globalData.pics = res.pics;
     that.setData({
-      patientData:res.scanData,
-      scanData:res.scanData,
-      pics:res.pics,
-      modalscan:false
-    })    
+      patientData: res.scanData,
+      scanData: res.scanData,
+      pics: res.pics,
+      modalscan: false
+    })
   },
   add() {
     wx.chooseMedia({
@@ -100,7 +106,7 @@ CustomPage({
     }
     app.globalData.patientData = data;
     wx.navigateTo({
-      url: '/pages/pneumonia/customer/saveResult',
+      url: '/pages/pneumonia/patient/saveResult',
     })
   },
   pickerChange(e){
