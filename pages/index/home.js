@@ -77,7 +77,7 @@ CustomPage({
   async getHomeData(type) {
     try {
       let res = await Api.homeData({
-        type: type
+        diseaseId: type
       });
       console.log(res);
       let datas = res.data.map(item => {
@@ -90,9 +90,8 @@ CustomPage({
         diseaseId:type
       })
     } catch (error) {
-
+      console.log(error)
     }
-
   },
   follow(e) {
     console.log(e);
@@ -106,24 +105,23 @@ CustomPage({
 
   async scan(e) {
     console.log(e);
-    let pages = {'ip1':'/pages/diabetes/patient/scanResult?diseaseId=1&type=1','op1':'/pages/diabetes/patient/outpatient?diseaseId=1&type=2','ip2':'/pages/pneumonia/patient/scanResult?diseaseId=2&type=1','op2':'/pages/pneumonia/patient/scanResult?diseaseId=2&type=2'};
+    let types = {'ip':{type:1,url:'scanResult'},'op':{type:0,url:'outpatient'}};
+    let diseaseIds = {'diabetes':1,'respiratory':2};
     let dataset = e.currentTarget.dataset;
-    let key = dataset.type+dataset.diseaseId;
-    console.log(pages[key]);
-    console.log(!pages[key]);
-    if(!pages[key]) return that.showTips("该病种病历扫描开发中");
+    if(!diseaseIds[dataset.d]) return that.showTips("该病种病历扫描开发中");
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
     let res = await ocr.getOcrResult({
       imgs:scanImages,
       type:dataset.type,
-      diseaseId:dataset.diseaseId
+      d:dataset.d
     });
     console.log(res);
     app.globalData.scanData = res.scanData;
-    app.globalData.pics = res.pics;    
+    app.globalData.pics = res.pics; 
+    console.log('/pages/'+dataset.d+'/patient/'+types[dataset.type].url+'?diseaseId='+diseaseIds[dataset.d]+'&type='+types[dataset.type].type)   
     wx.navigateTo({
-      url: pages[key]
+      url: '/pages/'+dataset.d+'/patient/'+types[dataset.type].url+'?diseaseId='+diseaseIds[dataset.d]+'&type='+types[dataset.type].type
     })
   },
   hideModal(e) {

@@ -1,0 +1,252 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<include src="/pages/template/scanModal"></include>
+<form bindsubmit="submit">
+  <input hidden name="type" value="{{options.type}}"></input>
+  <picker hidden name="pics" value="{{pics}}"></picker>
+  <input hidden name="diseaseId" value="{{options.diseaseId}}"></input>
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>基本信息
+    </view>
+    <view class="action text-gray">
+      无法识别项请手动输入
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">姓名</view>
+    <input placeholder="请输入姓名" name="name" class="text-right" data-name="name" bindinput="inputChange" value="{{patientData['name']}}"></input>
+  </view>
+
+  <view class="cu-form-group">
+    <view class="title">性别</view>
+    <input placeholder="请输入性别" name="gender" data-name="gender" bindinput="inputChange" class="text-right" value="{{patientData['gender']}}"></input>
+  </view>
+
+
+  <view class="cu-form-group">
+    <input hidden name="age" value="{{patientData['age']}}"></input>
+    <view class="title">出生年份</view>
+    <picker mode="date" header-text="请选择出生年份" fields="year" bindchange="pickerChange" data-name="birthOfYear" name="birthOfYear" value="{{patientData['birthOfYear']}}">
+      <view class="picker">
+        {{patientData['birthOfYear']||'请选择出生年份'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>住院信息
+    </view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">科室</view>
+    <input placeholder="请输入科室" data-name="department" bindinput="inputChange" type="text" class="text-right" value="{{patientData['department']}}"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">病人ID</view>
+    <input placeholder="请输入病人ID" name="hospitalId" data-name="hospitalId" bindinput="inputChange" type="number" class="text-right" value="{{patientData['hospitalId']}}"></input>
+  </view>
+  <view class="padding flex bg-white solid-top solid-bottom">
+    <view class="title margin-right">住院时间</view>
+    <picker class="flex-sub text-right" mode="date" bindchange="pickerChange" data-name="admissionDate" name="admissionDate" value="{{patientData['admissionDate']}}">
+      <view class="picker">
+        {{patientData['admissionDate']||'请选择入院时间'}}
+      </view>
+    </picker>
+    <text class="margin-lr">至</text>
+    <picker class="flex-sub text-right" mode="date" bindchange="pickerChange" data-name="dischargeDate" name="dischargeDate" value="{{patientData['dischargeDate']}}">
+      <view class="picker">
+        {{patientData['dischargeDate']||'请选择出院时间'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">血压</view>
+    <input placeholder="请输入血压" data-name="bp" bindinput="inputChange" type="text" class="text-right" value="{{patientData['bp']}}"></input>
+  </view>
+  
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>入院诊断
+    </view>
+  </view>
+  <view class="bg-white padding">
+    <text class="line2 {{allline['admissionDiagnosis']?'line-all':''}}">
+      <text wx:for="{{patientData['admissionDiagnosis']}}" wx:key="index">
+        {{item}}
+      </text>
+    </text>
+    <view class="flex align-center" bindtap="showAll" data-type="admissionDiagnosis">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['admissionDiagnosis']?'收起':'展开'}}<text class="text-blue {{allline['admissionDiagnosis']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>出院诊断
+    </view>
+  </view>
+
+  <view class="bg-white padding">
+    <text class="line2 {{allline['dischargeDiagnosis']?'line-all':''}}">
+      <text wx:for="{{patientData['dischargeDiagnosis']}}" wx:key="index">
+        {{item}}
+      </text>
+    </text>
+    <view class="flex align-center" bindtap="showAll" data-type="dischargeDiagnosis">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['dischargeDiagnosis']?'收起':'展开'}}<text class="text-blue {{allline['dischargeDiagnosis']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>入院情况
+    </view>
+  </view>
+  <view class="bg-white padding">
+    <text class="line2 {{allline['admissionInfo']?'line-all':''}}">{{patientData['admissionInfo']}}</text>
+    <view class="flex align-center" bindtap="showAll" data-type="admissionInfo">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['admissionInfo']?'收起':'展开'}}<text class="text-blue {{allline['admissionInfo']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>既往史
+    </view>
+  </view>
+
+  <view class="bg-white padding">
+    <text class="line2 {{allline['anamnesis']?'line-all':''}}">{{patientData['anamnesis']}}</text>
+    <view class="flex align-center" bindtap="showAll" data-type="anamnesis">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['anamnesis']?'收起':'展开'}}<text class="text-blue {{allline['anamnesis']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>治疗经过
+    </view>
+  </view>
+
+  <view class="bg-white padding">
+    <text class="line2 {{allline['treatment']?'line-all':''}}">{{patientData['treatment']}}</text>
+    <view class="flex align-center" bindtap="showAll" data-type="treatment">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['treatment']?'收起':'展开'}}<text class="text-blue {{allline['treatment']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>出院情况
+    </view>
+  </view>
+
+  <view class="bg-white padding">
+    <text class="line2 {{allline['dischargeInfo']?'line-all':''}}">{{patientData['dischargeInfo']}}</text>
+    <view class="flex align-center" bindtap="showAll" data-type="dischargeInfo">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['dischargeInfo']?'收起':'展开'}}<text class="text-blue {{allline['dischargeInfo']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+
+
+
+
+
+
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>药物治疗
+    </view>
+  </view>
+  <view class="padding flex bg-white solid-bottom">
+    <text class="flex-treble">药品名称</text>
+    <text class="flex-twice text-center">规格</text>
+    <text class="flex-twice text-center">方式</text>
+    <text class="flex-twice text-center">时间</text>
+  </view>
+
+  <view class="padding flex bg-white text-sm" wx:for="{{patientData['drugs']}}" wx:key="index">
+    <text class="flex-treble">{{item.name}}<text wx:if="{{item.company}}">({{item.company}})</text></text>
+    <text class="flex-twice text-center">{{item.dosage}}</text>
+    <text class="flex-twice text-center">{{item.mode}}</text>
+    <text class="flex-twice text-center">{{item.daily}}</text>
+  </view>
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>生活方式及出院医嘱
+    </view>
+  </view>
+
+
+  <view class="bg-white padding">
+    <text class="line2 {{allline['advice']?'line-all':''}}">
+      <text wx:for="{{patientData['advice']}}" wx:key="index">
+        {{index+1}}、{{item}}
+      </text>
+    </text>
+    <view class="flex align-center" bindtap="showAll" data-type="advice">
+      <view class="flex-sub dashed-bottom"></view>
+      <view class="margin-lr text-blue">{{allline['advice']?'收起':'展开'}}<text class="text-blue {{allline['advice']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
+      <view class="flex-sub dashed-bottom"></view>
+    </view>
+  </view>
+
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>复查计划识别区
+    </view>
+  </view>
+  <view class="scan-box padding">
+    <view class="scan-content padding">
+      <view wx:for="{{scanData.review}}" wx:key="index">
+        {{index+1}}、{{item}}
+      </view>
+    </view>
+  </view>
+  <view class=" footer-btns">
+    <view class="cu-bar bg-gray">
+      <view class="action">
+        <text class="cuIcon-title text-blue"></text>复查项目
+      </view>
+      <view class="action text-blue" bindtap="addReview">
+        <view class="text-sm text-blue cuIcon-add"></view>添加复查计划
+      </view>
+    </view>
+    <block wx:for="{{reviews}}" wx:key="index">
+      <view class="flex bg-white align-center solids-bottom">
+        <view class="flex-sub solids-right">
+          <view class="cu-form-group">
+            <view class="title">复查项目</view>
+            <input placeholder="请输入复查项目" class="text-right" bindchange="reviewChange" data-type="title" data-index="{{index}}" value="{{item.title}}"></input>
+          </view>
+          <view class="cu-form-group">
+            <view class="title margin-right">复查时间</view>
+            <picker class="flex-sub text-right" mode="date" bindchange="reviewChange" data-type="time" data-index="{{index}}" value="{{item.time}}">
+              <view class="picker">
+                {{item.time||'请选择入院时间'}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="lg lg text-grey cuIcon-delete margin" style="font-size: 40rpx;" bindtap="reviewRemove" data-index="{{index}}"></view>
+      </view>
+    </block>
+  </view>
+  <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" bindtap="modalStatus" data-name="scan">重新扫描</button>
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" form-type="submit">保存结果</button>
+  </view>
+</form>

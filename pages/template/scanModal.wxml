@@ -19,8 +19,8 @@
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-grey" bindtap="modalStatus" data-name="scan">取消</button>
-        <button class="cu-btn bg-main margin-left" bindtap="scan" data-type="op" data-disease-id="{{diseaseId}}" wx:if="{{scanBtn['op']}}">门诊识别</button>
-        <button class="cu-btn bg-main margin-left" bindtap="scan" data-type="ip" data-disease-id="{{diseaseId}}" wx:if="{{scanBtn['ip']}}">住院识别</button>
+        <button class="cu-btn bg-main margin-left" bindtap="scan" data-type="op" data-d="{{dTypes[diseaseId]}}" wx:if="{{scanBtn['op']}}">门诊识别</button>
+        <button class="cu-btn bg-main margin-left" bindtap="scan" data-type="ip" data-d="{{dTypes[diseaseId]}}" wx:if="{{scanBtn['ip']}}">住院识别</button>
       </view>
     </view>
   </view>

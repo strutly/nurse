@@ -7,6 +7,7 @@ CustomPage({
   data: {
     pics: [],
     scanImages: [],
+    diseaseId:1,
     reviews: [],
     allline:{},
     scanBtn:{

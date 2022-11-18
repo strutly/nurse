@@ -1,0 +1,47 @@
+<view class="cu-list menu margin-top">
+    <view class="cu-item arrow" bindtap="open" data-index='0'>
+      <view class="content padding-tb-sm">
+        <view>
+          莱塞斯特咳嗽生命质量问卷
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right">{{reportForm.content.lcq.sum}}</view>
+      </view>
+    </view>
+
+    <view class="cu-item " wx:for="{{coughQuestions}}" wx:if="{{reportForm.content.lcq.sum>0 && open==0}}">
+      <view class="content padding-tb-sm">
+        <view>
+          {{item.title}}
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right">{{reportForm.content.lcq.result[index].score}}</view>
+      </view>
+    </view>
+
+
+    <view class="cu-item arrow margin-top" bindtap="open" data-index='1'>
+      <view class="content padding-tb-sm">
+        <view>
+          加利福利亚大学圣地亚哥分校气短问卷
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right">{{reportForm.content.sobq.sum}}</view>
+      </view>
+    </view>
+
+    <view class="cu-item " wx:for="{{questions}}" wx:if="{{open==1}}">
+      <view class="content padding-tb-sm">
+        <view>
+          {{item}}
+        </view>
+      </view>
+      <view class="action">
+        <view class="text-right">{{reportForm.content.sobq.result[index]}}</view>
+      </view>
+    </view>
+
+  </view>

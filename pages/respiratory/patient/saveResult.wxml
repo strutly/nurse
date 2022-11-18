@@ -14,22 +14,22 @@
     <input placeholder="请输入手机号" name="phone" class="text-right" data-name="phone" bindinput="inputChange" value="{{patientData['phone']}}"></input>
   </view>
   <view class="cu-list menu">
-    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/pneumonia/scale/form?type=lcq">
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/respiratory/scale/form?type=lcq">
       <picker hidden name="lcq" value="{{lcq.sum}}"></picker>
-      <picker hidden name="other.lcq" value="{{lcq}}"></picker>
+      <picker hidden name="otherInfo.lcq" value="{{lcq}}"></picker>
       <view class="content padding-tb-sm">
         <view>
           莱塞斯特咳嗽生命质量问卷
         </view>
       </view>
       <view class="action">
-        <view class="text-right {{lcq.result?'':'text-gray'}}">{{lcq.sum||'待完成测评'}}</view>
+        <view class="text-right {{lcq.result?'':'text-gray'}}">{{lcq.sum!=undefined?lcq.sum:'待完成测评'}}</view>
       </view>
     </view>
-    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/pneumonia/scale/form2?type=sobq">
+    <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/respiratory/scale/form2?type=sobq">
 
       <picker hidden name="sobq" value="{{sobq.sum}}"></picker>
-      <picker hidden name="other.sobq" value="{{sobq}}"></picker>
+      <picker hidden name="otherInfo.sobq" value="{{sobq}}"></picker>
       <view class="content padding-tb-sm">
         <view>
           加利福利亚大学圣地亚哥分校气短问卷

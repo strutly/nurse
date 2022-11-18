@@ -4,7 +4,8 @@ const CustomPage = function (page) {
     Object.assign({}, page, {
       onLoad(options) {
         this.setData({
-          options:options
+          options:options,
+          dTypes:{1:'diabetes',2:'respiratory'}
         });
         page.onLoad && page.onLoad.call(this, options)
       },

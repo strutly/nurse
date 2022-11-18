@@ -3,7 +3,8 @@ import Api from '../../../config/api';
 import CustomPage from '../../../CustomPage';
 CustomPage({
   data: {
-    info:{}
+    info:{},
+    allline:{},
   },
   async onLoad(options) {
     console.log(options)
@@ -29,5 +30,14 @@ CustomPage({
   },
   refresh(){
     that.loadQcode(that.data.options.id)
+  },
+  showAll(e){
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    let allline = that.data.allline;
+    allline[type] = !allline[type];
+    that.setData({
+      allline:allline
+    })
   }
 })

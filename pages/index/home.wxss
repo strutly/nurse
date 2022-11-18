@@ -2,3 +2,24 @@
   background-color: var(--white);
   color:var(--main);
 }
+
+page{
+  background-color: var(--white);
+}
+.cu-list.menu>.cu-item{
+  padding: 30rpx;
+}
+.cu-form-group textarea{
+  padding: 20rpx;
+  min-height: 200rpx;
+}
+.footer{
+  position: fixed;
+  bottom: 20rpx;
+  left:0;
+  right:0;
+}
+
+.text-xxl{
+  font-size: 44rpx;
+}

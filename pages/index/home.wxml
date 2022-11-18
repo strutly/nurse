@@ -12,13 +12,25 @@
       </view>
 
     </view>
-    <view class="padding-tb-sm text-center" bindtap="{{authSuccess?'toUrl':'modalStatus'}}" data-url="{{authSuccess?'/pages/diabetes/patient/list?diseaseId='+diseaseId:''}}" data-msg="{{loginMsg}}" data-name="auth">
+    <view class="padding-tb-sm text-center" bindtap="{{authSuccess?'toUrl':'modalStatus'}}" data-url="{{(authSuccess&&diseaseId)?'/pages/diabetes/patient/list?diseaseId='+diseaseId:''}}" data-msg="{{loginMsg}}" data-name="auth">
       <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
       <view class="text-sm">患者管理</view>
     </view>
   </view>
 </view>
-
+<view class="cu-list menu">
+  <view class="cu-item" wx:for="{{datas}}" wx:key="index">
+    <view class="content" bindtap="toUrl" data-url="/pages/{{diseaseId==1?'diabetes':'respiratory'}}/patient/detail?id={{item.patient.id}}">
+      <text class="cu-avatar round margin-right bg-gray text-white">{{item.first}}</text>
+      <text class="">{{item.patient.name}}</text>
+      <text class="cu-tag bg-yellow text-white margin-left-sm" wx:if="{{diseaseId==1}}">{{typeArr[item.patient.assess.type]}}</text>
+    </view>
+    <view class="action {{k>0?'margin-left':''}}" bindtap="{{tag.type}}" data-id="{{item.patient.id}}" data-index="{{index}}" wx:for="{{item.tags}}" wx:for-index="k" wx:for-item="tag" wx:key="k">
+      <view class="padding-tb-xs" style="position: relative;">{{tag.title}}<view class='cu-tag badge' wx:if="{{tag.num>0}}">{{tag.num}}</view>
+      </view>
+    </view>
+  </view>
+</view>
 <view class="padding footer text-center safe-bottom">
   <button class="cu-btn block bg-main margin lg round" bindtap="modalStatus" data-name="{{authSuccess?'scan':'auth'}}">病历扫描</button>
   <view class="text-gray text-sm">技术支持:清华大学精准医学研究院智慧健康中心</view>

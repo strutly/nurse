@@ -1,5 +1,5 @@
 <view class="cu-list menu margin-top">
-  <view class="cu-item" wx:if="{{nums['1-0']}}" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=1&status=0&patientId={{patient.id}}">
+  <view class="cu-item" wx:if="{{nums['1-0']}}" bindtap="toUrl" data-url="/pages/respiratory/report/list?type=1&status=0&patientId={{patient.id}}">
     <view class="content">
       <view>
         <view class="padding-tb-xs" style="position: relative;">待核实的报告<view class='cu-tag badge' >{{nums['1-0']}}</view>
@@ -7,7 +7,7 @@
       </view>
     </view>
   </view>
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=1&status=1&patientId={{patient.id}}">
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/respiratory/report/list?type=1&status=1&patientId={{patient.id}}">
     <view class="content">
       <text class="">自我管理报告</text>
     </view>
@@ -15,7 +15,7 @@
       <text class="text-main text-xxl">{{nums['1-1']||0}}</text>
     </view>
   </view>
-  <view class="cu-item" wx:if="{{nums['2-0']}}" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=2&status=0&patientId={{patient.id}}">
+  <view class="cu-item" wx:if="{{nums['2-0']}}" bindtap="toUrl" data-url="/pages/respiratory/report/list?type=2&status=0&patientId={{patient.id}}">
     <view class="content">
       <view>
         <view class="padding-tb-xs" style="position: relative;">待核实的量表<view class='cu-tag badge' >{{nums['2-0']}}</view>
@@ -23,7 +23,7 @@
       </view>
     </view>
   </view>
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/diabetes/report/list?type=2&status=1&patientId={{patient.id}}">
+  <view class="cu-item" bindtap="toUrl" data-url="/pages/respiratory/report/list?type=2&status=1&patientId={{patient.id}}">
     <view class="content">
       <text class="">量表检测</text>
     </view>
@@ -44,7 +44,7 @@
 </view>
 
 <view class="padding-xl flex flex-direction footer">
-  <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/diabetes/patient/statistics?id={{patient.id}}" wx:if="{{patient.diseaseId==1}}">健康数据监测</button>
+  
   
   <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/follow/list?id={{patient.id}}">患者电话随访记录</button>
   <button class="cu-btn bg-main round padding-tb-xl margin-xl" bindtap="toUrl" data-url="/pages/diabetes/patient/info?id={{patient.id}}">查看患者信息</button>

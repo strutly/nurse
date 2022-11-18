@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/home",
-    "pages/pneumonia/scale/form2",
-    "pages/pneumonia/scale/form",
-    "pages/pneumonia/patient/saveResult",
+    "pages/respiratory/scale/form2",
+    "pages/respiratory/scale/form",
+    "pages/respiratory/patient/saveResult",
     "pages/index/index",
-    "pages/pneumonia/patient/scanResult",
+    "pages/respiratory/patient/scanResult",
     "pages/diabetes/patient/calendar",
     "pages/diabetes/scale/form",
     "pages/diabetes/patient/saveResult",
@@ -16,12 +16,16 @@
     "pages/diabetes/report/list",
     "pages/diabetes/report/report",
     "pages/diabetes/report/form",
-    "pages/diabetes/notice/detail",
-    "pages/diabetes/follow/list",
-    "pages/diabetes/notice/list",
+    "pages/notice/detail",
+    "pages/follow/list",
+    "pages/notice/list",
     "pages/diabetes/patient/statistics",
-    "pages/diabetes/patient/outpatient"
-    
+    "pages/diabetes/patient/outpatient",
+    "pages/respiratory/report/list",
+    "pages/respiratory/report/report",
+    "pages/respiratory/report/form",
+    "pages/respiratory/patient/detail",
+    "pages/respiratory/patient/outpatient"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -5,22 +5,21 @@ import CustomPage from '../../../CustomPage';
 import ocr from '../../../config/ocr';
 CustomPage({
   data: {
-    pics: [],
-    scanImages: [],
-    diseaseId:1,
-    reviews: [],
+    pics:[],
+    scanImages:[],
+    diseaseId:2,
     allline:{},
     scanBtn:{
-      op:true
+      ip:true
     }
   },
   onLoad(options) {
-    that = this;
+    that = this; 
     console.log(app.globalData)
     that.setData({
-      patientData: app.globalData.scanData,
-      scanData: app.globalData.scanData,
-      pics: app.globalData.pics
+      patientData:app.globalData.scanData,
+      scanData:app.globalData.scanData,
+      pics:app.globalData.pics
     })
     that.initValidate();
   },
@@ -34,12 +33,6 @@ CustomPage({
       },
       birthOfYear: {
         required: true
-      },
-      hospitalId: {
-        required: true
-      },
-      treatmentDate: {
-        required: true
       }
     }, messages = {
       name: {
@@ -50,23 +43,17 @@ CustomPage({
       },
       birthOfYear: {
         required: "请选择出生年份"
-      },
-
-      hospitalId: {
-        required: "请输入住院ID"
-      },
-      treatmentDate: {
-        required: "请选择就诊时间"
       }
     };
     that.WxValidate = new WxValidate(rules, messages);
-  },
+  },  
   async scan(e) {
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
     let res = await ocr.getOcrResult({
       imgs:scanImages,
-      type:e.currentTarget.dataset.type
+      type:e.currentTarget.dataset.type,
+      d:e.currentTarget.dataset.d,
     });
     console.log(res);
     app.globalData.scanData = res.scanData;
@@ -111,66 +98,32 @@ CustomPage({
       scanImages: scanImages
     })
   },
-  addReview() {
-    let reviews = that.data.reviews;
-    reviews.push({});
-    that.setData({
-      reviews: reviews
-    })
-  },
-  reviewChange(e) {
-    console.log(e);
-    let dataset = e.currentTarget.dataset;
-    let reviews = that.data.reviews;
-    reviews[dataset.index][dataset.type] = e.detail.value;
-    that.setData({
-      reviews: reviews
-    })
-  },
-  reviewRemove(e) {
-    console.log(e);
-    let index = e.currentTarget.dataset.index;
-    let reviews = that.data.reviews;
-    reviews = reviews.splice(0, index);
-    that.setData({
-      reviews: reviews
-    })
-  },
+
   submit(e) {
     let data = e.detail.value;
-    console.log(data);
     if (!that.WxValidate.checkForm(data)) {
       console.log(that.WxValidate)
       let error = that.WxValidate.errorList[0]
       that.showTips(error.msg)
       return false;
     }
-    let reviews = that.data.reviews;
-    for (let i = 0; i < reviews.length; i++) {
-      if (!reviews[i].title || !reviews[i].time) {
-        that.showTips("复查项目请输入完整信息");
-        return;
-      }
-    }
-    data.reviews = reviews;
     app.globalData.patientData = data;
-    app.globalData.scanData = that.data.patientData;
     wx.navigateTo({
-      url: '/pages/diabetes/patient/saveResult',
+      url: '/pages/respiratory/patient/saveResult',
     })
   },
-  pickerChange(e) {
+  pickerChange(e){
     console.log(e);
     let name = e.currentTarget.dataset.name;
     that.setData({
-      ['patientData.' + name]: e.detail.value
+      ['patientData.'+name]:e.detail.value
     })
   },
-  inputChange(e) {
+  inputChange(e){
     console.log(e);
     let name = e.currentTarget.dataset.name;
     that.setData({
-      ['patientData.' + name]: e.detail.value
+      ['patientData.'+name]:e.detail.value
     })
   },
   showAll(e){
@@ -182,4 +135,6 @@ CustomPage({
       allline:allline
     })
   }
+  
+
 })
