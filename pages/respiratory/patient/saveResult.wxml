@@ -13,6 +13,15 @@
     <view class="title">手机号</view>
     <input placeholder="请输入手机号" name="phone" class="text-right" data-name="phone" bindinput="inputChange" value="{{patientData['phone']}}"></input>
   </view>
+  <view class="cu-form-group">
+    <view class="title">经管医生</view>
+    <input hidden name="doctorId" value="{{doctorArr[doctor].id}}"></input>
+    <picker mode="selector" bindchange="pickerChange" data-name="doctor" value="{{0}}" range="{{doctorArr}}" range-key="name">
+      <view class="picker">
+        {{doctorArr[doctor].name||"请选择经管医生"}}
+      </view>
+    </picker>
+  </view>
   <view class="cu-list menu">
     <view class="cu-item arrow" bindtap="toUrl" data-url="/pages/respiratory/scale/form?type=lcq">
       <picker hidden name="lcq" value="{{lcq.sum}}"></picker>

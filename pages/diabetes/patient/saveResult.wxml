@@ -22,7 +22,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">经管医生</view>
-    <input hidden name="doctorId" value="{{doctor}}"></input>
+    <input hidden name="doctorId" value="{{doctorArr[doctor].id}}"></input>
     <picker mode="selector" bindchange="pickerChange" data-name="doctor" value="{{0}}" range="{{doctorArr}}" range-key="name">
       <view class="picker">
         {{doctorArr[doctor].name||"请选择经管医生"}}

@@ -8,21 +8,23 @@
   <view class="padding text-grey bg-white">
     请为您的咳嗽打分（完全不咳嗽为0分，咳嗽的难以忍受为10分，请点击您感觉的分数,如果评分不是0分请完成之后的问卷）
   </view>
-
-  <scroll-view scroll-x class="bg-white  response cu-steps padding-bottom" scroll-with-animation>
-    <view class="cu-item text-sm" wx:for="{{max}}" wx:key="index" bindtap="chooseScore" data-sum="{{item}}">
-      <text class="cuIcon-{{sum==item?'radioboxfill text-main':'title text-grey'}}"></text>
-      <text class="text-xs">{{item}}</text>
-    </view>
-  </scroll-view>
-
+  
+  <view class="flex align-center bg-white padding">
+    <block wx:for="{{max}}" wx:key="index">
+      <view class="flex-sub solids-bottom" wx:if="{{index>0}}"></view>
+      <view class="text-center" bindtap="chooseScore" data-sum="{{item}}">
+        <view class="cuIcon-{{sum==item?'radioboxfill text-main':'title text-grey'}}"></view>
+        <view class="text-xs">{{item}}</view>
+      </view>
+    </block>
+  </view>
 
   <view class="bg-white padding" wx:for="{{coughQuestions}}" wx:key="question" wx:for-item="question" wx:for-index="i" wx:if="{{sum>0}}">
     <view class="title">{{i+1}}:{{question.title}}</view>
     <input name="{{i}}" value="{{score[i].score}}" hidden></input>
     <view class="cu-steps">
       <view class="cu-item text-sm" wx:for="{{question.checks}}" wx:key="index" wx:for-index="index" bindtap="choose" data-q="{{i}}" data-score="{{index+1}}" data-type="{{question.type}}">
-        <text class="cuIcon-{{score[i].score==index+1?'radioboxfill text-main':'title text-grey'}}"></text><text class="text-xs">{{score[i].score==index+1?item:''}}</text>
+        <text class="cuIcon-{{score[i].score==index+1?'radioboxfill text-main':'title text-grey'}}"></text><text class="text-xs">{{item}}</text>
       </view>
     </view>
   </view>

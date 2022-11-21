@@ -121,7 +121,7 @@ CustomPage({
     app.globalData.pics = res.pics; 
     console.log('/pages/'+dataset.d+'/patient/'+types[dataset.type].url+'?diseaseId='+diseaseIds[dataset.d]+'&type='+types[dataset.type].type)   
     wx.navigateTo({
-      url: '/pages/'+dataset.d+'/patient/'+types[dataset.type].url+'?diseaseId='+diseaseIds[dataset.d]+'&type='+types[dataset.type].type
+      url: `/pages/${dataset.d}/patient/${types[dataset.type].url}?diseaseId=${diseaseIds[dataset.d]}&type=${types[dataset.type].type}`
     })
   },
   hideModal(e) {

@@ -59,10 +59,7 @@
       </view>
     </picker>
   </view>
-  <view class="cu-form-group">
-    <view class="title">血压</view>
-    <input placeholder="请输入血压" data-name="bp" bindinput="inputChange" type="text" class="text-right" value="{{patientData['bp']}}"></input>
-  </view>
+  
   
   <view class="cu-bar bg-gray">
     <view class="action">

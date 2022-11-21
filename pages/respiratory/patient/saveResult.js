@@ -17,7 +17,7 @@ CustomPage({
     that = this;
     that.initValidate();
     let res = await Api.doctorPage({
-      type:1
+      type:2
     });
     that.setData({
       doctorArr:res.data
@@ -30,16 +30,22 @@ CustomPage({
         required: true,
         tel:true
       },
+      doctorId: {
+        required: true
+      },
       lcq:{
         required: true
       },
       sobq: {
         required: true
-      }
+      },
     }, messages = {
       phone: {
         required: "请输入正确的手机号",
         tel:"请输入正确的手机号"
+      },
+      doctorId: {
+        required: "请选择经管医生"
       },
       lcq:{
         required: '请完成莱塞斯特咳嗽生命质量问卷'
