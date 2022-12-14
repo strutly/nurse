@@ -48,10 +48,7 @@
 
 
 
-  <view class="cu-form-group">
-    <view class="title">目前治疗方案</view>
-    <input placeholder="请输入目前治疗方案" name="assess.treatments" class="text-right"></input>
-  </view>
+
 
   <!--
 

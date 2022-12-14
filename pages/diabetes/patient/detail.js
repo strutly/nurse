@@ -46,4 +46,22 @@ CustomPage({
       that.showTips(res.msg);
     }
   },
+  async notice(e){
+    console.log(e)
+    let data = e.detail.value;
+    if(!data.advice) return that.showTips("请输入通知内容~");
+    let res = await Api.addReport({type:4,patientId:data.patientId,content:{advice:data.advice}});
+    if(res.code==0){
+      let nums = that.data.nums;
+      nums['4-1'] = (nums['4-1']||0)+1;
+      that.setData({
+        modalnotice:false,
+        nums:nums
+      })
+    }else{
+      that.showTips(res.msg);
+    }
+
+
+  }
 })

@@ -11,6 +11,7 @@ CustomPage({
     tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
     tabIndex: 0,
     show: false,
+    diseaseId:1,
     scanImages: [],
     scanBtn:{
       ip:true,
@@ -83,18 +84,19 @@ CustomPage({
   },
 
   async scan(e) {
-    let type = e.currentTarget.dataset.type;
+    let dataset = e.currentTarget.dataset;
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
     let res = await ocr.getOcrResult({
       imgs:scanImages,
-      type:type
+      type:dataset.type,
+      d:'diabetes'
     });
     console.log(res);
     app.globalData.scanData = res.scanData;
-    app.globalData.pics = res.pics;
+    app.globalData.pics = res.pics; 
     wx.navigateTo({
-      url: type=='ip'?'/pages/diabetes/patient/scanResult':'/pages/diabetes/patient/outpatient',
+      url: dataset.type=='ip'?'/pages/diabetes/patient/scanResult?diseaseId=1&type=1':'/pages/diabetes/patient/outpatient?diseaseId=1&type=0',
     })
   },
   hideModal(e) {

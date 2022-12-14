@@ -43,7 +43,7 @@
   </view>
   <view class="cu-form-group">
     <view class="title">病人ID</view>
-    <input placeholder="请输入病人ID" name="hospitalId" data-name="hospitalId" bindinput="inputChange" type="number" class="text-right" value="{{patientData['hospitalId']}}"></input>
+    <input placeholder="请输入病人ID" name="hospitalId" data-name="hospitalId" bindinput="inputChange" type="text" class="text-right" value="{{patientData['hospitalId']}}"></input>
   </view>
   <view class="padding flex bg-white solid-top solid-bottom">
     <view class="title margin-right">住院时间</view>
@@ -175,17 +175,14 @@
     <input hidden name="plan.lowSalt" value="{{item}}" wx:if="{{item=='低盐'}}"></input>
     <input hidden name="plan.lowFat" value="{{item}}" wx:if="{{item=='低脂'}}"></input>
   </view>
-  <view class="cu-list menu solid-top">
-    <input hidden name="quantity" value="{{patientData['cal']}}"></input>
-    <view class="cu-item">
-      <view class="content">
-        每日热量
-      </view>
-      <view class="action">
-        {{patientData['cal']}}千卡
-      </view>
-    </view>
+
+
+  <view class="cu-form-group">
+    <view class="title">每日热量</view>
+    <input placeholder="请输入每日热量" data-name="quantity" bindinput="inputChange" type="text" class="text-right" value="{{patientData['cal']}}"></input>
+    <view class="margin-left-xs">千卡</view>
   </view>
+
 
   <view class="cu-bar bg-gray">
     <view class="action">
