@@ -145,13 +145,14 @@ CustomPage({
       })
       console.log(res);
       if (res.code == 0) {
-        if (res.data.login) {
+        if (res.data.auth && res.data.login) {
           wx.setStorageSync('token', res.data.token);
           wx.setStorageSync('userInfo', res.data.info);
         } else {
           wx.removeStorageSync('code');
           wx.removeStorageSync('token');
           wx.removeStorageSync('userInfo');
+          that.showTips(res.data.msg)
         }
         app.globalData.msg = res.data.msg;
         app.globalData.status = { login: res.data.login, auth: res.data.auth };
