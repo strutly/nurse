@@ -4,13 +4,10 @@
   <image style="width: 100rpx;height: 100rpx;" src="{{userInfo?domain+userInfo.pic:'/images/head.png'}}" class="round margin-right-sm bg-white padding-xs"></image>
   <view class="flex-sub flex align-center">
     <view class="flex-sub text-white">
-      <view class="">健康照护师</view>     
-      
-      
-      <view class="margin-top padding-lr text-sm cu-tag line-white round {{index==checkIndex?'tag-active':''}}" wx:for="{{userInfo.tags}}" wx:key="index" bindtap="{{item.caregiverTag.diseaseId?'tagChange':''}}" data-type="{{item.caregiverTag.diseaseId}}" data-index="{{index}}">
+      <view class="">健康照护师</view>
+      <view class="margin-top padding-lr text-sm cu-tag line-white round {{item.caregiverTag.diseaseId==diseaseId?'tag-active':''}}" wx:for="{{userInfo.tags}}" wx:key="index" bindtap="{{item.caregiverTag.diseaseId?'tagChange':''}}" data-type="{{item.caregiverTag.diseaseId}}" data-disease-id="{{item.caregiverTag.diseaseId}}">
         {{item.caregiverTag.name}}
       </view>
-
     </view>
     <view class="padding-tb-sm text-center" bindtap="{{authSuccess?'toUrl':'modalStatus'}}" data-url="{{(authSuccess&&diseaseId)?'/pages/diabetes/patient/list?diseaseId='+diseaseId:''}}" data-msg="{{loginMsg}}" data-name="auth">
       <image src="/images/user.png" style="width: 60rpx;height: 60rpx;"></image>
@@ -19,8 +16,8 @@
   </view>
 </view>
 <view class="cu-list menu">
-  <view class="cu-item" wx:for="{{datas}}" wx:key="index">
-    <view class="content" bindtap="toUrl" data-url="/pages/{{diseaseId==1?'diabetes':'respiratory'}}/patient/detail?id={{item.patient.id}}">
+  <view class="cu-item" wx:for="{{datas}}" wx:key="index" bindtap="toUrl" data-url="/pages/{{diseaseId==1?'diabetes':'respiratory'}}/patient/detail?id={{item.patient.id}}">
+    <view class="content" >
       <text class="cu-avatar round margin-right bg-gray text-white">{{item.first}}</text>
       <text class="">{{item.patient.name}}</text>
       <text class="cu-tag bg-yellow text-white margin-left-sm" wx:if="{{diseaseId==1}}">{{typeArr[item.patient.assess.type]}}</text>
@@ -41,9 +38,11 @@
     <view class="cu-bar bg-white justify-end">
       <view class="content">授权提示</view>
     </view>
-    <view class="padding-xl">
-      您未授权,请先进行授权
+    <view class="padding-xl text-left">
+      健康照护师小程序需要匹配当前手机号是否与信用体系平台信息一致，确认授权后，系统将为通过验证的健康照护师开放对应专业服务权限。
+      <view class="text-center margin-top-sm">点击<text class="text-main"> 确认 </text>进行手机号授权</view>
     </view>
+
     <view class="cu-bar bg-white justify-end">
       <view class="action">
         <button class="cu-btn line-gray text-gray" bindtap="modalStatus" data-name="auth">取消</button>

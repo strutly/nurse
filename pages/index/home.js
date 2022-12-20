@@ -13,15 +13,17 @@ CustomPage({
     tabIndex: 0,
     show: false,
     scanImages: [],
-    scanBtn:{
-      ip:true,
-      op:true
+    scanBtn: {
+      ip: true,
+      op: true
     }
   },
   onLoad(options) {
     that = this;
+
   },
   onReady() {
+    console.log("onReady")
     getApp().watch(function (value) {
       console.log(value);
       /*
@@ -33,11 +35,10 @@ CustomPage({
           modalauth: false
         })
         let userInfo = wx.getStorageSync('userInfo');
+        let diseaseId = wx.getStorageSync('diseaseId');
         if (userInfo.tags.length > 0) {
-          that.getHomeData(userInfo.tags[0].caregiverTag.diseaseId)
+          that.getHomeData(diseaseId || userInfo.tags[0].caregiverTag.diseaseId)
         }
-
-
       }
       /**
        * 登录成功,授权失败,提示授权
@@ -61,23 +62,36 @@ CustomPage({
       })
     })
   },
+  onShow() {
+    console.log("onshow")
+    getApp().watch(function (value) {
+      if (value.login && value.auth) {
+        let diseaseId = wx.getStorageSync('diseaseId');
+        let userInfo = wx.getStorageSync('userInfo');
+        if (userInfo.tags.length > 0) {
+          that.getHomeData(diseaseId || userInfo.tags[0].caregiverTag.diseaseId)
+        }
+      }
+    })
+  },
+
+
   tagChange(e) {
     console.log(e);
-    let index = e.currentTarget.dataset.index;
-    let checkIndex = that.data.checkIndex;
-    if (index == checkIndex) return;
+    let diseaseId = e.currentTarget.dataset.diseaseId;
+    let checkIndex = that.data.diseaseId;
+    if (diseaseId == checkIndex) return;
     that.setData({
-      checkIndex: index
+      diseaseId: diseaseId
     })
-    let userInfo = wx.getStorageSync('userInfo');
-    if (userInfo.tags.length > 0) {
-      that.getHomeData(userInfo.tags[index].caregiverTag.diseaseId)
-    }
+
+    that.getHomeData(diseaseId)
+
   },
-  async getHomeData(type) {
+  async getHomeData(diseaseId) {
     try {
       let res = await Api.homeData({
-        diseaseId: type
+        diseaseId: diseaseId
       });
       console.log(res);
       let datas = res.data.map(item => {
@@ -87,8 +101,9 @@ CustomPage({
       })
       that.setData({
         datas: datas,
-        diseaseId:type
+        diseaseId: diseaseId
       })
+      wx.setStorageSync('diseaseId', diseaseId);
     } catch (error) {
       console.log(error)
     }
@@ -105,21 +120,21 @@ CustomPage({
 
   async scan(e) {
     console.log(e);
-    let types = {'ip':{type:1,url:'scanResult'},'op':{type:0,url:'outpatient'}};
-    let diseaseIds = {'diabetes':1,'respiratory':2};
+    let types = { 'ip': { type: 1, url: 'scanResult' }, 'op': { type: 0, url: 'outpatient' } };
+    let diseaseIds = { 'diabetes': 1, 'respiratory': 2 };
     let dataset = e.currentTarget.dataset;
-    if(!diseaseIds[dataset.d]) return that.showTips("该病种病历扫描开发中");
+    if (!diseaseIds[dataset.d]) return that.showTips("该病种病历扫描开发中");
     let scanImages = that.data.scanImages;
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
     let res = await ocr.getOcrResult({
-      imgs:scanImages,
-      type:dataset.type,
-      d:dataset.d
+      imgs: scanImages,
+      type: dataset.type,
+      d: dataset.d
     });
     console.log(res);
     app.globalData.scanData = res.scanData;
-    app.globalData.pics = res.pics; 
-    console.log('/pages/'+dataset.d+'/patient/'+types[dataset.type].url+'?diseaseId='+diseaseIds[dataset.d]+'&type='+types[dataset.type].type)   
+    app.globalData.pics = res.pics;
+    console.log('/pages/' + dataset.d + '/patient/' + types[dataset.type].url + '?diseaseId=' + diseaseIds[dataset.d] + '&type=' + types[dataset.type].type)
     wx.navigateTo({
       url: `/pages/${dataset.d}/patient/${types[dataset.type].url}?diseaseId=${diseaseIds[dataset.d]}&type=${types[dataset.type].type}`
     })
@@ -152,16 +167,25 @@ CustomPage({
           wx.removeStorageSync('code');
           wx.removeStorageSync('token');
           wx.removeStorageSync('userInfo');
-          that.showTips(res.data.msg)
+          that.showTips(res.data.msg);
+          that.setData({
+            authModal: false
+          })
         }
         app.globalData.msg = res.data.msg;
         app.globalData.status = { login: res.data.login, auth: res.data.auth };
       } else {
         wx.removeStorageSync('code');
-        that.showTips(res.msg)
+        that.showTips(res.msg);
+        that.setData({
+          authModal: false
+        })
       }
     } else {
-      that.showTips('您已拒绝授权获取手机号~')
+      that.showTips('您已拒绝授权获取手机号~');
+      that.setData({
+        authModal: false
+      })
     }
   },
   add() {
