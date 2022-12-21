@@ -1,0 +1,37 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<scroll-view class="chat-box" scroll-y="true" refresher-enabled="{{true}}" refresher-threshold="{{100}}" refresher-default-style="white" refresher-background="lightgreen" refresher-triggered="{{triggered}}" bindrefresherpulling="onPulling" bindrefresherrefresh="onRefresh" bindrefresherrestore="onRestore" bindrefresherabort="onAbort" scroll-into-view="{{intoView}}">
+  <view class="cu-chat footer-btns">
+    <block wx:for="{{chats}}" wx:key="index">
+      <view class="cu-item {{item.type==4?'self':''}}" id="report{{index}}">
+        <block wx:if="{{item.type==4}}">
+          <view class="main">
+            <view class="action text-grey" wx:if="{{!item.status}}">
+              未读
+            </view>
+            <view class="content bg-green shadow">
+              <text>{{item.content.advice}}</text>
+            </view>
+          </view>
+          <image class="cu-avatar radius" src="{{domain+item.pic}}"></image>
+          <view class="date">{{item.createTime}}</view>
+        </block>
+        <block wx:else>
+          <image class="cu-avatar radius" src="/images/head.png"></image>
+          <view class="main">
+            <view class="content shadow">
+              {{item.content.advice}}
+            </view>
+          </view>
+          <view class="date">{{item.createTime}}</view>
+        </block>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+<form bindsubmit="notice">
+  <input hidden name="patientId" value="{{options.id}}"></input>
+  <view class="cu-bar foot input">
+    <input name='advice'></input>
+    <button class="cu-btn bg-green shadow" form-type="submit">发送</button>
+  </view>
+</form>

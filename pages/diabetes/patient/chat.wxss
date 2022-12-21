@@ -1,0 +1,7 @@
+/* pages/diabetes/patient/chat.wxss */
+.chat-box{
+  height: 100vh;
+}
+.cu-chat{
+  flex-direction: column-reverse;
+}

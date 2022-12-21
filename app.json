@@ -26,7 +26,8 @@
     "pages/respiratory/report/form",
     "pages/respiratory/patient/detail",
     "pages/respiratory/patient/outpatient",
-    "pages/diabetes/patient/edit"
+    "pages/diabetes/patient/edit",
+    "pages/diabetes/patient/chat"
   ],
   "window": {
     "backgroundTextStyle": "light",

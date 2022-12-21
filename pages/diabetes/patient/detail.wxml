@@ -42,29 +42,11 @@
     </view>
   </view>
 
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/notice/list?patientId={{patient.id}}&type=4">
-    <view class="content">
-      <text class="">通知提醒</text>
-    </view>
-    <view class="action">
-      <text class="text-main text-xxl">{{(nums['4-1']||0)+(nums['4-0']||0)}}</text>
-    </view>
-  </view>
-
-  <view class="cu-item" bindtap="toUrl" data-url="/pages/notice/list?patientId={{patient.id}}&type=5">
-    <view class="content">
-      <text class="">用户消息</text>
-    </view>
-    <view class="action">
-      <text class="text-main text-xxl">{{(nums['5-1']||0)+(nums['5-0']||0)}}</text>
-    </view>
-  </view>
-
 </view>
 
 <view class="padding-xl flex flex-direction footer">
 
-  <button class="cu-btn bg-main round padding-tb-xl margin-sm" bindtap="modalStatus" data-name="notice" wx:if="{{patient.diseaseId==1}}">发送提醒通知</button>
+  <button class="cu-btn bg-main round padding-tb-xl margin-sm" bindtap="toUrl" data-url="/pages/diabetes/patient/chat?id={{patient.id}}" wx:if="{{patient.diseaseId==1}}">患者沟通</button>
 
 
   <button class="cu-btn bg-main round padding-tb-xl  margin-sm" bindtap="toUrl" data-url="/pages/diabetes/patient/statistics?id={{patient.id}}" wx:if="{{patient.diseaseId==1}}">健康数据监测</button>
