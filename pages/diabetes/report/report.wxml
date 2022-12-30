@@ -128,10 +128,28 @@
     <input class="text-right" placeholder="请输入餐前血糖" name="content.sugarBefore" value="{{reportForm.content.sugarBefore}}"></input>
     <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
   </view>
+
+  <view class="cu-form-group">
+    <view class="title">监测时间</view>
+    <picker mode="time" name="content.sugarBeforeTime" data-type="sugarBeforeTime" value="{{reportForm.content.sugarBeforeTime}}" start="04:01" end="23:01" bindchange="pickerChange">
+      <view class="picker">
+        {{reportForm.content.sugarBeforeTime||'请输入餐前血糖监测时间'}}
+      </view>
+    </picker>
+  </view>
+
   <view class="cu-form-group">
     <view class="title">餐后</view>
     <input class="text-right" placeholder="请输入餐后血糖" name="content.sugarAfter" value="{{reportForm.content.sugarAfter}}"></input>
     <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">监测时间</view>
+    <picker mode="time" name="content.sugarAfterTime" data-type="sugarAfterTime" value="{{reportForm.content.sugarAfterTime}}" start="04:01" end="23:01" bindchange="pickerChange">
+      <view class="picker">
+        {{reportForm.content.sugarAfterTime||'请输入餐后血糖监测时间'}}
+      </view>
+    </picker>
   </view>
 
   <view class="cu-bar">
@@ -149,6 +167,17 @@
     <input class="text-right" placeholder="请输入舒张压" name="content.diastolicPressure" value="{{reportForm.content.diastolicPressure}}"></input>
     <text class="text-grey text-sm padding-tb-sm">mmol/L</text>
   </view>
+
+  <view class="cu-form-group">
+    <view class="title">监测时间</view>
+    <picker mode="time" name="content.pressureTime" data-type="pressureTime" value="{{reportForm.content.pressureTime}}" start="04:01" end="23:01" bindchange="pickerChange">
+      <view class="picker">
+        {{reportForm.content.pressureTime||'请选择血压监测时间'}}
+      </view>
+    </picker>
+  </view>
+
+
   <view class="footer-btns"></view>
   <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
     <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" bindtap="call" data-phone="{{patient.phone}}">联系患者</button>

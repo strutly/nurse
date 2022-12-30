@@ -98,6 +98,13 @@ CustomPage({
       [type + "s"]: vals
     })
   },
+  pickerChange(e){
+    console.log(e);
+    let type = e.currentTarget.dataset.type;
+    that.setData({
+      ['reportForm.content.'+type]:e.detail.value
+    })
+  },
   inputChange(e) {
     let type = e.currentTarget.dataset.type;
     let index = e.currentTarget.dataset.index;
