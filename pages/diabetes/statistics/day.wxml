@@ -1,0 +1,156 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<wxs src="/utils/Tools.wxs" module="Tools"></wxs>
+<view class="text-center">
+  <view class="date-wrap padding text-xl ">
+    <text class="text-main cuIcon-roundleftfill-copy margin-right" bindtap="dayChange" data-add="-1"></text>{{time}}
+    <text class="text-main cuIcon-roundrightfill margin-left" bindtap="dayChange" data-add="1"></text>
+  </view>
+</view>
+
+
+<view class="cu-list menu">
+  <block wx:for="{{list}}" wx:key="index" wx:for-item="report">
+    <view class="cu-item arrow margin-top" bindtap="open" data-index="{{index}}">
+      <view class="content">
+        <text>{{report.name}}</text>
+      </view>
+      <view class="action">
+        <text class="{{report.confirm==0?'text-red':''}}">{{report.confirm==0?'待确认':report.des}}</text>
+      </view>
+    </view>
+    <view class="bg-white" wx:if="{{open==index}}">
+      <view class="cu-bar">
+        <view class="action">
+          <view class='cu-tag bg-blue light radius'>用药</view>
+        </view>
+      </view>
+      <view class="flex">
+        <view class="flex-sub text-center solid-bottom medic-type padding-sm {{tab==index?'bg-grey':''}}" wx:for="{{report.content.medication}}" data-index="{{index}}" bindtap="tabChange" wx:key="index">{{item.type}}</view>
+      </view>
+      <view class="flex">
+        <view class="flex-sub text-center medic-item" wx:for="{{report.content.medication}}" wx:for-item="medication" data-index="{{index}}" wx:for-index="i" wx:if="{{tab==i}}" wx:key="medication">
+          <view class="flex align-center bg-white solid-bottom text-sm padding-tb-sm padding-lr" wx:key="item" wx:for="{{medication.medics}}" wx:for-index="j">
+            <view class="flex-treble text-left" th:text="${item.name}">{{item.name}}</view>
+            <view class="flex-twice text-center" th:text="${item.dosage}">{{item.dosage}}</view>
+            <view class="flex-twice text-center" th:text="${item.mode}">{{item.mode}}</view>
+            <view class="flex-twice text-center text-right" th:text="${item.daily}">{{item.daily}}</view>
+            <view class="lg margin-left {{item.complete?'cuIcon-roundcheck text-main':'cuIcon-info text-orange'}} text-xxl"></view>
+          </view>
+        </view>
+      </view>
+
+      <block wx:if="{{report.content.sugars.length>0}}">
+        <view class="cu-bar">
+          <view class="action">
+            <view class='cu-tag bg-blue light radius'>血糖</view>
+          </view>
+        </view>
+        <view class="flex padding-lr padding-tb-sm solid-bottom" wx:for="{{report.content.sugars}}" wx:key="index">
+          <view class="flex-sub">{{item.type==0?'餐前':'餐后'}}</view>
+          <view class="flex-sub">{{item.time}}点</view>
+          <view class="flex-sub">{{item.num}}mmol/L</view>
+
+          <view class="text-xxl {{Tools.threshold('sugar',item)?'cuIcon-roundcheck text-main':'cuIcon-info text-orange'}}"></view>
+
+        </view>
+
+      </block>
+
+      <block wx:if="{{report.content.pressures.length>0}}">
+        <view class="cu-bar">
+          <view class="action">
+            <view class='cu-tag bg-blue light radius'>血压</view>
+          </view>
+        </view>
+        <view class="cu-form-group" wx:for="{{report.content.pressures}}" wx:key="index">
+          <view class="flex-sub">{{item.type==0?'收缩压':'舒张压'}}</view>
+          <view class="flex-sub">{{item.time}}点</view>
+          <view class="flex-sub">{{item.num}}mmHg</view>
+          <view class="text-xxl {{Tools.threshold('pressure',item)?'cuIcon-roundcheck text-main':'cuIcon-info text-orange'}}"></view>
+        </view>
+      </block>
+      <view class="cu-bar">
+        <view class="action">
+          <view class='cu-tag bg-blue light radius'>饮食</view>
+          <view class='cu-tag bg-orange round' wx:if="{{report.content.eat.lowSalt}}">低盐</view>
+          <view class='cu-tag bg-pink round' wx:if="{{report.content.eat.lowFat}}">低脂</view>
+        </view>
+      </view>
+      <view class="cu-form-group">
+        <view class="grid col-3 grid-square flex-sub padding-tb">
+          <view class="bg-img" wx:if="{{report.content.eat.breakfast}}">
+            <image src="{{report.content.eat.breakfast}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{report.content.eat.breakfast}}" mode="aspectFill"></image>
+            <view class="tag-msg">早餐</view>
+          </view>
+          <view class="solids" bindtap="addImg" data-type="breakfast" wx:else>
+            <text class='cuIcon-info text-orange'>早餐</text>
+          </view>
+
+          <view class="bg-img" wx:if="{{report.content.eat.lunch}}">
+            <image src="{{report.content.eat.lunch}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{report.content.eat.lunch}}" mode="aspectFill"></image>
+            <view class="tag-msg">中餐</view>
+          </view>
+          <view class="solids" bindtap="addImg" data-type="breakfast" wx:else>
+            <text class='cuIcon-info text-orange'>中餐</text>
+          </view>
+          <view class="bg-img" wx:if="{{report.content.eat.dinner}}">
+            <image src="{{report.content.eat.dinner}}?imageView2/2/w/200" bindtap="viewImage" data-url="{{report.content.eat.dinner}}" mode="aspectFill"></image>
+            <view class="tag-msg">晚餐</view>
+          </view>
+          <view class="solids" bindtap="addImg" data-type="breakfast" wx:else>
+            <text class='cuIcon-info text-orange'>晚餐</text>
+          </view>
+
+        </view>
+      </view>
+
+
+      <view class="cu-bar solid-top">
+        <view class="action">
+          <view class='cu-tag bg-blue light radius'>运动</view>
+        </view>
+      </view>
+      <view class="cu-form-group solid-bottom">
+        <view class="title">准时完成</view>
+        <view class="lg margin-left {{report.content.motion.complete?'cuIcon-roundcheck text-main':'cuIcon-info text-orange'}} text-xxl"></view>
+      </view>
+      <view>
+        <view class="cu-list menu">
+          <view class="cu-item">
+            <view class="content">
+              <text class="">运动方式</text>
+            </view>
+            <view class="action">
+              <text class="text-sm">{{report.content.motion.type}}</text>
+            </view>
+          </view>
+          <view class="cu-item">
+            <view class="content">
+              <text class="">运动时长</text>
+            </view>
+            <view class="action">
+              <text class="text-sm">{{report.content.motion.duration}}分钟/次</text>
+            </view>
+          </view>
+          <view class="cu-item">
+            <view class="content">
+              <text class="">运动频率</text>
+            </view>
+            <view class="action">
+              <text class="text-sm">{{report.content.motion.frequency}}次/周</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class="padding-xs flex align-center" wx:if="{{list.length==0}}">
+  <view class="flex-sub text-center">
+    <view class="text-xsl padding">
+      <text class="cuIcon-info text-main"></text>
+    </view>
+    <view class="padding">今日无统计报告</view>
+  </view>
+</view>

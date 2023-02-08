@@ -27,7 +27,10 @@
     "pages/respiratory/patient/detail",
     "pages/respiratory/patient/outpatient",
     "pages/diabetes/patient/edit",
-    "pages/diabetes/patient/chat"
+    "pages/diabetes/patient/chat",
+    "pages/diabetes/statistics/day",
+    "pages/diabetes/statistics/week",
+    "pages/follow/form"
   ],
   "window": {
     "backgroundTextStyle": "light",

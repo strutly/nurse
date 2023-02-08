@@ -1,0 +1,14 @@
+/* pages/diabetes/statistics/week.wxss */
+page{
+  background-color: var(--white);
+}
+.canvas {
+  width: 100vw;
+  height: 650rpx;
+  text-align: center;
+}
+.des{
+  position: absolute;
+  top:50rpx;
+  z-index:100;
+}

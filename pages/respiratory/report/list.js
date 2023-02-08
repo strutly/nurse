@@ -15,7 +15,7 @@ CustomPage({
   async getList(pageNo){
     let param = that.data.options;
     console.log(param)
-    param.pageNo = pageNo;
+    param.pageNum = pageNo;
     let res = await Api.pageReport(param);
     let reports = that.data.reports;
     that.setData({

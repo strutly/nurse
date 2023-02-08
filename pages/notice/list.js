@@ -12,7 +12,8 @@ CustomPage({
   async getList(pageNo) {
     let param = that.data.options;
     console.log(param)
-    param.pageNo = pageNo;
+    param.pageNum = pageNo;
+    param.pageSize = 10;
     try {
       let res = await Api.reportNoticePage(param);
       console.log(res);

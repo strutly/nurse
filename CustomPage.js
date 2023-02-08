@@ -95,6 +95,10 @@ const CustomPage = function (page) {
           wx.navigateBack({
             delta: 1
           })
+        }else{
+          wx.reLaunch({
+            url: '/pages/index/home',
+          })
         }
       },
       home() {

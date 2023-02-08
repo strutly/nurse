@@ -8,3 +8,7 @@
   text-align: center;
   width: 100%;
 }
+.cu-form-group picker .picker{
+  text-align: left;
+}
+

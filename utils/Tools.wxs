@@ -41,8 +41,29 @@ function replace(str,o,n='未知'){
   return str.replace(o,n);
 }
 
+function threshold(type,data){
+  console.log(JSON.stringify(data));
+  if(type=='sugar'){
+    if(data.type==0){
+      console.log(data);
+      return 3.9 <= data.num && data.num <= 6.1;
+    }else{
+      return 4.4 <= data.num && data.num <= 7.8;
+    }
+  }
+  if(type=='pressure'){
+    if(data.type==0){
+      return 90 <= data.num && data.num <= 139;
+    }else{
+      return 60 <= data.num && data.num <= 89;
+    }
+  }
+  return false;
+}
+
 module.exports = {
   include:include,
   sum:sum,
-  replace:replace
+  replace:replace,
+  threshold:threshold
 }

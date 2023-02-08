@@ -70,8 +70,7 @@ CustomPage({
     Object.values(data).forEach(val=>{
       sum+=parseInt(val);
     })
-    console.log(sum);
-    console.log(that.getResult(sum));
+
     var pages = getCurrentPages();
     var previousPage = pages[pages.length - 2]; //上一个页面
     previousPage.setData({

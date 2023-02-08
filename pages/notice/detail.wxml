@@ -1,6 +1,6 @@
 <view class="padding">
-  {{notice.report.content.advice}}
-  <view class="text-right"><text>{{notice.patient.name}}</text><text class="margin-left-sm">{{notice.report.createTime}}</text></view>
+  {{notice.report.advice}}
+  <view class="text-right margin-top"><text>{{notice.name}}</text><text class="margin-left-sm">{{notice.createTime}}</text></view>
 </view>
 
 <view class="cu-modal show" wx:if="{{!notice.report}}">

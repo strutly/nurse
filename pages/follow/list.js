@@ -7,7 +7,8 @@ CustomPage({
   data: {
     typeArr:['1型','2型','未知'],
     follows:[],
-    open:-1
+    open:-1,
+    formAnswer:{}
   },
   onLoad(options) {
     that = this;

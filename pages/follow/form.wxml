@@ -1,0 +1,16 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<form bindsubmit="submit">
+  <view class="flex padding margin-top bg-white align-center" wx:for="{{qs}}" wx:key="index">
+    <view class="flex-sub">{{item}}</view>
+    <picker style="min-width: 100rpx;" bindchange="pickerChange" data-index="{{index}}" value="{{value['sum'+(index+1)]}}" range="{{vals}}" name="sum{{index+1}}">
+      <view class="picker text-right text-bold">
+        {{value["sum"+(index+1)]?value["sum"+(index+1)]:'请选择'}}
+      </view>
+    </picker>
+    <view class="cuIcon-right"></view>
+  </view>
+  <view class="footer-btns"></view>
+  <view class="padding margin-top-xl flex bg-white footer">    
+    <button class="cu-btn bg-main padding-tb-xl padding-tb-xl round flex-sub" form-type="submit">提交</button>
+  </view>
+</form>

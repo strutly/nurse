@@ -13,7 +13,7 @@ CustomPage({
   },
   async getList(pageNo,phone){
     let res = await Api.pagePatient({
-      pageNo:pageNo,
+      pageNum:pageNo,
       phone:phone,
       diseaseId:that.data.options.diseaseId
     });

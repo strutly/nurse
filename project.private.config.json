@@ -12,8 +12,29 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/scale/form",
-          "query": "type=sas",
+          "pathName": "pages/notice/detail",
+          "query": "type=1990",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/diabetes/statistics/day",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/follow/form",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/diabetes/statistics/week",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }

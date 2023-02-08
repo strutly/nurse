@@ -21,6 +21,7 @@ App({
     })
   },
   globalData: {
+    formAnswer:{},
     scanData:{},
     userInfo: null,
     status: {login:false,auth:false}

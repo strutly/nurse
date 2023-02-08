@@ -1,0 +1,34 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<view class="margin text-gray" wx:if="{{statistic.undones.length>0}}">未完成:
+  <block wx:for="{{statistic.undones}}" wx:key="index">
+    <text class="margin-right-sm" bindtap="showDes" data-index="{{index}}">{{item.name}} </text>
+    <view class="text-black des margin bg-gray padding" wx:if="{{showIndex==index}}">
+      <view wx:for="{{item.des}}" wx:for-item="des" wx:key="index">{{des}}</view>
+    </view>
+  </block>
+</view>
+<canvas canvas-id="myChart" disable-scroll="true" class="canvas margin-top-xl padding-bottom"></canvas>
+<view class="text-xl text-center">工作量统计</view>
+
+<view class="flex padding-lr-lg margin-lg text-center text-lg">
+  <view class="flex-sub">
+    <view>
+      <text class="text-blue text-bold">{{statistic.followNum}}</text>/{{statistic.patientNum}}
+    </view>
+    <view class="margin-top">随访</view>
+  </view>
+  <view class="flex-sub">
+    <view>
+      <text class="text-blue text-bold">{{statistic.reportNum}}</text>/{{statistic.patientNum*7}}
+    </view>
+    <view class="margin-top">健康数据确认</view>
+    <view class="text-sm text-gray">(照护对象人次)</view>
+  </view>
+  <view class="flex-sub">
+    <view>
+      <text class="text-blue text-bold">{{statistic.formNum}}</text>/{{statistic.patientNum}}
+    </view>
+    <view class="margin-top">量表确认</view>
+  </view>
+
+</view>

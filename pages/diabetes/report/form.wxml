@@ -1,10 +1,10 @@
 <wxs src="/utils/Tools.wxs" module="Tools"></wxs>
 <view class="padding-lg text-center">
-  <text class="text-main text-xsl">{{Tools.sum(reportForm.content)}}</text>
+  <text class="text-main text-xsl">{{Tools.sum(reportForm)}}</text>
 </view>
 <view class="cu-list menu">
   <view class="cu-item" wx:for="{{qs}}" wx:key="index">
-    <view class="content padding-tb-sm">{{Tools.replace(item,'多少',reportForm.content['sum'+(index+1)])}}</view>
-    <view class="action text-right">{{reportForm.content['sum'+(index+1)]||'未提交'}}</view>
+    <view class="content padding-tb-sm">{{Tools.replace(item,'多少',reportForm['sum'+(index+1)])}}</view>
+    <view class="action text-right">{{reportForm['sum'+(index+1)]||'未提交'}}</view>
   </view>
 </view>
