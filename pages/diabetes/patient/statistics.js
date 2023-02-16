@@ -33,7 +33,7 @@ CustomPage({
     console.log(lineData)
 
     var windowWidth = 320;
-    if(lineData.days.length<=0){
+    if(!lineData.days || lineData.days.length<=0){
       that.setData({
         chartLine:false
       })

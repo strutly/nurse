@@ -4,22 +4,22 @@ const CustomPage = function (page) {
     Object.assign({}, page, {
       onLoad(options) {
         this.setData({
-          options:options,
-          dTypes:{1:'diabetes',2:'respiratory'}
+          options: options,
+          dTypes: { 1: 'diabetes', 2: 'respiratory' }
         });
         page.onLoad && page.onLoad.call(this, options)
       },
-      onReady(){
+      onReady() {
         console.log(2)
         this.setData({
-          userInfo:wx.getStorageSync('userInfo')
+          userInfo: wx.getStorageSync('userInfo')
         })
         page.onReady && page.onReady.call(this)
       },
       toUrl(e) {
         console.log(e)
         let url = e.currentTarget.dataset.url;
-        let msg = e.currentTarget.dataset.msg||'正在开发中~';
+        let msg = e.currentTarget.dataset.msg || '正在开发中~';
         if (url) {
           wx.navigateTo({
             url: url,
@@ -31,24 +31,24 @@ const CustomPage = function (page) {
           })
         }
       },
-      modalStatus(e){
+      modalStatus(e) {
         let name = e.currentTarget.dataset.name;
         this.setData({
-          ['modal'+name]:!this.data['modal'+name]
+          ['modal' + name]: !this.data['modal' + name]
         })
       },
-      call(e){
+      call(e) {
         let phone = e.currentTarget.dataset.phone;
-        if(phone){
+        if (phone) {
           wx.makePhoneCall({
             phoneNumber: phone
           })
-        }else{
+        } else {
           wx.showToast({
             title: '号码不存在',
-            icon:'none'
+            icon: 'none'
           })
-        }        
+        }
       },
       phoneChange(e) {
         console.log(e);
@@ -95,7 +95,7 @@ const CustomPage = function (page) {
           wx.navigateBack({
             delta: 1
           })
-        }else{
+        } else {
           wx.reLaunch({
             url: '/pages/index/home',
           })
@@ -108,22 +108,26 @@ const CustomPage = function (page) {
       },
       viewImage(e) {
         console.log(e)
-        wx.previewImage({
-          urls: [e.currentTarget.dataset.url],
-          current: e.currentTarget.dataset.url
-        })
+        let url = e.currentTarget.dataset.url;
+        if(url){
+          wx.previewImage({
+            urls: [url],
+            current: url
+          })
+        }
+        
       },
       showTips(msg = "出错了~", errorType = "error") {
         this.setData({
-          errorMsg: msg,
+          errorMsg: msg || '出错了~',
           errorType: errorType,
           errorShow: true
         })
       },
-      showToast(msg="出错了~"){
+      showToast(msg = "出错了~") {
         wx.showToast({
-          title: msg,
-          icon:'none'
+          title: msg || '出错了~',
+          icon: 'none'
         })
       }
     })
