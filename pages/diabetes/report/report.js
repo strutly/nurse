@@ -45,8 +45,9 @@ CustomPage({
     let take = true;
     report.medication[i].medics.forEach((m,index)=>{
       if(index==j) m.complete = flag;
-      if(!m.eat) take = false;
+      if(!m.complete) take = false;
     })
+
     report.medication[i].complete = take;
     that.setData({
       report: report
