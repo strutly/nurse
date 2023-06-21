@@ -2,12 +2,12 @@
 <view class="margin text-gray" wx:if="{{statistic.undones.length>0}}">未完成:
   <block wx:for="{{statistic.undones}}" wx:key="index">
     <text class="margin-right-sm" bindtap="showDes" data-index="{{index}}">{{item.name}} </text>
-    <view class="text-black des margin bg-gray padding" wx:if="{{showIndex==index}}">
-      <view wx:for="{{item.des}}" wx:for-item="des" wx:key="index">{{des}}</view>
-    </view>
+    <cover-view class="text-black des margin bg-gray padding" wx:if="{{showIndex==index}}">
+      <cover-view wx:for="{{item.des}}" wx:for-item="des" wx:key="index">{{des}}</cover-view>
+    </cover-view>
   </block>
 </view>
-<canvas canvas-id="myChart" disable-scroll="true" class="canvas margin-top-xl padding-bottom"></canvas>
+<canvas canvas-id="myChart" disable-scroll="true" z-index="10"  class="canvas margin-top-xl padding-bottom"></canvas>
 <view class="text-xl text-center">工作量统计</view>
 
 <view class="flex padding-lr-lg margin-lg text-center text-lg">

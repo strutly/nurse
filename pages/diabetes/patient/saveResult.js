@@ -8,6 +8,7 @@ CustomPage({
   data: {
     tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
     typeArr: ['2型', '1型'],
+    sourceArr:['手工填写','艾糖CGM','瞬感CGM'],
     emotionArr: ['良好', '精神紧张', '焦虑', '抑郁'],
     medicationArr: ['按时按量', '未按时用药'],
     dietArr: ['清淡', '油腻'],
@@ -97,6 +98,9 @@ CustomPage({
       that.showTips(error.msg)
       return false;
     }
+    if(data.sourceType>0 && (!data.sourceStartTime||!data.sourceEndTime)){
+      return that.showTips("请选择血糖采集日期范围");
+    }
 
 
     that.setData({
@@ -114,8 +118,9 @@ CustomPage({
       }
     })
     patientData.scanData = app.globalData.scanData;
-
+    
     console.log(patientData);
+    return ;
     let res = await Api.addPatient(patientData);
     console.log(res);
     if (res.code == 0) {

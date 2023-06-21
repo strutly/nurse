@@ -11,10 +11,10 @@ CustomPage({
     that = this;
     that.getList(1,'')
   },
-  async getList(pageNo,phone){
+  async getList(pageNo,name){
     let res = await Api.pagePatient({
       pageNum:pageNo,
-      phone:phone,
+      name:name,
       diseaseId:that.data.options.diseaseId
     });
     let patients = that.data.patients||[];
@@ -22,7 +22,7 @@ CustomPage({
       patients:patients.concat(res.data.content),
       endline:res.data.last,
       pageNo: pageNo,
-      phone:phone
+      name:name
     })
   },
   touchstart(e) {    
@@ -54,15 +54,15 @@ CustomPage({
   },
   onReachBottom() {
     let endline = that.data.endline;
-    let phone = that.data.phone;
+    let name = that.data.name;
     if(!endline){
       let pageNo = that.data.pageNo + 1;
-      that.getList(pageNo,phone);
+      that.getList(pageNo,name);
     }
   },
   submit(e){
     console.log(e);
-    let name = e.detail.value.name;
+    let name = e.detail.value;
     that.search(name);
     
   },

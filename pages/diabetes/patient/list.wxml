@@ -3,7 +3,7 @@
 <view class="cu-bar bg-white search ">
   <view class="search-form round">
     <text class="cuIcon-search"></text>
-    <input type="text" placeholder="患者手机号" confirm-type="search"></input>
+    <input bindconfirm="submit" type="text" placeholder="患者手机号" confirm-type="search"></input>
   </view>
 </view>
 

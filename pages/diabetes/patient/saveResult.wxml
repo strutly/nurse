@@ -40,6 +40,31 @@
     </picker>
   </view>
   <view class="cu-form-group">
+    <view class="title">血糖数据采集方式</view>
+    <picker mode="selector" bindchange="pickerChange" name="sourceType" data-name="sourceType" value="{{sourceType||0}}" range="{{sourceArr}}">
+      <view class="picker">
+        {{sourceArr[sourceType||0]}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:if="{{sourceType>0}}">
+    <view class="title">采集开始日期</view>
+    <picker mode="date" bindchange="pickerChange" name="sourceStartTime" data-name="sourceStartTime" value="">
+      <view class="picker">
+        {{sourceStartTime||'请选择数据采集开始日期'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group" wx:if="{{sourceType>0}}">
+    <view class="title">采集截至日期</view>
+    <picker mode="date" bindchange="pickerChange" name="sourceEndTime" data-name="sourceEndTime" value="">
+      <view class="picker">
+        {{sourceEndTime||'请选择数据采集截止日期'}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="cu-form-group solid-bottom">
     <view class="title">病程</view>
     <input placeholder="请输入病程" name="assess.time" type="digit" class="text-right"></input>
     <view class="text-gray text-xs margin-left-xs padding-top-xs">年</view>
