@@ -5,6 +5,7 @@ import CustomPage from '../../../CustomPage';
 import ocr from '../../../config/ocr';
 CustomPage({
   data: {
+    editData:{},
     pics: [],
     scanImages: [],
     diseaseId:1,
@@ -137,7 +138,7 @@ CustomPage({
     console.log(e);
     let index = e.currentTarget.dataset.index;
     let reviews = that.data.reviews;
-    reviews = reviews.splice(0, index);
+    reviews = reviews.splice(index, 1);
     that.setData({
       reviews: reviews
     })
@@ -186,6 +187,63 @@ CustomPage({
     allline[type] = !allline[type];
     that.setData({
       allline:allline
+    })
+  },
+  edit(e){
+    console.log(e);
+    let dataset = e.currentTarget.dataset;
+    let patientData = that.data.patientData;
+    dataset['data'] = patientData[dataset['name']];
+    that.setData({
+      modaledit:true,
+      editData:dataset
+    })
+  },
+  addEdit(){
+    let editData = that.data.editData;
+    editData.data.push("");
+    that.setData({
+      editData:editData
+    })
+  },
+  editRemove(e){
+    console.log(e)
+    let index = e.currentTarget.dataset.index;
+    let editData = that.data.editData;
+    editData.data.splice(index, 1);
+    that.setData({
+      editData: editData
+    })
+  },
+  editEnd(e){
+    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    let type = e.currentTarget.dataset.type;
+    let editData = that.data.editData;
+    if(type=='list'){
+      editData['data'][index] = e.detail.value;
+    }else{
+      editData['data'] = e.detail.value;
+    }
+    that.setData({
+      editData:editData
+    })
+  },
+  save(e){
+    console.log(e);
+    let name = e.currentTarget.dataset.name;
+    let editData = that.data.editData;
+    let data = editData.data;
+    let type = e.currentTarget.dataset.type;
+    if(type=='list'){
+      data = data.filter(item=>item.trim().length>0);
+    }    
+    console.log(data);
+    let patientData = that.data.patientData;
+    patientData[name] = data;
+    that.setData({
+      modaledit:false,
+      patientData:patientData
     })
   }
 })

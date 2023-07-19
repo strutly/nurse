@@ -1,5 +1,38 @@
 <topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
 <include src="/pages/template/scanModal"></include>
+<template name="edit">
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>编辑{{title}}
+    </view>
+    <view class="action text-blue" wx:if="{{type=='list'}}">
+      <text class="cuIcon-add text-blue" bindtap="addEdit"></text>
+    </view>
+  </view>
+  
+  <view class="flex padding align-center bg-white solid-bottom" wx:for="{{data}}" wx:key="index" wx:if="{{type=='list'}}">
+    <textarea bindblur="editEnd" data-type="{{type}}" data-index="{{index}}" class="flex-sub solids-right solid-left" auto-height="true" maxlength="-1" value="{{item}}"></textarea>
+    <text class="margin-left cuIcon-delete text-red" bindtap="editRemove" data-index="{{index}}"></text>
+  </view>
+
+  <view class="flex padding bg-white" wx:if="{{type=='text'}}">
+    <textarea bindblur="editEnd" data-type="{{type}}" class="bg-gray flex-sub solid-left" auto-height="true" maxlength="-1" value="{{data}}"></textarea>
+  </view>
+
+  <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
+    <button style="width: 40%;" class="cu-btn bg-grey padding-tb-xl round" bindtap="modalStatus" data-name="edit">取消</button>
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" bindtap="save" data-type="{{type}}" data-name="{{name}}">保存</button>
+  </view>
+</template>
+
+
+<view class="mask" wx:if="{{modaledit}}">
+
+  <template is="edit" data="{{...editData}}"></template>
+
+</view>
+
 <form bindsubmit="submit">
   <input hidden name="type" value="{{options.type}}"></input>
   <picker hidden name="pics" value="{{pics}}"></picker>
@@ -71,6 +104,9 @@
     <view class="action">
       <text class="cuIcon-title text-blue"></text>入院诊断
     </view>
+    <view class="action" bindtap="edit" data-type="list" data-name="admissionDiagnosis" data-title="入院诊断">
+      <text class="cuIcon-edit text-blue"></text>
+    </view>
   </view>
   <view class="bg-white padding">
     <text class="line2 {{allline['admissionDiagnosis']?'line-all':''}}">
@@ -88,6 +124,9 @@
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>出院诊断
+    </view>
+    <view class="action" bindtap="edit" data-type="list" data-name="dischargeDiagnosis" data-title="出院诊断">
+      <text class="cuIcon-edit text-blue"></text>
     </view>
   </view>
 
@@ -108,6 +147,9 @@
     <view class="action">
       <text class="cuIcon-title text-blue"></text>入院情况
     </view>
+    <view class="action" bindtap="edit" data-type="text" data-name="admissionInfo" data-title="入院情况">
+      <text class="cuIcon-edit text-blue"></text>
+    </view>
   </view>
   <view class="bg-white padding">
     <text class="line2 {{allline['admissionInfo']?'line-all':''}}">{{patientData['admissionInfo']}}</text>
@@ -121,10 +163,13 @@
     <view class="action">
       <text class="cuIcon-title text-blue"></text>既往史
     </view>
+    <view class="action" bindtap="edit" data-type="text" data-name="anamnesis" data-title="既往史">
+      <text class="cuIcon-edit text-blue"></text>
+    </view>
   </view>
 
   <view class="bg-white padding">
-    <text class="line2 {{allline['anamnesis']?'line-all':''}}">{{patientData['anamnesis']}}</text>
+    <text user-select="false"  class="line2 {{allline['anamnesis']?'line-all':''}}">{{patientData['anamnesis']}}</text>
     <view class="flex align-center" bindtap="showAll" data-type="anamnesis">
       <view class="flex-sub dashed-bottom"></view>
       <view class="margin-lr text-blue">{{allline['anamnesis']?'收起':'展开'}}<text class="text-blue {{allline['anamnesis']?'cuIcon-triangleupfill':'cuIcon-triangledownfill'}}"></text></view>
@@ -134,6 +179,9 @@
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>治疗经过
+    </view>
+    <view class="action" bindtap="edit" data-type="text" data-name="treatment" data-title="治疗经过">
+      <text class="cuIcon-edit text-blue"></text>
     </view>
   </view>
 
@@ -151,6 +199,9 @@
     <view class="action">
       <text class="cuIcon-title text-blue"></text>出院情况
     </view>
+    <view class="action" bindtap="edit" data-type="text" data-name="dischargeInfo" data-title="出院情况">
+      <text class="cuIcon-edit text-blue"></text>
+    </view>
   </view>
 
   <view class="bg-white padding">
@@ -162,14 +213,13 @@
     </view>
   </view>
 
-
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>饮食事项
     </view>
   </view>
 
-  <view class="cu-form-group" wx:for="{{patientData['diet']}}">
+  <view class="cu-form-group" wx:for="{{patientData['diet']}}" wx:key="index">
     <view class="title">{{item}}</view>
     <checkbox class='round checked main' checked="true" disabled="true"></checkbox>
     <input hidden name="plan.lowSalt" value="{{item}}" wx:if="{{item=='低盐'}}"></input>
@@ -205,6 +255,9 @@
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>生活方式及出院医嘱
+    </view>
+    <view class="action" bindtap="edit" data-type="list" data-name="advice" data-title="生活方式及出院医嘱">
+      <text class="cuIcon-edit text-blue"></text>
     </view>
   </view>
 

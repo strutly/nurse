@@ -245,7 +245,7 @@
   <view class="cu-dialog bg-white">
     <view class="text-center text-xxl margin-tb-xl">患者档案已建立</view>
     <view class="padding-lr-xl margin-lr-xl text-lg">{{tips}}</view>
-    <view class="text-center margin-top">
+    <view class="text-center margin-top" wx:if="{{codeUrl}}">
       <image src="{{codeUrl||'/images/fail.png'}}" mode="aspectFill" bindtap="updateCode" style="width: 500rpx;height: 500rpx;"></image>
     </view>
     <view class="padding margin-top-xl  text-center safe-bottom">

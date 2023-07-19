@@ -120,14 +120,13 @@ CustomPage({
     patientData.scanData = app.globalData.scanData;
     
     console.log(patientData);
-    return ;
     let res = await Api.addPatient(patientData);
     console.log(res);
     if (res.code == 0) {
       that.setData({
         codeUrl: res.data.url,
         patientId: res.data.id,
-        tips: res.data.url ? '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息' : '二维码生成失败,点击重新生成二维码',
+        tips: res.data.url ? '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息' : '该患者进入常规组',
         show: true
       })
     } else {
