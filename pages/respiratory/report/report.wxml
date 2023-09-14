@@ -7,12 +7,12 @@
     血常规
   </view>
   <view class="action">
-    {{reportForm.content.cbc.length}}/3
+    {{reportForm.cbc.length}}/3
   </view>
 </view>
 <view class="cu-form-group">
   <view class="grid col-3 grid-square flex-sub">
-    <view class="bg-image" wx:for="{{reportForm.content.cbc}}" wx:for-item="image">
+    <view class="bg-image" wx:for="{{reportForm.cbc}}" wx:for-item="image">
       <image src="{{image}}?imageView2/2/w/200" mode="aspectFill" bindtap="viewImage" data-url="{{image}}"></image>
     </view>
   </view>
@@ -23,12 +23,12 @@
     肝肾功能
   </view>
   <view class="action">
-    {{reportForm.content.hrs.length}}/3
+    {{reportForm.hrs.length}}/3
   </view>
 </view>
 <view class="cu-form-group">
   <view class="grid col-3 grid-square flex-sub">
-    <view class="bg-image" wx:for="{{reportForm.content.hrs}}" wx:for-item="image">
+    <view class="bg-image" wx:for="{{reportForm.hrs}}" wx:for-item="image">
       <image src="{{image}}?imageView2/2/w/200" mode="aspectFill" bindtap="viewImage" data-url="{{image}}"></image>
     </view>
   </view>
@@ -39,12 +39,12 @@
     血糖谱
   </view>
   <view class="action">
-    {{reportForm.content.glu.length}}/3
+    {{reportForm.glu.length}}/3
   </view>
 </view>
 <view class="cu-form-group">
   <view class="grid col-3 grid-square flex-sub">
-    <view class="bg-image" wx:for="{{reportForm.content.glu}}" wx:for-item="image">
+    <view class="bg-image" wx:for="{{reportForm.glu}}" wx:for-item="image">
       <image src="{{image}}?imageView2/2/w/200" mode="aspectFill" bindtap="viewImage" data-url="{{image}}"></image>
     </view>
   </view>
@@ -55,12 +55,12 @@
     指氧
   </view>
   <view class="action">
-    {{reportForm.content.spo2.length}}/3
+    {{reportForm.spo2.length}}/3
   </view>
 </view>
 <view class="cu-form-group">
   <view class="grid col-3 grid-square flex-sub">
-    <view class="bg-image" wx:for="{{reportForm.content.spo2}}" wx:for-item="image">
+    <view class="bg-image" wx:for="{{reportForm.spo2}}" wx:for-item="image">
       <image src="{{image}}?imageView2/2/w/200" mode="aspectFill" bindtap="viewImage" data-url="{{image}}"></image>
     </view>
   </view>
@@ -71,12 +71,12 @@
     肺功能
   </view>
   <view class="action">
-    {{reportForm.content.pft.length}}/3
+    {{reportForm.pft.length}}/3
   </view>
 </view>
 <view class="cu-form-group padding-bottom-xl">
   <view class="grid col-3 grid-square flex-sub">
-    <view class="bg-image" wx:for="{{reportForm.content.pft}}" wx:for-item="image">
+    <view class="bg-image" wx:for="{{reportForm.pft}}" wx:for-item="image">
       <image src="{{image}}?imageView2/2/w/200" mode="aspectFill" bindtap="viewImage" data-url="{{image}}"></image>
     </view>
   </view>

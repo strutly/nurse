@@ -87,10 +87,9 @@ CustomPage({
     console.log(options)
     let res = await Api.detailReport(options);
     console.log(res);
-    let treats = JSON.parse(res.data.report.content.treats || '[]');
+    
     that.setData({
       reportForm: res.data.report,
-      treats: treats,
       patient: res.data.patient
     })
     that.initValidate();
