@@ -15,6 +15,7 @@ CustomPage({
     let res = await Api.pagePatient({
       pageNum:pageNo,
       name:name,
+      pageSize:15,
       diseaseId:that.data.options.diseaseId
     });
     let patients = that.data.patients||[];

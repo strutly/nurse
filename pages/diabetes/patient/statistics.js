@@ -37,7 +37,7 @@ CustomPage({
       that.setData({
         chartLine:false
       })
-      return;
+      return that.showToast("暂无此类数据");
     }
     try {
       var res = wx.getSystemInfoSync();
@@ -55,7 +55,6 @@ CustomPage({
         name: '餐前血糖',
         data: lineData.values,
         format: function (val, name) {
-          console.log(val)
           return val + '';
         }
       }],
@@ -70,7 +69,6 @@ CustomPage({
       },
       width: windowWidth,
       height: 300,
-      dataLabel: false,
       dataPointShape: true,
       extra: {
         lineStyle: 'curve'
@@ -90,9 +88,14 @@ CustomPage({
     if (index == tabIndex) return;
     let statisticsData = that.data.statisticsData;
     let lineData = statisticsData[type];
+
+    let showChartLine = !lineData.days || lineData.days.length<=0;
     that.setData({
+      chartLine:!showChartLine,
       tabIndex:index
-    });
+    })
+    if(showChartLine) return that.showToast("暂无此类数据");      
+    
     let nameArr = ['餐前血糖','餐后血糖','收缩压','舒张压'];
     lineChart.updateData({
       categories: lineData.days,

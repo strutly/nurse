@@ -12,8 +12,15 @@
       "list": [
         {
           "name": "",
+          "pathName": "pages/diabetes/patient/statistics",
+          "query": "id=8246",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
           "pathName": "pages/notice/detail",
-          "query": "type=1990",
+          "query": "id=779",
           "launchMode": "default",
           "scene": null
         },

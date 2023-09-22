@@ -35,14 +35,14 @@
     <view class="text-black margin-top-sm text-sm">收缩压</view>
   </view>
 </view>
-<block wx:if="{{chartLine}}">
+<block>
   <veiw class="flex solids-top padding">
     <view class="cu-tag {{tabIndex==0?'bg-main':''}}" bindtap="tabChange" data-index="0" data-type="sugarBeforLine">餐前血糖</view>
     <view class="cu-tag {{tabIndex==1?'bg-main':''}} " bindtap="tabChange" data-index="1" data-type="sugarAfterLine">餐后血糖</view>
     <view class="cu-tag {{tabIndex==2?'bg-main':''}} " bindtap="tabChange" data-index="2" data-type="diastolicPressureLine">收缩压</view>
     <view class="cu-tag {{tabIndex==3?'bg-main':''}} " bindtap="tabChange" data-index="3" data-type="systolicPressureLine">舒张压</view>
   </veiw>
-  <canvas canvas-id="myChart" disable-scroll="true" class="canvas margin-top-xl padding-bottom"></canvas>
+  <canvas canvas-id="myChart" disable-scroll="true" class="canvas margin-top-xl padding-bottom" wx:if="{{chartLine}}"></canvas>
 </block>
 
 
