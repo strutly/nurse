@@ -73,7 +73,8 @@ CustomPage({
     if (!scanImages || scanImages.length == 0) return that.showTips("请先添加病历图片");
     let res = await ocr.getOcrResult({
       imgs:scanImages,
-      type:e.currentTarget.dataset.type
+      type:e.currentTarget.dataset.type,
+      d:'diabetes'
     });
     console.log(res);
     app.globalData.scanData = res.scanData;
@@ -138,7 +139,7 @@ CustomPage({
     console.log(e);
     let index = e.currentTarget.dataset.index;
     let reviews = that.data.reviews;
-    reviews = reviews.splice(index, 1);
+    reviews.splice(index, 1);
     that.setData({
       reviews: reviews
     })

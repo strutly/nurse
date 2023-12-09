@@ -1,7 +1,6 @@
 var that;
 import Api from '../../../config/api';
 import CustomPage from '../../../CustomPage';
-import WxValidate from '../../../utils/WxValidate';
 CustomPage({
   data: {
     tab: 0,
@@ -138,6 +137,13 @@ CustomPage({
     report[type][index].num = e.detail.value;
     that.setData({
       report: report
+    })
+  },
+  adverseChange(e){
+    let report = that.data.report;
+    report.adverse = e.detail.value;
+    that.setData({
+      report:report
     })
   },
   async submit(e) {

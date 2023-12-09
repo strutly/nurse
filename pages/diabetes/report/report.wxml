@@ -175,10 +175,16 @@
           </view>
         </view>
       </view>
-
+      
 
     </view>
   </view>
+  <view class="margin bg-white">
+        <view class="cu-form-group align-start">
+            <view class="title">不良事件</view>
+            <textarea maxlength="-1" name="adverse" bindblur="adverseChange" placeholder="不良事件" value="{{report.adverse}}"></textarea>
+        </view>
+    </view>
   <view class="footer-btns"></view>
   <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
     <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" bindtap="call" data-phone="{{phone}}">联系患者</button>

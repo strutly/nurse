@@ -229,7 +229,7 @@
 
   <view class="cu-form-group">
     <view class="title">每日热量</view>
-    <input placeholder="请输入每日热量" data-name="quantity" bindinput="inputChange" type="text" class="text-right" value="{{patientData['cal']}}"></input>
+    <input placeholder="请输入每日热量" data-name="quantity" name="quantity" bindinput="inputChange" type="text" class="text-right" value="{{patientData['cal']}}"></input>
     <view class="margin-left-xs">千卡</view>
   </view>
 

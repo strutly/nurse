@@ -6,7 +6,7 @@ import CustomPage from '../../../CustomPage';
 import WxValidate from "../../../utils/WxValidate";
 CustomPage({
   data: {
-    tips: '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
+    tips: '该患者进入实验组,请患者使用微信扫描下方二维码，关注公众号并绑定个人信息',
     typeArr: ['2型', '1型'],
     sourceArr:['手工填写','艾糖CGM','瞬感CGM'],
     emotionArr: ['良好', '精神紧张', '焦虑', '抑郁'],
@@ -90,10 +90,8 @@ CustomPage({
   },
   async submit(e) {
     console.log(e);
-    
     let data = e.detail.value;
     if (!that.WxValidate.checkForm(data)) {
-      console.log(that.WxValidate)
       let error = that.WxValidate.errorList[0]
       that.showTips(error.msg)
       return false;
@@ -101,15 +99,10 @@ CustomPage({
     if(data.sourceType>0 && (!data.sourceStartTime||!data.sourceEndTime)){
       return that.showTips("请选择血糖采集日期范围");
     }
-
-
-    that.setData({
-      disabled: true
-    })
+    
     let patientData = app.globalData.patientData;
     patientData = Object.assign(patientData, data);
     Object.keys(patientData).map(key => {
-      console.log(key)
       if (key.indexOf(".") > -1) {
         let s = key.split(".");
         if (!patientData[s[0]]) patientData[s[0]] = {};
@@ -118,20 +111,28 @@ CustomPage({
       }
     })
     patientData.scanData = app.globalData.scanData;
-    
-    console.log(patientData);
+    that.setData({
+      disabled: true
+    })
+    wx.showLoading({
+      title: '提交中~',
+    })
     let res = await Api.addPatient(patientData);
     console.log(res);
     if (res.code == 0) {
       that.setData({
         codeUrl: res.data.url,
         patientId: res.data.id,
-        tips: res.data.url ? '请患者使用微信扫描下方二维码，关注公众号并绑定个人信息' : '该患者进入常规组',
+        tips: res.data.url ? '该患者进入实验组,请患者使用微信扫描下方二维码，关注公众号并绑定个人信息' : '该患者进入常规组',
         show: true
       })
     } else {
+      that.setData({
+        disabled: false
+      })
       that.showTips(res.msg);
     }
+    wx.hideLoading();
   },
   async updateCode() {
     let res = await Api.codePatient({ id: that.data.patientId });
