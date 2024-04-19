@@ -262,7 +262,7 @@
     <text class="cuIcon-refresh text-gray margin-right-xs"></text>刷新
   </view>
 </view>
-<view class="text-center bg-white padding">
+<view class="text-center bg-white padding" wx:if="{{info.groupId==null || info.groupId==2}}">
   <image src="{{qUrl||'/images/fail.png'}}" style="width: 300rpx;height: 300rpx;"></image>
 </view>
 
