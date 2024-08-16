@@ -22,7 +22,7 @@
       <view>{{item.age}}</view>
     </view>
     <view class="move">
-      <view class="bg-grey" bindtap="toUrl" data-url="">编辑</view>
+      <view class="bg-grey" bindtap="toUrl" data-url="/pages/diabetes/patient/edit?id={{item.id}}">编辑</view>
       <view class="bg-red" bindtap="delete" data-id="{{item.id}}">删除</view>
     </view>
   </view>

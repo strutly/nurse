@@ -15,7 +15,7 @@
     </view>
   </view>
 </view>
-<view class="cu-list menu">
+<view class="cu-list menu safe-btns">
   <view class="cu-item" wx:for="{{datas}}" wx:key="index" bindtap="toUrl" data-url="/pages/{{diseaseId==1?'diabetes':'respiratory'}}/patient/detail?id={{item.patient.id}}">
     <view class="content" >
       <text class="cu-avatar round margin-right bg-gray text-white">{{item.first}}</text>

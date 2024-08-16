@@ -1,31 +1,42 @@
+<topTips errorShow="{{errorShow}}" errorMsg="{{errorMsg}}" errorType="{{errorType}}"></topTips>
+<template name="edit">
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>编辑{{title}}
+    </view>
+    <view class="action text-blue" wx:if="{{type=='list'}}">
+      <text class="cuIcon-add text-blue" bindtap="addEdit"></text>
+    </view>
+  </view>
+
+  <view class="flex padding align-center bg-white solid-bottom" wx:for="{{data}}" wx:key="index" wx:if="{{type=='list'}}">
+    <textarea bindblur="editEnd" data-type="{{type}}" data-index="{{index}}" class="flex-sub solids-right solid-left" auto-height="true" maxlength="-1" value="{{item}}"></textarea>
+    <text class="margin-left cuIcon-delete text-red" bindtap="editRemove" data-index="{{index}}"></text>
+  </view>
+
+  <view class="flex padding bg-white" wx:if="{{type=='text'}}">
+    <textarea bindblur="editEnd" data-type="{{type}}" class="bg-gray flex-sub solid-left" auto-height="true" maxlength="-1" value="{{data}}"></textarea>
+  </view>
+
+  <view class="padding margin-top-xl flex justify-between align-center bg-white footer">
+    <button style="width: 40%;" class="cu-btn bg-grey padding-tb-xl round" bindtap="modalStatus" data-name="edit">取消</button>
+    <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl padding-tb-xl round" bindtap="save" data-type="{{type}}" data-name="{{name}}">保存</button>
+  </view>
+</template>
+
+
+<view class="mask" wx:if="{{modaledit}}">
+
+  <template is="edit" data="{{...editData}}"></template>
+
+</view>
+
 <view class="cu-bar bg-gray">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>基本信息
   </view>
 </view>
-
-
-<view class="cu-form-group">
-  <view class="title">姓名</view>
-  <input placeholder="请输入姓名" name="name" class="text-right" data-name="name" bindinput="inputChange" value="{{info.name}}"></input>
-</view>
-<view class="cu-form-group">
-  <view class="title">手机号</view>
-  <input placeholder="请输入手机号" name="phone" type="number" class="text-right" value=""></input>
-</view>
-<view class="cu-form-group">
-  <view class="title">身高</view>
-  <input placeholder="请输入身高" name="height" type="number" class="text-right" value=""></input>
-  <text class="text-gray text-xs padding-top-xs margin-left-xs">CM</text>
-</view>
-
-<view class="cu-form-group">
-  <view class="title">体重</view>
-  <input placeholder="请输入体重" type="digit" name="weight" class="text-right" value=""></input>
-  <text class="text-gray text-xs padding-top-xs margin-left-xs">KG</text>
-</view>
-
-
 <view class="cu-list menu">
   <view class="cu-item">
     <view class="content">姓名</view>
@@ -73,6 +84,9 @@
   <view class="action">
     <text class="cuIcon-title text-blue"></text>入院诊断
   </view>
+  <view class="action" bindtap="edit" data-type="list" data-name="admissionDiagnosis" data-title="入院诊断">
+    <text class="cuIcon-edit text-blue"></text>
+  </view>
 </view>
 <view class="bg-white padding">
   <text class="line2 {{allline['admissionDiagnosis']?'line-all':''}}">
@@ -92,6 +106,9 @@
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>出院诊断
+    </view>
+    <view class="action" bindtap="edit" data-type="list" data-name="dischargeDiagnosis" data-title="出院诊断">
+      <text class="cuIcon-edit text-blue"></text>
     </view>
   </view>
 
@@ -114,6 +131,9 @@
   <view class="action">
     <text class="cuIcon-title text-blue"></text>入院情况
   </view>
+  <view class="action" bindtap="edit" data-type="text" data-name="admissionInfo" data-title="入院情况">
+    <text class="cuIcon-edit text-blue"></text>
+  </view>
 </view>
 <view class="bg-white padding">
   <text class="line2 {{allline['admissionInfo']?'line-all':''}}">{{info.scanData['admissionInfo']}}</text>
@@ -126,6 +146,9 @@
 <view class="cu-bar bg-gray">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>既往史
+  </view>
+  <view class="action" bindtap="edit" data-type="text" data-name="anamnesis" data-title="既往史">
+    <text class="cuIcon-edit text-blue"></text>
   </view>
 </view>
 
@@ -140,6 +163,9 @@
 <view class="cu-bar bg-gray">
   <view class="action">
     <text class="cuIcon-title text-blue"></text>治疗经过
+  </view>
+  <view class="action" bindtap="edit" data-type="text" data-name="treatment" data-title="治疗经过">
+    <text class="cuIcon-edit text-blue"></text>
   </view>
 </view>
 
@@ -156,6 +182,9 @@
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>出院情况
+    </view>
+    <view class="action" bindtap="edit" data-type="text" data-name="dischargeInfo" data-title="出院情况">
+      <text class="cuIcon-edit text-blue"></text>
     </view>
   </view>
 
@@ -227,6 +256,9 @@
     <view class="action">
       <text class="cuIcon-title text-blue"></text>生活方式及出院医嘱
     </view>
+    <view class="action" bindtap="edit" data-type="list" data-name="advice" data-title="生活方式及出院医嘱">
+      <text class="cuIcon-edit text-blue"></text>
+    </view>
   </view>
   <view class="bg-white padding">
     <text class="line2 {{allline['advice']?'line-all':''}}">
@@ -260,34 +292,57 @@
     </view>
   </view>
 </block>
-<block wx:if="{{info.reviews.length>0}}">
-  <view class=" footer-btns">
-    <view class="cu-bar bg-gray">
-      <view class="action">
-        <text class="cuIcon-title text-blue"></text>复查项目
-      </view>
+
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>数据采集
     </view>
-    <view class="cu-list menu">
-      <view class="cu-item" wx:for="{{info.reviews}}" wx:key="index">
-        <view class="content">{{item.title}}</view>
-        <view class="action">{{item.time}}</view>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">血糖数据采集方式</view>
+    <picker mode="selector" bindchange="pickerChange" name="sourceType" data-name="sourceType" value="{{info.sourceType||0}}" range="{{sourceArr}}">
+      <view class="picker">
+        {{sourceArr[info.sourceType||0]}}
       </view>
+    </picker>
+  </view>
+  <block wx:if="{{info.sourceType>0}}">
+  <view class="cu-form-group">
+    <view class="title">采集开始日期</view>
+    <picker mode="date" bindchange="pickerChange" name="sourceStartTime" data-name="sourceStartTime" value="">
+      <view class="picker">
+        {{info.sourceStartTime||'请选择数据采集开始日期'}}
+      </view>
+    </picker>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">采集截至日期</view>
+    <picker mode="date" bindchange="pickerChange" name="sourceEndTime" data-name="sourceEndTime" value="">
+      <view class="picker">
+        {{info.sourceEndTime||'请选择数据采集截止日期'}}
+      </view>
+    </picker>
+  </view>
+</block>
+<block wx:if="{{info.reviews.length>0}}">
+
+  <view class="cu-bar bg-gray">
+    <view class="action">
+      <text class="cuIcon-title text-blue"></text>复查项目
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item" wx:for="{{info.reviews}}" wx:key="index">
+      <view class="content">{{item.title}}</view>
+      <view class="action">{{item.time}}</view>
     </view>
   </view>
 </block>
+<view class=" footer-btns"></view>
 
-
-
-<view class="cu-bar bg-gray">
-  <view class="action">
-    <text class="cuIcon-title text-blue"></text>绑定二维码
-  </view>
-  <view class="action" bindtap="refresh">
-    <text class="cuIcon-refresh text-gray margin-right-xs"></text>刷新
-  </view>
-</view>
-<view class="text-center bg-white padding">
-  <image src="{{qUrl||'/images/fail.png'}}" style="width: 300rpx;height: 300rpx;"></image>
+<view class="padding margin-top-xl  text-center footer bg-white">
+  <button style="width: 40%;" class="cu-btn bg-main padding-tb-xl round" bind:tap="submit" disabled="{{disabled}}">保存修改</button>
 </view>
 
 <view class="safe-bottom"></view>
