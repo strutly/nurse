@@ -293,7 +293,14 @@
   </view>
 </block>
 
-
+<view class="cu-form-group">
+    <view class="title">糖尿病类型</view>
+    <picker mode="selector" bindchange="assessChange" name="type" data-name="type" value="{{info.assess.type||0}}" range="{{typeArr}}">
+      <view class="picker">
+        {{typeArr[info.assess.type||0]}}
+      </view>
+    </picker>
+  </view>
   <view class="cu-bar bg-gray">
     <view class="action">
       <text class="cuIcon-title text-blue"></text>数据采集

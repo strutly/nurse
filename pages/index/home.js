@@ -8,7 +8,7 @@ CustomPage({
   data: {
     domain: Api.domain,
     checkIndex: 0,
-    typeArr: ['1型', '2型', '未知'],
+    typeArr: ['2型', '1型','未知'],
     tabs: [{ title: '今日随访', num: 0 }, { title: '患者动态', num: 3 }],
     tabIndex: 0,
     show: false,

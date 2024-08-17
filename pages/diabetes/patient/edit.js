@@ -4,6 +4,7 @@ import CustomPage from '../../../CustomPage';
 CustomPage({
   data: {
     info:{},
+    typeArr: ['2型', '1型'],
     sourceArr:['手工填写','艾糖CGM','瞬感CGM'],
     allline:{},
   },
@@ -39,8 +40,16 @@ CustomPage({
     info[name] = e.detail.value;
     that.setData({
       info:info
-    })
-    
+    })   
+  },
+  assessChange(e){
+    console.log(e);
+    let name = e.currentTarget.dataset.name;
+    let info = that.data.info;
+    info.assess[name] = e.detail.value;
+    that.setData({
+      info:info
+    })   
   },
   edit(e){
     console.log(e);
