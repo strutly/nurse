@@ -11,20 +11,24 @@ CustomPage({
     that = this;
     that.getList(1,'')
   },
-  async getList(pageNo,name){
-    let res = await Api.pagePatient({
+  getList(pageNo,name){
+    Api.pagePatient({
       pageNum:pageNo,
       name:name,
       pageSize:15,
       diseaseId:that.data.options.diseaseId
-    });
-    let patients = that.data.patients||[];
-    that.setData({
-      patients:patients.concat(res.data.content),
-      endline:res.data.last,
-      pageNo: pageNo,
-      name:name
+    }).then(res=>{
+      let patients = that.data.patients||[];
+      that.setData({
+        patients:patients.concat(res.data.content),
+        endline:res.data.last,
+        pageNo: pageNo,
+        name:name
+      })
+    },err=>{
+      that.showTips(err.msg);
     })
+    
   },
   touchstart(e) {    
     that.setData({
@@ -64,8 +68,7 @@ CustomPage({
   submit(e){
     console.log(e);
     let name = e.detail.value;
-    that.search(name);
-    
+    that.search(name);    
   },
   search(name){
     that.setData({
@@ -74,17 +77,15 @@ CustomPage({
     })
     that.getList(1,name);
   },
-  async delete(e){
+  delete(e){
     console.log(e)
     let id = e.currentTarget.dataset.id;
     let patients = that.data.patients;
     wx.showModal({
       title:"确认删除此患者?",
-      success:async function(res){
+      success:function(res){
         if (res.confirm) {
-          console.log(res);
-          let res = await Api.deletePatient(e.currentTarget.dataset);
-          if(res.code==0){
+          Api.deletePatient(e.currentTarget.dataset).then(res=>{
             patients = patients.filter(p=>{
               return p.id != id;
             })
@@ -93,13 +94,40 @@ CustomPage({
               patients:patients
             })
             that.showTips("删除成功","success");
-          }else{
-            that.showTips(res.msg);
-          }
-          
-          
+          },err=>{
+            that.showTips(err.msg);
+          })
         }
       }
+    })
+  },
+  unhook(e){
+    let id = e.currentTarget.dataset.id;
+    that.setData({
+      modalunhook:true,
+      unhookId:id
+    })
+  },
+  submitUnhook(e){
+    let data = e.detail.value;
+    if(!data.unhookReason){
+      return that.showTips("请输入脱落原因再提交")
+    }
+    let patients = that.data.patients;
+    Api.patientUnhook(data).then(res=>{      
+      console.log(res);
+      that.showTips("操作成功","success");
+      let index = patients.findIndex(p=>p.id==data.id);
+      console.log(index);
+      patients.splice(index,1);
+      that.setData({
+        patients:patients,
+        modalunhook:false,
+        unhookId:'',
+        moveIndex:-1
+      })
+    },err=>{
+      that.showTips(err.msg);
     })
   }
 })

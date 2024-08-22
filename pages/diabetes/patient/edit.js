@@ -55,7 +55,8 @@ CustomPage({
     console.log(e);
     let dataset = e.currentTarget.dataset;
     let patientData = that.data.info;
-    dataset['data'] = patientData.scanData[dataset['name']];
+    let data = dataset.type=='list'?(patientData[dataset['name']]||[]):patientData[dataset['name']]
+    dataset['data'] = data;
     that.setData({
       modaledit:true,
       editData:dataset

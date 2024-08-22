@@ -12,7 +12,7 @@
   </view>
   
   <view class="flex padding align-center bg-white solid-bottom" wx:for="{{data}}" wx:key="index" wx:if="{{type=='list'}}">
-    <textarea bindblur="editEnd" data-type="{{type}}" data-index="{{index}}" class="flex-sub solids-right solid-left" auto-height="true" maxlength="-1" value="{{item}}"></textarea>
+    <textarea bindblur="editEnd" data-type="{{type}}" data-index="{{index}}" class="flex-sub solids-right solid-left bg-gray" auto-height="true" maxlength="-1" value="{{item}}"></textarea>
     <text class="margin-left cuIcon-delete text-red" bindtap="editRemove" data-index="{{index}}"></text>
   </view>
 

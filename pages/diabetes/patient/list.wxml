@@ -22,8 +22,13 @@
       <view>{{item.age}}</view>
     </view>
     <view class="move">
-      <view class="bg-grey" bindtap="toUrl" data-url="/pages/diabetes/patient/edit?id={{item.id}}">编辑</view>
-      <view class="bg-red" bindtap="delete" data-id="{{item.id}}">删除</view>
+      <block wx:if="{{item.groupId!=3}}">
+        <view class="bg-grey" bindtap="toUrl" data-url="/pages/diabetes/patient/edit?id={{item.id}}">编辑</view>
+        <view class="bg-red" bindtap="unhook" data-id="{{item.id}}">脱落</view>
+      </block>
+      <block wx:else>
+        <view class="bg-red" bindtap="delete" data-id="{{item.id}}">删除</view>
+      </block>
     </view>
   </view>
 
@@ -35,4 +40,25 @@
     </view>
     <view class="padding">暂无相关信息</view>
   </view>
+</view>
+
+<view class="cu-modal {{modalunhook?'show':''}}">
+  <form bindsubmit="submitUnhook">
+    <input hidden name="id" value="{{unhookId}}"></input>
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">脱落提醒</view>
+      </view>
+      <view class="padding text-left flex">
+        <textarea name="unhookReason" style="height: 10vh;" maxlength="128" class="flex-sub" placeholder="脱落原因"></textarea>
+      </view>
+      <view class="cu-bar bg-white justify-end">
+        <view class="action">
+          <button class="cu-btn line-gray text-green" data-name="unhook" bind:tap="modalStatus">取消</button>
+          <button class="cu-btn bg-green margin-left" form-type="submit">提交</button>
+        </view>
+      </view>
+    </view>
+  </form>
+
 </view>

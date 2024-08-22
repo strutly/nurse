@@ -194,7 +194,8 @@ CustomPage({
     console.log(e);
     let dataset = e.currentTarget.dataset;
     let patientData = that.data.patientData;
-    dataset['data'] = patientData[dataset['name']];
+    let data = dataset.type=='list'?(patientData[dataset['name']]||[]):patientData[dataset['name']]
+    dataset['data'] = data;
     that.setData({
       modaledit:true,
       editData:dataset
@@ -202,6 +203,7 @@ CustomPage({
   },
   addEdit(){
     let editData = that.data.editData;
+    console.log(editData)
     editData.data.push("");
     that.setData({
       editData:editData
