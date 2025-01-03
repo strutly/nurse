@@ -117,6 +117,7 @@ CustomPage({
     wx.showLoading({
       title: '提交中~',
     })
+    console.log(patientData)
     let res = await Api.addPatient(patientData);
     console.log(res);
     if (res.code == 0) {
